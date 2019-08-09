@@ -7,7 +7,7 @@
 > **Start Time**: 14:00
 > **End Time**: 15:00
 > **Team Members Present**: Aaymen, Clayton, Viet, Owen, Flander, Sina, Ylva
-> **Absent**: 
+> **Absent**:
 
 ## Agenda
 
@@ -17,7 +17,7 @@
         - They deal with the medical faculty (and are based there)
         - Three month study can entail thousands of dollar grants
     2. Pivot is a global database that is already establish
-        - When you search, grants in USA will appear instead of local and applicable grants 
+        - When you search, grants in USA will appear instead of local and applicable grants
         - A lot of mis-searches etc.
         - UWA have a licence and pay big dollars to use their service.
     3. Currently implement a database using confidence?
@@ -72,7 +72,7 @@
             - Month Closing
             - HERDC Category
             - Added in last 30 days
-        - Have a box explaining verious terminology
+        - Have a box explaining various terminology
     10. How do the funding opportunities get added
         - Each opportunity enters "the back end" and clicks edit to enter the detail
         - Details entered
@@ -101,7 +101,7 @@
             - funding body link
         11. Filter for certain columns
             - show these funding opportunities first
-        12. 
+       12
 
 ## Client Requirements
 
