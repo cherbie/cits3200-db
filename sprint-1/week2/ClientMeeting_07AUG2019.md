@@ -1,13 +1,13 @@
 # **Client Meeting #1** - *Meeting Minutes*
 
 ## General Information
-> **Group**: Group 21
-> **Week**: Week 2
-> **Date**: 07 Aug 2019
-> **Start Time**: 14:00
-> **End Time**: 15:00
-> **Team Members Present**: Aaymen, Clayton, Viet, Owen, Flander, Sina, Ylva
-> **Absent**:
+ - **Group**: Group 21
+ - **Week**: Week 2
+ - **Date**: 07 Aug 2019
+ - **Start Time**: 14:00
+ - **End Time**: 15:00
+ - **Team Members Present**: Aaymen, Clayton, Viet, Owen, Flander, Sina, Ylva
+ - **Absent**:
 
 ## Agenda
  1. Introductions
