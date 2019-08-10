@@ -117,12 +117,12 @@
 
 ## System Requirements
   1. To complete the STARS project scope
-     - First draft completed by **Monday 14 August 2019**
+     - First draft completed by (**Monday 14 August 2019**)
   2. Clayton to create STARS markdown template
   3. All team members to elect on the sheet which sections they will be taking
   3. Flander to setup the gantt chart
   4. All team members to send timesheet for week 1 & week 2
-  6. All team members to complete the Skills and resources audit by  **Monday Week 3**
+  6. All team members to complete the Skills and resources audit by (**Monday Week 3**)
      - Greater depth than the initial SWOT performed
   7. Owen to send out meeting invite (**5pm Monday Week 3**)
   8. Aaymen to prepare the agenda for Monday
