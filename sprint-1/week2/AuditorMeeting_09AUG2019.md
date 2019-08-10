@@ -7,7 +7,7 @@
  - **Date**: 09 Aug 2019
  - **Start Time**: 15:00
  - **End Time**: 16:00
- - **Team Members Present**: Aaymen, Clayton, Viet, Owen, Flander, Syed Zulqarnain Gilani
+ - **Presents**: Aaymen, Clayton, Viet, Owen, Flander, Syed Zulqarnain Gilani
  - **Absent**:None
  - **Next Meeting**: 17:00 14 August 2019
  - **Next Auditor Meeting**: 07 September 2019 - 15:00 -> 16:00
