@@ -1,5 +1,5 @@
 # **Group Meeting Week 2** - *Meeting Minutes*
-> Auditor *Zulqarnian Gilani* was present.
+> Auditor *Zulqarnain Gilani* was present.
 
 ## General Information
  - **Group**: Group 21
@@ -41,7 +41,7 @@
 
 
 ## Discussion Items
- 1. Introduction to Zulqarnian (Syed)
+ 1. Introduction to Zulqarnain (Syed)
     - PhD in computer science
     - 3D computer vision
     - Also did doctor at UWA
