@@ -7,7 +7,7 @@
  - **Date**: 09 Aug 2019
  - **Start Time**: 15:00
  - **End Time**: 16:00
- - **Team Members Present**: Aaymen, Clayton, Viet, Owen, Flander, Zulqarnian Gilani (Saheed)
+ - **Team Members Present**: Aaymen, Clayton, Viet, Owen, Flander, Zulqarnian Gilani (Syed)
  - **Absent**: None
  - **Next Meeting**: 17:00 14 August 2019
  - **Next Auditor Meeting**: 07 September 2019 - 15:00 -> 16:00
@@ -44,41 +44,41 @@
  1. Introduction to Zulqarnian (Syed)
     - PhD in computer science
     - 3D computer vision
-    - also did doctor at UWA
-    - taught number of courses
-    - second time he has audited professional computing
+    - Also did doctor at UWA
+    - Taught number of courses
+    - Second time he has audited professional computing
  2. Auditing Role
     - Audit the meetings
-    - how you conduct yourself
-    - professional behaviour
-      - how you solve a problem
-      - how to delegate responsibilities
+    - How you conduct yourself
+    - Professional behaviour
+      - How you solve a problem
+      - How to delegate responsibilities
     - Professional setting
-      - what is expected of you
-    - mandatory to attend
-    - does not speak in the meeting
+      - What is expected of you
+    - Mandatory to attend
+    - Does not speak in the meeting
  3. Timesheets due date and time
-    - time can be negotiated
+    - Time can be negotiated
     - 7pm Friday apart from week 2
-    - what is prepared
-      - weekly deliverables labelled as per the format on website
-      - will not accept otherwise
-    - gives him an idea of how much time you have spent on the projects
+    - What is prepared
+      - Weekly deliverables labelled as per the format on website
+      - Will not accept otherwise
+    - Gives him an idea of how much time you have spent on the projects
  4. Three sprints
-    - a lot of information to be submitted
-    - booked hours
-    - personal reflection part
-      - the lectures (every individual sends this to him)
-      - name format is critical!
+    - A lot of information to be submitted
+    - Booked hours
+    - Personal reflection part
+      - The lectures (every individual sends this to him)
+      - Name format is critical!
  5. Expected to change roles
-    - there are marks for changing the responsibilities
-    - supposed to participate in the meetings
+    - There are marks for changing the responsibilities
+    - Supposed to participate in the meetings
  6. What is the project
-    - project description explained to Syed
-    - suggestions
+    - Project description explained to Syed
+    - Suggestions
       - start with small targets
       - time passes very quickly
-    - completely delivered project is much better than an ambitious projects
+    - Completely delivered project is much better than an ambitious projects
  7. Terms used:
     - Clients
     - Mentor
@@ -88,19 +88,19 @@
  9. Establishing Scope of project
     - Want to identify topics
     - Split the project EPIC into three tiers
-      - tier one we must get this completed
-      - other tiers are nice-to-have bonuses
+      - Tier one we must get this completed
+      - Other tiers are nice-to-have bonuses
  10. Tier 1
      - targets such as filtering the faculty etc.
  11. Skills and resources audit
-     - leave for now ... prioritise the scope work
-     - will revisit in week 3
+     - Leave for now ... prioritise the scope work
+     - Will revisit in week 3
  13. Risk register
-     - need to understand the scope before the risk register can be completed.
-     - this will be postponed until week 3
+     - Need to understand the scope before the risk register can be completed.
+     - This will be postponed until week 3
  14. Timesheets
      - Aaymen to send Timesheets
-     - student email sent to Aaymen containing the excel Timesheet
+     - Student email sent to Aaymen containing the excel Timesheet
      - Mentor time is allowed to be entered
      - Week 1 & Week 2 to be sent
      - Aaymen to zip everything and send all the Details
@@ -109,21 +109,21 @@
      - to be discussed in the following meeting
  16. Task delegation discussed for the STARS scope
      - Clayton to prepare markdown template
-     - team members to place their name next to the sections they want to complete
-     - first draft to be ready Monday
+     - Team members to place their name next to the sections they want to complete
+     - First draft to be ready Monday
 
 ## Auditor Requirements
    - Submit timesheets & minutes weekly
 
 ## System Requirements
   1. To complete the STARS project scope
-     - first draft completed by **Monday 14 August 2019**
+     - First draft completed by (**Monday 14 August 2019**)
   2. Clayton to create STARS markdown template
   3. All team members to elect on the sheet which sections they will be taking
   3. Flander to setup the gantt chart
   4. All team members to send timesheet for week 1 & week 2
-  6. All team members to complete the Skills and resources audit by **Monday Week 3**
-     - greater depth than the initial SWOT performed
+  6. All team members to complete the Skills and resources audit by (**Monday Week 3**)
+     - Greater depth than the initial SWOT performed
   7. Owen to send out meeting invite (**5pm Monday Week 3**)
   8. Aaymen to prepare the agenda for Monday
   9. Aaymen to book next auditor meeting.
