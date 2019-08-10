@@ -8,7 +8,7 @@
  - **Start Time**: 15:00
  - **End Time**: 16:00
  - **Team Members Present**: Aaymen, Clayton, Viet, Owen, Flander, Zulqarnian Gilani (Saheed)
- - **Absent**:
+ - **Absent**: None
  - **Next Meeting**: 17:00 14 August 2019
  - **Next Auditor Meeting**: 07 September 2019 - 15:00 -> 16:00
 
@@ -18,9 +18,9 @@
     - Mock ups of potential look of the front end
         - Be very general in terms of the different routing pages (not actual elements just yet)
             - Searchable area for students
-            - Home page to select faculty?
+            - Home page to select faculty
             - Administration page to add to this database
-    - Discuss the idea of “wire-boxing” & then collating everyone’s unique ideas in follow-up meeting ?
+    - Discuss the idea of “wire-boxing” & then collating everyone’s unique ideas in follow-up meeting
     - Debrief the client meeting if necessary
     - Use personal notes to contribute toward scope / discussion minutes (emphasis our minutes were on point)
 2. **Skills and Resources Audit**
@@ -41,8 +41,8 @@
 
 
 ## Discussion Items
- 1. Introduction to Zulqarnian (Saheed)
-    - PhD is computer science
+ 1. Introduction to Zulqarnian (Syed)
+    - PhD in computer science
     - 3D computer vision
     - also did doctor at UWA
     - taught number of courses
@@ -74,7 +74,7 @@
     - there are marks for changing the responsibilities
     - supposed to participate in the meetings
  6. What is the project
-    - project description explained to Saheed
+    - project description explained to Syed
     - suggestions
       - start with small targets
       - time passes very quickly
