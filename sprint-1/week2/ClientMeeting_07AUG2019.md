@@ -14,26 +14,26 @@
 
 ## Discussion Items
     1. Introduction to the Research Development Team (RDT)
-        - They deal with the medical faculty (and are based there)
-        - Three month study can entail thousands of dollar grants
+       - They deal with the medical faculty (and are based there)
+       - Three month study can entail thousands of dollar grants
     2. Pivot is a global database that is already establish
-        - When you search, grants in USA will appear instead of local and applicable grants
-        - A lot of mis-searches etc.
-        - UWA have a licence and pay big dollars to use their service.
+       - When you search, grants in USA will appear instead of local and applicable grants
+       - A lot of mis-searches etc.
+       - UWA have a licence and pay big dollars to use their service.
     3. Currently implement a database using confidence?
-        - Aaymen may be familiar with this software
-        - Some kind of platform that the university uses to share documents with users
-        - Prior to current system pdf attachments to emails were implemented
+       - Aaymen may be familiar with this software
+       - Some kind of platform that the university uses to share documents with users
+       - Prior to current system pdf attachments to emails were implemented
     4. Current issues
-        - Students cannot access conference / database
-        - Search function in the database is quite "clunky"
-            - e.g "are you an early career researcher"
-        - You can't be specific with a study for instance search "brain cancer"
+       - Students cannot access conference / database
+       - Search function in the database is quite "clunky"
+         - e.g "are you an early career researcher"
+       - You can't be specific with a study for instance search "brain cancer"
     5. Sina's Role
         - Research Support Officer
-        - Sina finds opportunities and adds tot he databse all the information
+        - Sina finds opportunities and adds tot he database all the information
         - The researcher search for grants applicable to themselves
-        - Source fundign opportunities for our researchers but we wantto create something
+        - Source funding opportunities for our researchers but we wantto create something
         - end goal
             - Increase likelihood of receiving funding and increase profitability of UWA
     6. Function of the searchable database
