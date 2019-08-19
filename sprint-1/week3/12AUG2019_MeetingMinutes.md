@@ -1,4 +1,4 @@
-# **Client Meeting #1** - *Meeting Minutes*
+# **Meeting #1** - *Meeting Minutes*
 
 #### General Information
  - **Group**: Group 21
