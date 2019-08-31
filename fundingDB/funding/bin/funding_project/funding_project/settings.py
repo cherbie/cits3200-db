@@ -126,4 +126,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'fodb-home'
 
+LOGIN_URL = 'login'
+
 
