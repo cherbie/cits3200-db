@@ -8,3 +8,8 @@ The development of an online searchable database providing access to research fu
   - Aaymen Imran Khan
   - Nathan Owen Santoso
   - Yanhang Zhang
+
+### FOR DEVELOPERS
+ - The django-project is located in the folder *'funding-db'*.
+ - The virtual environment for python with the necessaraily modules is in the folder *'./funding-db/venv'*
+
