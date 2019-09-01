@@ -1,0 +1,12 @@
+{% extends "fodb/base.html" %}
+{% block content %}
+
+		<div style="display:center; margin:auto;">
+            <h1 style="color:red;">{{error.title}}</h1>
+            <h3>{{error.status_code}}</h3>
+        </div>
+        <div style="display:center; text-align:center; margin:auto;">
+            <p style="color:blue;">{{error.message}}</p>
+        </div>
+
+{% endblock content%}
