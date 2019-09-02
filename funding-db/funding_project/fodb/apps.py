@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class FodbConfig(AppConfig):
-    name = 'fodb'
+class BoardsConfig(AppConfig):
+    name = 'boards'
