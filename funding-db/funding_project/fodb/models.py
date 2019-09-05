@@ -62,4 +62,4 @@ class Funding(models.Model):
 	Max_Amount = models.IntegerField(blank = True)
 	Max_Duration = models.IntegerField(blank = True)
 	Amount_Estimated = models.BooleanField(default = False )
-	Duration_Estimated = models.BooleanField(default = False)s
+	Duration_Estimated = models.BooleanField(default = False)
