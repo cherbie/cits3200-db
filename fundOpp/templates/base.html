@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>F.O.D </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <style>
+        .background_base {
+            background-color: #27348b;
+        }
+
+        .nav-link {
+            color: white !important;
+        }
+
+        .capitalize {
+            text-transform: capitalize;
+        }
+
+        .navbar-items{
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body style="overflow-x: hidden">
+    {% load static %}
+
+    {% include "navbar.html" %}
+
+    {% block body %}{% endblock body %}
+
+    {% include "footer.html" %}
+</body>
+</html>

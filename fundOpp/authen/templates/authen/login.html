@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <style>
+        .navbar{
+            background-image: url("{% static "authen/images/coolimg.png" %}");
+            border-bottom: 1px solid white;
+        }
+
+        .container{
+            margin-top: 20px;
+            padding: 20px;
+            width: 50vw;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+
+        .cover_section{
+            position: relative;
+            margin: 0px;
+            padding: 0px;
+            min-width: 99vw;
+            width: 99vw;
+            max-width: 99vw;
+            height: 50vh;
+
+            display: flex;
+
+            justify-content: center;
+            justify-items: center;
+            align-content: center;
+            align-items: center;
+            text-align: center;
+
+            background-image: url("{% static "authen/images/cover_background.png" %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .welcome_title{
+            display: inline-block;
+            vertical-align: middle;
+            align-self: center;
+            justify-self: center;
+
+            justify-content: center;
+            justify-items: center;
+            align-content: center;
+            align-items: center;
+            text-align: center;
+
+            color: white;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8), 0 0 12px black;
+        }
+
+        .login_title{
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+            justify-self: center;
+            text-align: center;
+        }
+    </style>
+
+    <section class="cover_section">
+        <h1 class="welcome_title">
+            Welcome to Funding Research Database
+        </h1>
+    </section>
+
+    <section class="container">
+        <h3 class="login_title">
+            Confirm your credentials to continue
+        </h3>
+        <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <a href=""><button type="submit" class="btn btn-primary"> Submit</button></a>
+        </form>
+    </section>
+{% endblock body %}
