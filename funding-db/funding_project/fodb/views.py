@@ -5,6 +5,8 @@ from .models import Post
 # Create your views here.
 # This is where the routes are held
 
+def research(request):
+	return render(request, 'fodb/tables.html')
 
 def opportunities(request):
 	'''
