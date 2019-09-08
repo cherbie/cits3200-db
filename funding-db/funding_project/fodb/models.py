@@ -24,42 +24,37 @@ class Post(models.Model):
 	def __str__(self):
 		return self.title
 
-# Create your models here.
-class Funding_Opportunity1(models.Model):
-	Opportunity_ID = models.AutoField(unique = True, primary_key = True,default = 0)
-	Opportunity_Name = models.CharField(max_length = 100)
-	Description = models.CharField(max_length = 2500)
-	HERDC = models.IntegerField(blank = True)
-	Closing_Month = models.DateTimeField(null = False)
-	Creation_Date = models.DateTimeField(auto_now = True)
-	Last_Updated = models.DateTimeField(auto_now_add = True)
-	Link = models.CharField(max_length = 260)
+
+class funding_opportunity(models.Model):
+	id = models.AutoField(unique = True, primary_key = True)
+	name = models.CharField(max_length = 100)
+	description = models.CharField(max_length = 2500)
+	herdc = models.IntegerField(blank = True)
+	closing_month = models.DateTimeField(null = False)
+	creation_date = models.DateField(auto_now_add = True)
+	last_updated = models.DateField(auto_now= True)
+	link = models.URLField(max_length = 260)
 	limit_per_uni = models.BooleanField(default = False)
+	
+	max_amount = models.IntegerField(blank = True)
+	max_duration = models.IntegerField(blank = True)
+	amount_estimated = models.BooleanField(default = False )
+	duration_estimated = models.BooleanField(default = False)
+	
+	ecr = models.BooleanField(default = False)
+	travel = models.BooleanField(default = False)
+	visiting = models.BooleanField(default = False)
+	wir = models.BooleanField(default = False)
+	phd = models.BooleanField(default = False)
+	international = models.BooleanField(default = False)
+	hms = models.BooleanField(default = False)
+	ems = models.BooleanField(default = False)
+	science = models.BooleanField(default = False)
 
-
-class ImportantDate(models.Model):
-	Opportunity_ID = models.ForeignKey(Funding_Opportunity1, on_delete = models.CASCADE)
-	Date_ID = models.AutoField(primary_key = True,unique = True, default = 0)
-	Milestone = models.CharField(max_length = 35)
-	Date = models.DateTimeField(null = False)
-	Date_Status = models.CharField(max_length = 20)
-
-
-class Boolean_Tags(models.Model):
-	Funding_Opportunity1= models.OneToOneField(Funding_Opportunity1, on_delete = models.CASCADE,primary_key = True,unique = True)
-	ECR = models.BooleanField(default = False)
-	Travel = models.BooleanField(default = False)
-	Visiting = models.BooleanField(default = False)
-	WiR = models.BooleanField(default = False)
-	PhD = models.BooleanField(default = False)
-	International = models.BooleanField(default = False)
-	HMS = models.BooleanField(default = False)
-	EMS = models.BooleanField(default = False)
-	Science = models.BooleanField(default = False)
-
-class Funding(models.Model):
-	Funding_Opportunity1= models.OneToOneField(Funding_Opportunity1, on_delete = models.CASCADE,primary_key = True,unique = True)
-	Max_Amount = models.IntegerField(blank = True)
-	Max_Duration = models.IntegerField(blank = True)
-	Amount_Estimated = models.BooleanField(default = False )
-	Duration_Estimated = models.BooleanField(default = False)
+	
+class importantdate(models.Model):
+	funding_opportunity = models.ForeignKey(funding_opportunity, on_delete = models.CASCADE)
+	id = models.AutoField(primary_key = True,unique = True)
+	milestone = models.CharField(max_length = 35)
+	date = models.DateTimeField(null = False)
+	date_status = models.CharField(max_length = 20)
