@@ -22,12 +22,12 @@
             <div class="media-body">
                <div class="article-metadata ">
 
-                  <small class="text-muted float-right"> Date updated: {{ post.date_posted|date:"d F Y" }}</small>
+                  <small class="text-muted float-right"> Date updated: {{ post.last_updated|date:"d F Y" }}</small>
                   
               
-              <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+              <h2><a class="article-title" href="#">{{ post.name }}</a></h2>
               </div>
-               <p class="article-content">{{ post.content }}</p>
+               <p class="article-content">{{ post.description }}</p>
             </div>
         </article>
     {% endfor %}

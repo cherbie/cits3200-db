@@ -12,7 +12,7 @@ def home(request):
 		Render the main.html template.
 	'''
 	context = {
-		'posts': Post.objects.all()
+		'posts': funding_opportunity.objects.all()
 	}
 	return render(request,'fodb/home.html', context)
 

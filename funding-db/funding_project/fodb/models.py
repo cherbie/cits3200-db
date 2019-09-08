@@ -51,6 +51,9 @@ class funding_opportunity(models.Model):
 	ems = models.BooleanField(default = False)
 	science = models.BooleanField(default = False)
 
+	def __str__(self):
+		return self.name
+
 
 class important_date(models.Model):
 	funding_opportunity = models.ForeignKey(funding_opportunity, on_delete = models.CASCADE)
