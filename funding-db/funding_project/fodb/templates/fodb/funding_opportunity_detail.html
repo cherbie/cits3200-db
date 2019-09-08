@@ -2,22 +2,69 @@
 {% block content %}
 
 
-    {% for post in posts%}
-        <article class="media content-section">
-            <div class="media-body">
-               <div class="article-metadata ">
 
-                  <small class="text-muted float-right"> Date updated: {{ object.last_updated|date:"d F Y" }}</small>
+ <div class="row"> 
+
+
+     <div class="col-md-2">
+        
+            <a class="btn btn-info btn-lg" href="{% url 'fodb-home' %}"role="button">Back Home</a>
+
+
+      
+      </div>
+
+    <div class="col-md-10">  
+          <article class="media content-section">
+              <div class="media-body">
+                 
+                   <div class="article-metadata ">
+                        <small class="text-muted float-right"> Date updated: {{ object.last_updated|date:"d F Y" }}</small>
+                        <h1 class="article-title" >{{ object.name }}</h1>
+                  </div>
+
+                  <div class="alert alert-primary" role="alert">Closing on: {{ object.closing_month|date:"d F Y" }}</div>
+
+                  <div class="article-metadata ">
+                      <h4 class="article-title" > Description </h4>
+                      <p class="article-content">{{ object.description }}</p>
+                      <p class="article-content"> <a href="{{object.link}}"> read more about {{ object.name }} here...</a></p>
+                  </div>
                   
-              
-              <h2 class="article-title" >{{ object.name }}</h2>
+                  <br>
+                  
+                  <h5 class="article-title" >
+                        {% if object.amount_estimated == True %}
+                            <p class="article-content"> Estimated Max Amount: ${{ object.max_amount }}</p>
+                        {% else %}
+                            <p class="article-content"> Max Amount: ${{ object.max_amount }}</p>
+                        {% endif %}
+
+                        {% if object.duration_estimated == True %}
+                            <p class="article-content"> Estimated Max Amount: ${{ object.max_duration }}</p>
+                        {% else %}
+                            <p class="article-content"> Max Duration: {{ object.max_duration }} months</p>
+                        {% endif %}
+                  </h5>
+                  <br>
+                  
+                  <div class="article-metadata "></div>
+                  
+                  <h4 class="article-title" > Tags </h4>
+                  
+                  <br>
+                  <br>
+                 
+                  
+
               </div>
-               <p class="article-content">{{ object.description }}</p>
-            </div>
-        </article>
-    {% endfor %}
+          </article>
 
-   
+    </div>
 
+
+ 
+
+</div>
 
 {% endblock content%}
