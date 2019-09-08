@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Post
+from .models import Post, Funding_Opportunity1
+import time
 
 
 # Create your views here.
@@ -40,7 +41,20 @@ def unknown(request):
 	return redirect('/error')
 
 
-def entry(request):
+def db_update(request, args, kwargs):
 	'''
-		View that controls the add and edit template rendering
+		View that controls the add and edit template rendering.
 	'''
+	db_fields = {
+		"id":-1,
+		'title':"Funding Opportunity",
+		'description': "This is the description text",
+		'date': time.asctime(),
+	}
+	prop = {
+		"title": "Funding Opportunity Entry",
+		"field": db_fields,
+		"submit": "Add",
+		"action": "/",
+	}
+	return render(request, 'fodb/db-update.html', prop)
