@@ -5,8 +5,7 @@ from .models import Post
 # Create your views here.
 # This is where the routes are held
 
-
-def opportunities(request):
+def home(request):
 	'''
 		Display the list of database entries.
 		Render the main.html template.
@@ -14,7 +13,7 @@ def opportunities(request):
 	context = {
 		'posts': Post.objects.all()
 	}
-	return render(request,'fodb/opportunities.html', context)
+	return render(request,'fodb/home.html', context)
 
 
 # you can change this to the welcome page?
@@ -39,3 +38,9 @@ def unknown(request):
 		Redirects to controlled error page.
 	'''
 	return redirect('/error')
+
+
+def entry(request):
+	'''
+		View that controls the add and edit template rendering
+	'''
