@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Post, Funding_Opportunity1
+from .models import Post, funding_opportunity, important_date
 import time
 
 
