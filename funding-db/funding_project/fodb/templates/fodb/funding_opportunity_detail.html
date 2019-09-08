@@ -1,0 +1,23 @@
+{% extends "fodb/base.html" %}
+{% block content %}
+
+
+    {% for post in posts%}
+        <article class="media content-section">
+            <div class="media-body">
+               <div class="article-metadata ">
+
+                  <small class="text-muted float-right"> Date updated: {{ object.last_updated|date:"d F Y" }}</small>
+                  
+              
+              <h2 class="article-title" >{{ object.name }}</h2>
+              </div>
+               <p class="article-content">{{ object.description }}</p>
+            </div>
+        </article>
+    {% endfor %}
+
+   
+
+
+{% endblock content%}
