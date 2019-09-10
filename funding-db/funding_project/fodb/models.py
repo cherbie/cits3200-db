@@ -38,7 +38,7 @@ class funding_opportunity(models.Model):
 
 	max_amount = models.IntegerField(blank = True)
 	max_duration = models.IntegerField(blank = True)
-	
+
 	amount_estimated = models.BooleanField(default = False )
 	duration_estimated = models.BooleanField(default = False)
 
