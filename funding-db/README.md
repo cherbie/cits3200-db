@@ -9,5 +9,5 @@
  4. Use python3 manage.py runserver to start the django-project server.
 
 ### ADMIN DETAILS:
-## username: admin3
-## password: admin2019 
+username: admin3
+password: admin2019 
