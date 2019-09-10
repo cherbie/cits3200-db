@@ -38,6 +38,7 @@ class funding_opportunity(models.Model):
 
 	max_amount = models.IntegerField(blank = True)
 	max_duration = models.IntegerField(blank = True)
+	
 	amount_estimated = models.BooleanField(default = False )
 	duration_estimated = models.BooleanField(default = False)
 
@@ -50,6 +51,9 @@ class funding_opportunity(models.Model):
 	hms = models.BooleanField(default = False)
 	ems = models.BooleanField(default = False)
 	science = models.BooleanField(default = False)
+
+	def __str__(self):
+		return self.name
 
 
 class important_date(models.Model):

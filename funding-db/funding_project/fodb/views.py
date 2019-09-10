@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView
 from .models import Post, funding_opportunity, important_date
 import time
 
@@ -12,9 +13,20 @@ def home(request):
 		Render the main.html template.
 	'''
 	context = {
-		'posts': Post.objects.all()
+		'posts': funding_opportunity.objects.all()
 	}
 	return render(request,'fodb/home.html', context)
+
+class PostListView(ListView):
+	model = funding_opportunity
+	template_name = 'fodb/home.html'
+	context_object_name = 'posts'
+	ordering = ['-last_updated']
+
+class PostDetailView(DetailView):
+	model = funding_opportunity
+	template_name = 'fodb/funding_opportunity_detail.html'
+		
 
 
 # you can change this to the welcome page?
