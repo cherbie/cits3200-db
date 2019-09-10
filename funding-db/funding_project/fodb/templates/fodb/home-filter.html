@@ -1,6 +1,8 @@
 <!-- Filter content -->
-   <div class="col-md-3">
-      <div class="content-section">
+<div class="col-md-3">
+    <form action="" method="GET">
+        <!-- {{ filter.form.as_ul }} -->
+        <div class="content-section">
           <div class="sort-container">
               <div class="filter-title">
                   <h3>Sort by</h3>
@@ -18,13 +20,16 @@
               </div>
               <div class="filter-checkbox-container">
                   <div class="filter-option">
-                      <input type="checkbox" name="faculty-hms" value="HMS">HMS</input>
+                      <input type="checkbox" id="{{filter.form.hms.id_for_label}}" name={{filter.form.hms.name}} value="True"/>
+                      <label for="{{filter.form.hms.id_for_label}}">HMS</label>
                   </div>
                   <div class="filter-option">
-                      <input type="checkbox" name="faculty-ems" value="EMS">EMS</input>
+                      <input type="checkbox" id="{{filter.form.ems.id_for_label}}" name={{filter.form.ems.name}} value="True"/>
+                      <label for="{{filter.form.ems.id_for_label}}">EMS</label>
                   </div>
                   <div class="filter-option">
-                      <input type="checkbox" name="faculty-science" value="Science">Science</input>
+                      <input type="checkbox" id="{{filter.form.science.id_for_label}}" name={{filter.form.science.name}} value="True"/>
+                      <label for="{{filter.form.science.id_for_label}}">Science</label>
                   </div>
               </div>
           </div>
@@ -34,28 +39,37 @@
               </div>
               <div class="filter-checkbox-container">
                   <div class="filter-option">
-                      <input type="checkbox" name="type-ecr" value="ecr">ECR</input>
+                      <input type="checkbox" id="{{filter.form.ecr.id_for_label}}" name={{filter.form.ecr.name}} value="True"/>
+                      <label for="{{filter.form.ecr.id_for_label}}">ECR</label>
                   </div>
                   <div class="filter-option">
-                      <input type="checkbox" name="type-travel" value="travel">Travel</input>
+                      <input type="checkbox" id="{{filter.form.travel.id_for_label}}" name={{filter.form.travel.name}} value="True"/>
+                      <label for="{{filter.form.travel.id_for_label}}">Travel</label>
                   </div>
                   <div class="filter-option">
-                      <input type="checkbox" name="type-visiting" value="visiting">Visiting</input>
+                      <input type="checkbox" id="{{filter.form.visting.id_for_label}}" name={{filter.form.visiting.name}}/>
+                      <label for="{{filter.form.visiting.id_for_label}}">Visiting</label>
                   </div>
                   <div class="filter-option">
-                      <input type="checkbox" name="type-wir" value="wir"">Women in Research</input>
+                      <input type="checkbox" id="{{filter.form.wir.id_for_label}}" name={{filter.form.wir.name}}/>
+                      <label for="{{filter.form.wir.id_for_label}}"">Women in Research</label>
                   </div>
                   <div class="filter-option">
-                      <input type="checkbox" name="type-international" value="international">International</input>
+                      <input type="checkbox" id="{{filter.form.international.id_for_label}}" name={{filter.form.international.name}}/>
+                      <label for="{{filter.form.international.id_for_label}}">International</label>
                   </div>
                   <div class="filter-option">
-                      <input type="checkbox" name="type-phd" value="phd">PhD Stripend</input>
+                      <input type="checkbox" id="{{filter.form.phd.id_for_label}}" name="{{filter.form.phd.name}}"/>
+                      <label for="{{filter.form.phd.id_for_label}}">PhD Stripend</label>
                   </div>
               </div>
           </div>
       </div>
-  </div>
-
+      <div>
+          <input type="submit"/>
+      </div>
+    </form>
+</div>
     <!--<p class='text-muted'>This could be the filter section
               <ul class="list-group">
                 <li class="list-group-item list-group-item-light">Funding Amount</li>

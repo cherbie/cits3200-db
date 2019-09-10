@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Post, funding_opportunity, important_date
+from .filters import PostFilter
 import time
 
 
@@ -16,6 +17,16 @@ def home(request):
 		'posts': funding_opportunity.objects.all()
 	}
 	return render(request,'fodb/home.html', context)
+
+
+def filter_request(request):
+	'''
+		Additional filtering service provided by django-filter.
+	'''
+	posts = funding_opportunity.objects.all()
+	post_filter = PostFilter(request.GET, queryset=posts)
+	return render(request, 'fodb/home.html', {'filter': post_filter})
+
 
 class PostListView(ListView):
 	model = funding_opportunity

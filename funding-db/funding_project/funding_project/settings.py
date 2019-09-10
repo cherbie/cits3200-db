@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'fodb.apps.FodbConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'django_filters',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,5 +128,3 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'fodb-home'
 
 LOGIN_URL = 'login'
-
-

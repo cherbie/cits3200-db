@@ -4,6 +4,13 @@
     <div class="row">
         {% include './home-filter.html' %}
     <div class="col-md-9">
+        {% for post in filter.qs %}
+        <div>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.description }}</p>
+        </div>
+        {% endfor %}
+    <!--
     {% for post in posts%}
         <article class="media content-section">
             <div class="media-body">
@@ -18,7 +25,7 @@
             </div>
         </article>
     {% endfor %}
-
+    -->
     </div>
   </div>
 
