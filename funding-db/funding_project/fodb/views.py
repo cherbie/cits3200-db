@@ -26,7 +26,7 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
 	model = funding_opportunity
 	template_name = 'fodb/funding_opportunity_detail.html'
-		
+
 
 
 # you can change this to the welcome page?

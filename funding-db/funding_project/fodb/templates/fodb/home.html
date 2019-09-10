@@ -1,21 +1,8 @@
 {% extends "fodb/base.html" %}
 {% block content %}
 
-  <div class="row"> 
-     <div class="col-md-3">
-        <div class="content-section">
-          <h3>Filter</h3>
-          <p class='text-muted'>This could be the filter section
-            <ul class="list-group">
-              <li class="list-group-item list-group-item-light">Funding Amount</li>
-              <li class="list-group-item list-group-item-light">Funding Length</li>
-              <li class="list-group-item list-group-item-light">Category</li>
-              <li class="list-group-item list-group-item-light">etc</li>
-            </ul>
-          </p>
-        </div>
-      </div>
-
+    <div class="row">
+        {% include './home-filter.html' %}
     <div class="col-md-9">
     {% for post in posts%}
         <article class="media content-section">
@@ -23,8 +10,8 @@
                <div class="article-metadata ">
 
                   <small class="text-muted float-right"> Date updated: {{ post.last_updated|date:"d F Y" }}</small>
-                  
-              
+
+
               <h2><a class="article-title" href="{% url 'funding_opportunity-detail' post.id %}">{{ post.name }}</a></h2>
               </div>
                <p class="article-content">{{ post.description }}</p>
