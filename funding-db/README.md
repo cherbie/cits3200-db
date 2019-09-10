@@ -8,3 +8,6 @@
  3. The manage.py python module will be in this directory
  4. Use python3 manage.py runserver to start the django-project server.
 
+### ADMIN DETAILS:
+## username: admin3
+## password: admin2019 
