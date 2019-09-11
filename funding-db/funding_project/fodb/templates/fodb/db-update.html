@@ -1,0 +1,66 @@
+{% extends "fodb/base.html" %}
+{% block content %}
+    <div class="heading-field-container" style="margin: 10px;">
+        <div class="title-container" style="margin:auto; width:400px;text-align:center;">
+            <h2 style="text-decorations:bold;">{{title}}</h2>
+        </div>
+    </div>
+    <div class="form-container" style="margin: 0px 10px;">
+        <form id="db-update-form" action="{{action}}" method="post">{% csrf_token %}
+            <!-- Funding opportunity id -->
+            <input type="hidden" form="db-update-form" id="field-id" value="{{field.id}}"></input>
+            <!-- Funding opportunity title -->
+            <div class="entry-field-container" style="padding: 10px;">
+                <div class="label-container" style="padding: 2px; width:200px; font-style:oblique; font-weight:bold;">
+                    <label form="entry-update-form" for="field-title">Title</label>
+                </div>
+                <div style="padding: 2px; width:400px;">
+                    <textarea placeholder="Title" required wrap=off rows="1" cols="50" maxlength="50" id="field-title" style="color:black; border-color: white; display:inline; width: 100%;">{{field.title}}</textarea>
+                </div>
+            </div>
+            <!-- Funding description -->
+            <div class="entry-field-container" style="padding: 10px;">
+                <div class="label-container" style="padding: 2px; width:200px; font-style:oblique; font-weight:bold;">
+                    <label form="entry-update-form" for="field-description">Description</label>
+                </div>
+                <div style="padding: 2px; width:100%">
+                    <textarea wrap="soft" rows="5" maxlength="200" id="field-description" style="color:black; border-color: white; display:inline; width: 100%;">{{field.description}}</textarea>
+                </div>
+            </div>
+            <!--funding amount -->
+            <div class="entry-field-container" style="padding: 10px;">
+                <div style="display:grid; grid-template-columns: repeat(2, 1fr); width:100%">
+                    <div class="label-container" style="padding: 2px; width:200px; font-style:oblique; font-weight:bold; text-style: underline;">
+                        <label form="entry-update-form" for="field-description">Max Funding</label>
+                    </div>
+                    <div class="label-container" style="padding: 2px; font-style:oblique; font-weight:bold; text-style: underline;">
+                        <label form="entry-update-form" for="field-description">Max Duration</label>
+                    </div>
+                    <div style="padding: 2px; padding-right: 50px;">
+                        <input type=text placeholder="$Amount" autocomplete="" form="db-update-form" id="max-funding-input" name="max_funding" style="display:inline; width:100%;"></input>
+                    </div>
+                    <div style="padding:2px; display:table;">
+                        <div style="padding-right:5px; width:75%; display: inline-block;">
+                            <input type="text" id="max-duration-input" maxLength="4" name="max_duration" style="display: inline; width: 100%;"></input>
+                        </div>
+                        <div style="padding: 2px; width:25%; display:inline-block;">
+                            <select style="color:black; border-color: black; display:inline; width: 100%;">
+                                <option value="years">Years</option>
+                                <option value="months">Months</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Funding opportunity submit -->
+            <div class="entry-field-container" style="padding:10px; margin:auto; text-align:center;">
+                <div class="submit-container" style="padding:10px">
+                    <input type="submit" value="{{submit}}" style=""></input>
+                </div>
+            </div>
+        <!-- end of form -->
+        </form>
+    </div>
+
+
+{% endblock content%}

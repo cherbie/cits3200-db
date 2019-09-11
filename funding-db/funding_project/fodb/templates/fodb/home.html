@@ -1,0 +1,32 @@
+{% extends "fodb/base.html" %}
+{% block content %}
+
+    <div class="row">
+        {% include './home-filter.html' %}
+    <div class="col-md-9">
+        {% for post in filter.qs %}
+        <div>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.description }}</p>
+        </div>
+        {% endfor %}
+    <!--
+    {% for post in posts%}
+        <article class="media content-section">
+            <div class="media-body">
+               <div class="article-metadata ">
+
+                  <small class="text-muted float-right"> Date updated: {{ post.last_updated|date:"d F Y" }}</small>
+
+
+              <h2><a class="article-title" href="{% url 'funding_opportunity-detail' post.id %}">{{ post.name }}</a></h2>
+              </div>
+               <p class="article-content">{{ post.description }}</p>
+            </div>
+        </article>
+    {% endfor %}
+    -->
+    </div>
+  </div>
+
+{% endblock content%}
