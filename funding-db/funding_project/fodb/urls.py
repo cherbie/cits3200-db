@@ -1,12 +1,11 @@
 from django.urls import path, re_path
-from .views import PostListView, PostDetailView, filter_request
-from .filters import PostFilter
+from .views import PostListView, PostDetailView, home
 from .models import funding_opportunity
 
 from . import views
 
 urlpatterns = [
-    path('', views.filter_request, name="fodb-home"),
+    path('', views.home, name="fodb-home"),
     # path('', PostListView.as_view(), name='fodb-home'),
     path('funding_opportunity/<int:pk>', PostDetailView.as_view(), name='funding_opportunity-detail'),
     re_path(r'^(add)|(edit)', views.db_update, name='fodb-db-update'),

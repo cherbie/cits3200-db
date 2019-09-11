@@ -1,7 +1,6 @@
 <!-- Filter content -->
 <div class="col-md-3">
     <form action="" method="GET">
-        <!-- {{ filter.form.as_ul }} -->
         <div class="content-section">
           <div class="sort-container">
               <div class="filter-title">
@@ -20,15 +19,24 @@
               </div>
               <div class="filter-checkbox-container">
                   <div class="filter-option">
-                      <input type="checkbox" id="{{filter.form.hms.id_for_label}}" name={{filter.form.hms.name}} value="True"/>
+                      <input type="checkbox" id="{{filter.form.hms.id_for_label}}" name={{filter.form.hms.name}} value="False"
+                      {% if filter.form.hms.value == True %}
+                        checked
+                      {% endif %} />
                       <label for="{{filter.form.hms.id_for_label}}">HMS</label>
                   </div>
                   <div class="filter-option">
-                      <input type="checkbox" id="{{filter.form.ems.id_for_label}}" name={{filter.form.ems.name}} value="True"/>
+                      <input type="checkbox" id="{{filter.form.ems.id_for_label}}" name={{filter.form.ems.name}} value="False"
+                      {% if filter.form.ems.value == True %}
+                        checked
+                      {% endif %} />
                       <label for="{{filter.form.ems.id_for_label}}">EMS</label>
                   </div>
                   <div class="filter-option">
-                      <input type="checkbox" id="{{filter.form.science.id_for_label}}" name={{filter.form.science.name}} value="True"/>
+                      <input type="checkbox" id="{{filter.form.science.id_for_label}}" name={{filter.form.science.name}} value="False"
+                      {% if filter.form.science.value == True %}
+                        checked
+                      {% endif %} />
                       <label for="{{filter.form.science.id_for_label}}">Science</label>
                   </div>
               </div>
@@ -39,28 +47,46 @@
               </div>
               <div class="filter-checkbox-container">
                   <div class="filter-option">
-                      <input type="checkbox" id="{{filter.form.ecr.id_for_label}}" name={{filter.form.ecr.name}} value="True"/>
+                      <input type="checkbox" id="{{filter.form.ecr.id_for_label}}" name={{filter.form.ecr.name}} value="True"
+                      {% if filter.form.ecr.value == True %}
+                        checked
+                      {% endif %} />
                       <label for="{{filter.form.ecr.id_for_label}}">ECR</label>
                   </div>
                   <div class="filter-option">
-                      <input type="checkbox" id="{{filter.form.travel.id_for_label}}" name={{filter.form.travel.name}} value="True"/>
+                      <input type="checkbox" id="{{filter.form.travel.id_for_label}}" name={{filter.form.travel.name}} value="True"
+                      {% if filter.form.travel.value == True %}
+                        checked
+                      {% endif %} />
                       <label for="{{filter.form.travel.id_for_label}}">Travel</label>
                   </div>
                   <div class="filter-option">
-                      <input type="checkbox" id="{{filter.form.visting.id_for_label}}" name={{filter.form.visiting.name}}/>
-                      <label for="{{filter.form.visiting.id_for_label}}">Visiting</label>
+                      <input type="checkbox" id="{{filter.form.visting.id_for_label}}" name={{filter.form.visiting.name}} value="True"
+                      {% if filter.form.visiting.value == True %}
+                        checked
+                      {% endif %} />
+                      <label for="{{filter.form.visiting.id_for_label}}">{{filter.form.visiting.label}}</label>
                   </div>
                   <div class="filter-option">
-                      <input type="checkbox" id="{{filter.form.wir.id_for_label}}" name={{filter.form.wir.name}}/>
-                      <label for="{{filter.form.wir.id_for_label}}"">Women in Research</label>
+                      <input type="checkbox" id="{{filter.form.wir.id_for_label}}" name="{{filter.form.wir.name}}" value="True"
+                      {% if filter.form.wir.value == True %}
+                        checked
+                      {% endif %} />
+                      <label for="{{filter.form.wir.id_for_label}}">{{filter.form.wir.label}}</label>
                   </div>
                   <div class="filter-option">
-                      <input type="checkbox" id="{{filter.form.international.id_for_label}}" name={{filter.form.international.name}}/>
-                      <label for="{{filter.form.international.id_for_label}}">International</label>
+                      <input type="checkbox" id="{{filter.form.international.id_for_label}}" name="{{filter.form.international.name}}" value="True"
+                      {% if filter.form.international.value == True %}
+                        checked
+                      {% endif %} />
+                      <label for="{{filter.form.international.id_for_label}}">{{filter.form.international.label}}</label>
                   </div>
                   <div class="filter-option">
-                      <input type="checkbox" id="{{filter.form.phd.id_for_label}}" name="{{filter.form.phd.name}}"/>
-                      <label for="{{filter.form.phd.id_for_label}}">PhD Stripend</label>
+                      <input type="checkbox" id="{{filter.form.phd.id_for_label}}" name="{{filter.form.phd.name}}" value="True"
+                      {% if filter.form.phd.value == True %}
+                        checked
+                      {% endif %} />
+                      <label for="{{filter.form.phd.id_for_label}}">{{filter.form.phd.label}}</label>
                   </div>
               </div>
           </div>

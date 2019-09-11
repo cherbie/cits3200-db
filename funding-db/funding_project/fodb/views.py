@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Post, funding_opportunity, important_date
-from .filters import PostFilter
+from .filters import PostFilter, FilterManager
+from django.db.models import Q
 import time
 
 
@@ -10,21 +11,15 @@ import time
 
 def home(request):
 	'''
-		Display the list of database entries.
-		Render the main.html template.
-	'''
-	context = {
-		'posts': funding_opportunity.objects.all()
-	}
-	return render(request,'fodb/home.html', context)
-
-
-def filter_request(request):
-	'''
-		Additional filtering service provided by django-filter.
+		Rendering of fodb/home.html feeding filter queryset from ./filter.py
 	'''
 	posts = funding_opportunity.objects.all()
-	post_filter = PostFilter(request.GET, queryset=posts)
+	print(request.GET.dict())
+	if len(request.GET.dict()) > 0:
+		post_filter = FilterManager().filter(dict=request.GET.dict())
+	else:
+		post_filter = posts
+	# post_filter = PostFilter(request.GET, queryset=posts)
 	return render(request, 'fodb/home.html', {'filter': post_filter})
 
 
