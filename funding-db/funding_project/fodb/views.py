@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Post, funding_opportunity, important_date
-from .filters import PostFilter
+from .forms import FilterForm
+from django.db.models import Q
 import time
 
 
@@ -10,22 +11,14 @@ import time
 
 def home(request):
 	'''
-		Display the list of database entries.
-		Render the main.html template.
+		Rendering of fodb/home.html ... applying filter QuerySet from ./filter.py
 	'''
-	context = {
-		'posts': funding_opportunity.objects.all()
-	}
-	return render(request,'fodb/home.html', context)
 
+	form = FilterForm() # manage the html options of the fields
+	print(form)
+	qs = funding_opportunity.filters.filter_qs(request) # returns filtered queryset
 
-def filter_request(request):
-	'''
-		Additional filtering service provided by django-filter.
-	'''
-	posts = funding_opportunity.objects.all()
-	post_filter = PostFilter(request.GET, queryset=posts)
-	return render(request, 'fodb/home.html', {'filter': post_filter})
+	return render(request, 'fodb/home.html', {'posts': qs, 'form': form})
 
 
 class PostListView(ListView):
