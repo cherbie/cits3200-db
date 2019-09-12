@@ -1,6 +1,6 @@
 {% extends "fodb/base.html" %}
 {% block content %}
-
+{% if user.is_authenticated %}
     <div class="row">
         {% include './home-filter.html' %}
     <div class="col-md-9">
@@ -28,5 +28,5 @@
     {% endfor %}
     </div>
   </div>
-
+{% endif %}
 {% endblock content%}

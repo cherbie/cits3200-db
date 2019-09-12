@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path('home/', views.filter_request, name="fodb-home"),
+    path('oportunities/', views.filter_request, name="fodb-home"),
     path('', views.welcome, name='fodb-welcome'),
     #path('', PostListView.as_view(), name='fodb-home'),
     path('funding_opportunity/<int:pk>', PostDetailView.as_view(), name='funding_opportunity-detail'),
