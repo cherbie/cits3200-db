@@ -40,6 +40,7 @@ class PostDetailView(DetailView):
 
 
 
+
 # you can change this to the welcome page?
 # def about(request):
 # 	return render(request,'fodb/about.html', {'title':'About'})
