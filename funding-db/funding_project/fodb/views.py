@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Post, funding_opportunity, important_date
-from .filters import PostFilter, FilterManager
+from .forms import FilterForm
 from django.db.models import Q
 import time
 
@@ -11,16 +11,14 @@ import time
 
 def home(request):
 	'''
-		Rendering of fodb/home.html feeding filter queryset from ./filter.py
+		Rendering of fodb/home.html ... applying filter QuerySet from ./filter.py
 	'''
-	posts = funding_opportunity.objects.all()
-	print(request.GET.dict())
-	if len(request.GET.dict()) > 0:
-		post_filter = FilterManager().filter(dict=request.GET.dict())
-	else:
-		post_filter = posts
-	# post_filter = PostFilter(request.GET, queryset=posts)
-	return render(request, 'fodb/home.html', {'filter': post_filter})
+
+	form = FilterForm() # manage the html options of the fields
+	print(form)
+	qs = funding_opportunity.filters.filter_qs(request) # returns filtered queryset
+
+	return render(request, 'fodb/home.html', {'posts': qs, 'form': form})
 
 
 class PostListView(ListView):
