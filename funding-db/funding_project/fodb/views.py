@@ -15,7 +15,6 @@ def home(request):
 	'''
 
 	form = FilterForm() # manage the html options of the fields
-	print(form)
 	qs = funding_opportunity.filters.filter_qs(request) # returns filtered queryset
 
 	return render(request, 'fodb/home.html', {'posts': qs, 'form': form})
