@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.views.generic import ListView, DetailView
 from .models import Post, funding_opportunity, important_date
 from .filters import PostFilter
@@ -17,6 +17,11 @@ def home(request):
 		'posts': funding_opportunity.objects.all()
 	}
 	return render(request,'fodb/home.html', context)
+
+# you can change this to the welcome page?
+def welcome(request):
+ 	return render(request,'fodb/welcome.html', {'title':'Welcome'})
+
 
 
 def filter_request(request):
@@ -41,9 +46,8 @@ class PostDetailView(DetailView):
 
 
 
-# you can change this to the welcome page?
-# def about(request):
-# 	return render(request,'fodb/about.html', {'title':'About'})
+
+
 
 def error(request, error=None):
 	'''
