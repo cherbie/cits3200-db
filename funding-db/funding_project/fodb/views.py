@@ -1,9 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
-from .models import Post, funding_opportunity, important_date
-from django.contrib.auth.decorators import login_required
-from .forms import FilterForm
 from django.db.models import Q
+from django.core.paginator import Paginator
+from .models import Post, funding_opportunity, important_date
+from .forms import FilterForm
 import time
 
 
@@ -18,8 +19,12 @@ def home(request):
 
 	form = FilterForm() # manage the html options of the fields
 	qs = funding_opportunity.filters.filter_qs(request) # returns filtered queryset
+	paginator = Paginator(qs, 25) # Show 25 contacts per page
 
-	return render(request, 'fodb/home.html', {'posts': qs, 'form': form})
+	page = request.GET.get('page')
+	display = paginator.get_page(page)
+
+	return render(request, 'fodb/home.html', {'posts': display, 'form': form})
 
 
 class PostListView(ListView):
