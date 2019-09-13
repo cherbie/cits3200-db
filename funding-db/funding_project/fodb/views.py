@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Post, funding_opportunity, important_date
+from django.contrib.auth.decorators import login_required
 from .forms import FilterForm
 from django.db.models import Q
 import time
@@ -9,6 +10,7 @@ import time
 # Create your views here.
 # This is where the routes are held
 
+@login_required(login_url='login')
 def home(request):
 	'''
 		Rendering of fodb/home.html ... applying filter QuerySet from ./filter.py
@@ -56,12 +58,13 @@ def unknown(request):
 	return redirect('/error')
 
 
+@login_required(login_url='login')
 def db_update(request, args, kwargs):
 	'''
 		View that controls the add and edit template rendering.
 	'''
 	db_fields = {
-		"id":-1,
+		"id": -1,
 		'title':"Funding Opportunity",
 		'description': "This is the description text",
 		'date': time.asctime(),
