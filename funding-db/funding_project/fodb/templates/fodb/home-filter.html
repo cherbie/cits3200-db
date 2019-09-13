@@ -20,24 +20,24 @@
               <div class="filter-checkbox-container">
                   <div class="filter-option">
                       <input type="checkbox" id="{{form.hms.id_for_label}}" name={{form.hms.name}} value="True"
-                      {% if form.hms.value == "True" %}
+                      {% if form.hms.value == True %}
                         checked
                       {% endif %} />
-                      <label for="{{form.hms.id_for_label}}">HMS</label>
+                      <label for="{{form.hms.id_for_label}}">{{form.hms.label}}</label>
                   </div>
                   <div class="filter-option">
                       <input type="checkbox" id="{{form.ems.id_for_label}}" name={{form.ems.name}} value="True"
-                      {% if form.ems.value == "True" %}
+                      {% if form.ems.value == True %}
                         checked
                       {% endif %} />
-                      <label for="{{filter.form.ems.id_for_label}}">EMS</label>
+                      <label for="{{filter.form.ems.id_for_label}}">{{form.ems.label}}</label>
                   </div>
                   <div class="filter-option">
                       <input type="checkbox" id="{{form.science.id_for_label}}" name={{form.science.name}} value="True"
                       {% if form.science.value == "True" %}
                         checked
                       {% endif %} />
-                      <label for="{{form.science.id_for_label}}">Science</label>
+                      <label for="{{form.science.id_for_label}}">{{form.science.label}}</label>
                   </div>
               </div>
           </div>
@@ -52,18 +52,18 @@
                       {% if form.ecr.value == "True" %}
                         checked
                       {% endif %} />
-                      <label for="{{form.ecr.id_for_label}}">ECR</label>
+                      <label for="{{form.ecr.id_for_label}}">{{form.ecr.label}}</label>
                   </div>
                   <div class="filter-option">
                       <input type="checkbox" id="{{form.travel.id_for_label}}" name={{form.travel.name}} value="True"
                       {% if form.travel.value == "True" %}
                         checked
                       {% endif %} />
-                      <label for="{{form.travel.id_for_label}}">Travel</label>
+                      <label for="{{form.travel.id_for_label}}">{{form.travel.label}}</label>
                   </div>
                   <div class="filter-option">
                       <input type="checkbox" id="{{form.visting.id_for_label}}" name={{form.visiting.name}} value="True"
-                      {% if form.visiting.value == "True" %}
+                      {% if form.visiting.value == True %}
                         checked
                       {% endif %} />
                       <label for="{{form.visiting.id_for_label}}">{{form.visiting.label}}</label>
