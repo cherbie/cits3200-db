@@ -26,6 +26,7 @@
 <body style="overflow-x: hidden">
   {% include "navbar.html" %}
 
+  {% if messages %}
   <main role="main" class="container">
     <div class="row">
 
@@ -33,21 +34,24 @@
       <div class="col-md-12">
 
         <!-- this is where the messages will print out like "sucessfull acount/post created etc..." -->
-        {% if messages %}
+
           {%  for message in messages %}
             <div class="alert alert-{{message.tags}}">
               {{ message }}
             </div>
           {% endfor %}
-        {% endif%}
 
-        <!-- this is where the content starts (the rest of the pages) -->
-          {% block content %}{% endblock %}
+
+
+
       </div>
 
     </div>
   </main>
+  {% endif%}
 
+  <!-- this is where the content starts (the rest of the pages) -->
+  {% block content %}{% endblock %}
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
