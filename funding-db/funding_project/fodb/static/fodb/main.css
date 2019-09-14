@@ -98,7 +98,7 @@ a.article-title:hover {
 
 .navbar{
   background-color: #27348b;
-  margin-bottom: 2em;
+  border-bottom: 2px solid white;
 }
 
 .nav-link {

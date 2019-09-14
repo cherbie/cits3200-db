@@ -1,51 +1,87 @@
-{% extends "fodb/base.html" %}
+{% extends "base.html" %}
 {% block content %}
 
-
 {% load static%}
+<style>
+  .cover_section{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    min-width: 99vw;
+    width: 99vw;
+    max-width: 99vw;
+    height: 50vh;
 
-  <!-- Navigation -->
+    display: grid;
 
-      
-   
- 
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-image: url("{% static "fodb/images/searchbackground.png" %}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+  }
+
+  .welcome_title{
+    display: inline-block;
+    vertical-align: middle;
+    align-self: center;
+    justify-self: center;
+
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8), 0 0 12px black;
+  }
+
+  .welcome_lead{
+    color: #e2b600;
+  }
+
+  .welcome_lead:hover{
+    color: white;
+    text-decoration: none;
+  }
+</style>
 
 
+<section class="cover_section">
+    <!-- <h1 class="welcome_title">
+        Welcome to Funding Research Database
+    </h1> -->
 
-<!-- Full Page Image Header with Vertically Centered Content -->
-<header class="masthead">
+    {% if user.is_authenticated %}
 
-  <div class="container h-200">
-    <div class="row h-100 align-items-center">
-      <div class="col-12 text-center">
+      <h1 class="font-weight-light welcome_title">Funding Oportunities Database</h1>
+      <h3 class="welcome_title"> Get Searching </h3>
+      <a class="btn btn-primary " href="{% url 'fodb-home' %}">View Oportunities</a>
 
-        <br><br><br><br><br><br>
-      {% if user.is_authenticated %}
+    {% else %}
 
-      <h1 class="font-weight-light">Funding Oportunities Database</h1>
-        <p class="lead"> Get Searching </p>
-        <a class="btn btn-primary " href="{% url 'fodb-home' %}">View Oportunities</a>
-      
-      
-      {% else %}  
-        <h1 class="font-weight-light">Welcome</h1>
-        <p class="lead">This is the Funding Oportunities Database, please login or register to view oportunities available to you. </p>
-        <a class="btn btn-primary " href="{% url 'login' %}">Sign In</a>
-        <a class="btn btn-primary " href="{% url 'register' %}">Register</a>
-
-        <a>
-          <img src="{% static "fodb/images/ezone.jpg" %}">
+      <h1 class="font-weight-light welcome_title">Welcome to Funding Research Database</h1>
+      <h4 class="welcome_title">
+        This is the Funding Oportunities Database, please
+        <a class="welcome_lead" href="{% url 'login' %}">
+            login
         </a>
+        or
+        <a class="welcome_lead" href="{% url 'register' %}">
+            register
+        </a>
+        to view oportunities available to you.
+      </h4>
 
-        {% endif %} 
+    {% endif %}
 
-        <br><br><br><br><br><br>
-
-      </div>
-    </div>
-  </div>
-</header>
-
+</section>
 
 <!-- Page Content -->
 <section class="py-5">
