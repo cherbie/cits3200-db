@@ -1,34 +1,36 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
+from django.db.models import Q
+from django.core.paginator import Paginator
 from .models import Post, funding_opportunity, important_date
-from .filters import PostFilter
+from .forms import FilterForm
 import time
 
 
 # Create your views here.
 # This is where the routes are held
 
+<<<<<<< HEAD
 def research(request):
 	return render(request, 'fodb/tables.html')
 
+=======
+@login_required(login_url='login')
+>>>>>>> 773ff0d807bc14cf4a1869a07bd04bd8262243aa
 def home(request):
 	'''
-		Display the list of database entries.
-		Render the main.html template.
+		Rendering of fodb/home.html ... applying filter QuerySet from ./filter.py
 	'''
-	context = {
-		'posts': funding_opportunity.objects.all()
-	}
-	return render(request,'fodb/home.html', context)
 
+	form = FilterForm() # manage the html options of the fields
+	qs = funding_opportunity.filters.filter_qs(request) # returns filtered queryset
+	paginator = Paginator(qs, 25) # Show 25 contacts per page
 
-def filter_request(request):
-	'''
-		Additional filtering service provided by django-filter.
-	'''
-	posts = funding_opportunity.objects.all()
-	post_filter = PostFilter(request.GET, queryset=posts)
-	return render(request, 'fodb/home.html', {'filter': post_filter})
+	page = request.GET.get('page')
+	display = paginator.get_page(page)
+
+	return render(request, 'fodb/home.html', {'posts': display, 'form': form})
 
 
 class PostListView(ListView):
@@ -67,12 +69,13 @@ def unknown(request):
 	return redirect('/error')
 
 
+@login_required(login_url='login')
 def db_update(request, args, kwargs):
 	'''
 		View that controls the add and edit template rendering.
 	'''
 	db_fields = {
-		"id":-1,
+		"id": -1,
 		'title':"Funding Opportunity",
 		'description': "This is the description text",
 		'date': time.asctime(),
