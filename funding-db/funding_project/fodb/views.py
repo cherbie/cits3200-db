@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
-from .models import Post, funding_opportunity, important_date
+from .models import funding_opportunity, important_date
 import time
 
 
