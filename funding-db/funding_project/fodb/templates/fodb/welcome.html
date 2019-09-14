@@ -1,0 +1,59 @@
+{% extends "fodb/base.html" %}
+{% block content %}
+
+
+{% load static%}
+
+  <!-- Navigation -->
+
+      
+   
+ 
+
+
+
+<!-- Full Page Image Header with Vertically Centered Content -->
+<header class="masthead">
+
+  <div class="container h-200">
+    <div class="row h-100 align-items-center">
+      <div class="col-12 text-center">
+
+        <br><br><br><br><br><br>
+      {% if user.is_authenticated %}
+
+      <h1 class="font-weight-light">Funding Oportunities Database</h1>
+        <p class="lead"> Get Searching </p>
+        <a class="btn btn-primary " href="{% url 'fodb-home' %}">View Oportunities</a>
+      
+      
+      {% else %}  
+        <h1 class="font-weight-light">Welcome</h1>
+        <p class="lead">This is the Funding Oportunities Database, please login or register to view oportunities available to you. </p>
+        <a class="btn btn-primary " href="{% url 'login' %}">Sign In</a>
+        <a class="btn btn-primary " href="{% url 'register' %}">Register</a>
+
+        <a>
+          <img src="{% static "fodb/images/ezone.jpg" %}">
+        </a>
+
+        {% endif %} 
+
+        <br><br><br><br><br><br>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- Page Content -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="font-weight-light">Page Content</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ab nulla dolorum autem nisi officiis blanditiis voluptatem hic, assumenda aspernatur facere ipsam nemo ratione cumque magnam enim fugiat reprehenderit expedita.</p>
+  </div>
+</section>
+
+
+{% endblock content%}

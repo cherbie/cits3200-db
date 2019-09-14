@@ -1,5 +1,9 @@
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+
+from django.shortcuts import render, redirect, render_to_response
+
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -16,15 +20,18 @@ def home(request):
 	'''
 		Rendering of fodb/home.html ... applying filter QuerySet from ./filter.py
 	'''
-
 	form = FilterForm() # manage the html options of the fields
 	qs = funding_opportunity.filters.filter_qs(request) # returns filtered queryset
 	paginator = Paginator(qs, 25) # Show 25 contacts per page
-
 	page = request.GET.get('page')
 	display = paginator.get_page(page)
 
 	return render(request, 'fodb/home.html', {'posts': display, 'form': form})
+
+# you can change this to the welcome page?
+def welcome(request):
+ 	return render(request,'fodb/welcome.html', {'title':'Welcome'})
+
 
 
 class PostListView(ListView):
@@ -39,9 +46,9 @@ class PostDetailView(DetailView):
 
 
 
-# you can change this to the welcome page?
-# def about(request):
-# 	return render(request,'fodb/about.html', {'title':'About'})
+
+
+
 
 def error(request, error=None):
 	'''

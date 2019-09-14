@@ -83,3 +83,13 @@ a.article-title:hover {
   font-size: 2.5rem;
 }
 
+.masthead {
+  height: 100vh;
+  min-height: 500px;
+  background-image: url("/static/fodb/images/searchbackground.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
