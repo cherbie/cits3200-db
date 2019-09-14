@@ -2,7 +2,7 @@
 {% block content %}
 
 
-{% load staticfiles%}
+{% load static%}
 
   <!-- Navigation -->
 
@@ -32,6 +32,10 @@
         <p class="lead">This is the Funding Oportunities Database, please login or register to view oportunities available to you. </p>
         <a class="btn btn-primary " href="{% url 'login' %}">Sign In</a>
         <a class="btn btn-primary " href="{% url 'register' %}">Register</a>
+
+        <a>
+          <img src="{% static "fodb/images/ezone.jpg" %}">
+        </a>
 
         {% endif %} 
 
