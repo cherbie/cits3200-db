@@ -71,10 +71,14 @@
 }
 
 .research_content{
+    margin: 0px 5vw;
     margin-top: 20px;
+    padding: 0px 1em;
+    width: 90vw;
+    max-width: 1980px;
 
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 4fr;
     gap: 1em;
 }
 
