@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+<!-- Load css under here -->
+<link rel="stylesheet" type="text/css" href="{% static 'fodb/tables.css' %}">
+
+<!-- Load js under here -->
+
+<section class="head_container">
+    <div class="search_container">
+        <h1>
+            Funding Opportunities
+        </h1>
+        <div class="search_form">
+            <input type="text" placeholder="Search..">
+        </div>
+    </div>
+</section>
+
+<section class="research_content container">
+    <div class="filter_column">
+        <div class="filter_crit" id="sort_box">
+            <h3>
+                Sort By:
+            </h3>
+
+            <hr>
+
+            <div class="form-group">
+                <select id="inputState" class="form-control">
+                  <option selected>A to Z</option>
+                  <option>Salary: low to high</option>
+                  <option>Salary: high to low</option>
+                </select>
+            </div>
+        </div>
+
+
+
+        <div class="filter_crit" id="faculty">
+            <h3>
+                faculty
+            </h3>
+
+            <hr>
+
+            <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="hms">
+                    <label class="custom-control-label" for="hms">HMS</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="ems">
+                    <label class="custom-control-label" for="ems">EMS</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="science">
+                    <label class="custom-control-label" for="science">Science</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter_crit" id="type">
+            <h3>
+                type
+            </h3>
+
+            <hr>
+
+            <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="ecr">
+                    <label class="custom-control-label" for="ecr">ERC</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="travel">
+                    <label class="custom-control-label" for="travel">Travel</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="intenational">
+                    <label class="custom-control-label" for="international">International</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="phd">
+                    <label class="custom-control-label" for="phd">PhD stipend</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="women">
+                    <label class="custom-control-label" for="women">Women in Research</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="visiting">
+                    <label class="custom-control-label" for="visiting">Visiting Academic</label>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="funding_column">
+        <div class="funding_cards">
+            {% for research in researches %}
+                <h1>
+                    {{research["name"]}}
+                </h1>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock body %}
