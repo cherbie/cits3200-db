@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'fodb.apps.FodbConfig',
     'users.apps.UsersConfig',
     'crispy_forms'
+
 ]
 
 MIDDLEWARE = [
