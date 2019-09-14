@@ -1,36 +1,63 @@
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+
 from django.shortcuts import render, redirect, render_to_response
+
 from django.views.generic import ListView, DetailView
+from django.db.models import Q
+from django.core.paginator import Paginator
+from django.db import connections, connection
+
 from .models import Post, funding_opportunity, important_date
-from .filters import PostFilter
+from .forms import FilterForm
 import time
 
 
 # Create your views here.
 # This is where the routes are held
+def dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]
 
+def research(request):
+	# researches = {}
+
+	# rows = dictfetchall(funding_opportunity.objects.raw('SELECT * FROM funding_opportunity'))
+
+	# researches.update(rows)
+
+	# page = request.GET.get('page')
+	# display = paginator.get_page(page)
+
+	form = FilterForm() # manage the html options of the fields
+	qs = funding_opportunity.filters.filter_qs(request) # returns filtered queryset
+	paginator = Paginator(qs, 25) # Show 25 contacts per page
+	page = request.GET.get('page')
+	display = paginator.get_page(page)
+	return render(request, 'fodb/tables.html', {'researches':display,'form': form})
+
+@login_required(login_url='login')
 def home(request):
 	'''
-		Display the list of database entries.
-		Render the main.html template.
+		Rendering of fodb/home.html ... applying filter QuerySet from ./filter.py
 	'''
-	context = {
-		'posts': funding_opportunity.objects.all()
-	}
-	return render(request,'fodb/home.html', context)
+	form = FilterForm() # manage the html options of the fields
+	qs = funding_opportunity.filters.filter_qs(request) # returns filtered queryset
+	paginator = Paginator(qs, 25) # Show 25 contacts per page
+	page = request.GET.get('page')
+	display = paginator.get_page(page)
+
+	return render(request, 'fodb/home.html', {'posts': display, 'form': form})
 
 # you can change this to the welcome page?
 def welcome(request):
  	return render(request,'fodb/welcome.html', {'title':'Welcome'})
 
-
-
-def filter_request(request):
-	'''
-		Additional filtering service provided by django-filter.
-	'''
-	posts = funding_opportunity.objects.all()
-	post_filter = PostFilter(request.GET, queryset=posts)
-	return render(request, 'fodb/home.html', {'filter': post_filter})
 
 
 class PostListView(ListView):
@@ -69,12 +96,13 @@ def unknown(request):
 	return redirect('/error')
 
 
+@login_required(login_url='login')
 def db_update(request, args, kwargs):
 	'''
 		View that controls the add and edit template rendering.
 	'''
 	db_fields = {
-		"id":-1,
+		"id": -1,
 		'title':"Funding Opportunity",
 		'description': "This is the description text",
 		'date': time.asctime(),

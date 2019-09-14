@@ -1,4 +1,4 @@
-{% extends "fodb/base.html" %}
+{% extends "base.html" %}
 {% block content %}
 {% if user.is_authenticated %}
     <div class="row">
@@ -11,8 +11,11 @@
         </div>
         {% endfor %}
         -->
+        <div style="">
+            <p><strong>Number of entries: <i>{{posts.paginator.count}}</i></strong></p>
+        </div>
 
-    {% for post in filter.qs %}
+    {% for post in posts %}
         <article class="media content-section">
             <div class="media-body">
                <div class="article-metadata ">
@@ -26,6 +29,23 @@
             </div>
         </article>
     {% endfor %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if posts.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ posts.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+                </span>
+
+                {% if posts.has_next %}
+                    <a href="?page={{ posts.next_page_number }}">next</a>
+                    <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
     </div>
   </div>
 {% endif %}

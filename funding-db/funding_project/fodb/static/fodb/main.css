@@ -1,7 +1,6 @@
 body {
   background: #fafafa;
   color: #333333;
-  margin-top: 5rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -92,4 +91,24 @@ a.article-title:hover {
   background-repeat: no-repeat;
 }
 
+/* Base styling */
+.background_base {
+  background-color: #27348b;
+}
 
+.navbar{
+  background-color: #27348b;
+  margin-bottom: 2em;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.navbar-items{
+  justify-content: flex-end;
+}
