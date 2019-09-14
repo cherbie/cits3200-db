@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.db import connections, connection
+
 from .models import Post, funding_opportunity, important_date
 from .forms import FilterForm
 import time
@@ -10,14 +12,25 @@ import time
 
 # Create your views here.
 # This is where the routes are held
+def dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]
 
 def research(request):
-	researches = funding_opportunity.objects(request)
+	researches = {}
 
-	page = request.GET.get('page')
-	display = paginator.get_page(page)
+	rows = dictfetchall(funding_opportunity.objects.raw('SELECT * FROM funding_opportunity'))
 
-	return render(request, 'fodb/tables.html', {'display':display, 'researches':researches})
+	researches.update(rows)
+
+	# page = request.GET.get('page')
+	# display = paginator.get_page(page)
+
+	return render(request, 'fodb/tables.html', {'researches':researches})
 
 @login_required(login_url='login')
 def home(request):

@@ -1,23 +1,23 @@
-{% extends "fodb/base.html" %}
+{% extends "base.html" %}
 {% block content %}
 
 
 
- <div class="row"> 
+ <div class="row">
 
 
      <div class="col-md-2">
-        
+
             <a class="btn btn-info btn-lg" href="{% url 'fodb-home' %}"role="button">Back Home</a>
 
 
-      
+
       </div>
 
-    <div class="col-md-10">  
+    <div class="col-md-10">
           <article class="media content-section">
               <div class="media-body">
-                 
+
                    <div class="article-metadata ">
                         <small class="text-muted float-right"> Date updated: {{ object.last_updated|date:"d F Y" }}</small>
                         <h1 class="article-title" >{{ object.name }}</h1>
@@ -30,9 +30,9 @@
                       <p class="article-content">{{ object.description }}</p>
                       <p class="article-content"> <a href="{{object.link}}" target="_blank" > read more about {{ object.name }} here...</a></p>
                   </div>
-                  
+
                   <br>
-                  
+
                   <h5 class="article-title" >
                         {% if object.amount_estimated == True %}
                             <p class="article-content"> Estimated Max Amount: ${{ object.max_amount }}</p>
@@ -47,15 +47,15 @@
                         {% endif %}
                   </h5>
                   <br>
-                  
+
                   <div class="article-metadata "></div>
-                  
+
                   <h4 class="article-title" > Tags </h4>
-                  
+
                   <br>
                   <br>
-                 
-                  
+
+
 
               </div>
           </article>
@@ -63,7 +63,7 @@
     </div>
 
 
- 
+
 
 </div>
 
