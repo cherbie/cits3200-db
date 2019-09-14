@@ -7,6 +7,8 @@ from django.shortcuts import render, redirect, render_to_response
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.db import connections, connection
+
 from .models import Post, funding_opportunity, important_date
 from .forms import FilterForm
 import time
@@ -14,6 +16,30 @@ import time
 
 # Create your views here.
 # This is where the routes are held
+def dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]
+
+def research(request):
+	# researches = {}
+
+	# rows = dictfetchall(funding_opportunity.objects.raw('SELECT * FROM funding_opportunity'))
+
+	# researches.update(rows)
+
+	# page = request.GET.get('page')
+	# display = paginator.get_page(page)
+
+	form = FilterForm() # manage the html options of the fields
+	qs = funding_opportunity.filters.filter_qs(request) # returns filtered queryset
+	paginator = Paginator(qs, 25) # Show 25 contacts per page
+	page = request.GET.get('page')
+	display = paginator.get_page(page)
+	return render(request, 'fodb/tables.html', {'researches':display,'form': form})
 
 @login_required(login_url='login')
 def home(request):
