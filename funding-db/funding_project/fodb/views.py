@@ -11,13 +11,15 @@ import time
 # Create your views here.
 # This is where the routes are held
 
-<<<<<<< HEAD
 def research(request):
-	return render(request, 'fodb/tables.html')
+	researches = funding_opportunity.objects(request)
 
-=======
+	page = request.GET.get('page')
+	display = paginator.get_page(page)
+
+	return render(request, 'fodb/tables.html', {'display':display, 'researches':researches})
+
 @login_required(login_url='login')
->>>>>>> 773ff0d807bc14cf4a1869a07bd04bd8262243aa
 def home(request):
 	'''
 		Rendering of fodb/home.html ... applying filter QuerySet from ./filter.py
