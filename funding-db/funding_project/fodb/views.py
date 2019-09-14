@@ -25,16 +25,21 @@ def dictfetchall(cursor):
     ]
 
 def research(request):
-	researches = {}
+	# researches = {}
 
-	rows = dictfetchall(funding_opportunity.objects.raw('SELECT * FROM funding_opportunity'))
+	# rows = dictfetchall(funding_opportunity.objects.raw('SELECT * FROM funding_opportunity'))
 
-	researches.update(rows)
+	# researches.update(rows)
 
 	# page = request.GET.get('page')
 	# display = paginator.get_page(page)
 
-	return render(request, 'fodb/tables.html', {'researches':researches})
+	form = FilterForm() # manage the html options of the fields
+	qs = funding_opportunity.filters.filter_qs(request) # returns filtered queryset
+	paginator = Paginator(qs, 25) # Show 25 contacts per page
+	page = request.GET.get('page')
+	display = paginator.get_page(page)
+	return render(request, 'fodb/tables.html', {'researches':display,'form': form})
 
 @login_required(login_url='login')
 def home(request):

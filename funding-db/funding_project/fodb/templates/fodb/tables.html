@@ -105,8 +105,9 @@
         <div class="funding_cards">
             {% for research in researches %}
                 <h1>
-                    {{research["name"]}}
+                    {{ research.name }}
                 </h1>
+                {{ research.description }}
             {% endfor %}
         </div>
     </div>
