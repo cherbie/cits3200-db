@@ -7,12 +7,12 @@ import datetime
 
 
 class funding_opportunity(models.Model):
-	Year_or_Month =( ('Y','Year'), ('M','Month'),)
-	Herdc_type = (('1','category1'),('2','category2'),('3','category3'),('4','category4'),)
+	year_or_month =( ('Y','Year'), ('M','Month'),)
+	herdc_type = (('1','category1'),('2','category2'),('3','category3'),('4','category4'),)
 
 	name = models.CharField(max_length = 100)
 	description = models.CharField(max_length = 2500)
-	herdc = models.CharField(blank = True, max_length = 15,  choices = Herdc_type)
+	herdc = models.CharField(blank = True, max_length = 15,  choices = herdc_type)
 	closing_month = models.DateTimeField(null = False)
 	creation_date = models.DateField(auto_now_add = True)
 	last_updated = models.DateField(auto_now= True)
@@ -21,7 +21,7 @@ class funding_opportunity(models.Model):
 
 	max_amount = models.IntegerField(blank = True)
 	max_duration = models.IntegerField(blank = True)
-	duration_type = models.CharField(max_length = 6, choices = Year_or_Month, default = "Month")
+	duration_type = models.CharField(max_length = 6, choices = year_or_month, default = "Month")
 	amount_estimated = models.BooleanField(default = False )
 	duration_estimated = models.BooleanField(default = False)
 
@@ -54,5 +54,3 @@ class important_date(models.Model):
 class fodb_date(models.Model):
 	fodb = models.ForeignKey(funding_opportunity, on_delete=models.CASCADE)
 	date = models.ForeignKey(important_date, on_delete=models.CASCADE)
-
-
