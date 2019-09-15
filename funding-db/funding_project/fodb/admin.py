@@ -1,6 +1,6 @@
 from django.contrib import admin, auth
 from django.contrib.auth.models import User, Group
-from .models import Post, funding_opportunity, important_date
+from .models import funding_opportunity, important_date
 from django.utils.html import format_html
 # Register your models here.
 
@@ -12,7 +12,7 @@ from django.utils.html import format_html
 admin.site.site_header = 'Funding Opportunities Database'
 
 class important_dateInline(admin.TabularInline):
-    model = important_date
+    model = important_date.members.through
     extra = 1
 
 class FundingOpportunityAdmin(admin.ModelAdmin):

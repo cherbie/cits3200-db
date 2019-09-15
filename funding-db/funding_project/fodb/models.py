@@ -5,17 +5,17 @@ from .filters import FilterManager
 import datetime
 
 
+
 class funding_opportunity(models.Model):
 	Year_or_Month =( ('Y','Year'), ('M','Month'),)
 	Herdc_type = (('1','category1'),('2','category2'),('3','category3'),('4','category4'),)
 
-	id = models.AutoField(unique = True, primary_key = True)
 	name = models.CharField(max_length = 100)
 	description = models.CharField(max_length = 2500)
 	herdc = models.CharField(blank = True, max_length = 15,  choices = Herdc_type)
-	closing_month = models.DateTimeField(null = False, localize=True)
-	creation_date = models.DateField(auto_now_add = True, localize=True)
-	last_updated = models.DateField(auto_now= True, localize=True)
+	closing_month = models.DateTimeField(null = False)
+	creation_date = models.DateField(auto_now_add = True)
+	last_updated = models.DateField(auto_now= True)
 	link = models.URLField(max_length = 260)
 	limit_per_uni = models.BooleanField(default = False)
 
@@ -45,13 +45,14 @@ class funding_opportunity(models.Model):
 
 
 class important_date(models.Model):
-	id = models.AutoField(primary_key = True,unique = True)
 	milestone = models.CharField(max_length = 35)
-	date = models.DateTimeField(null = False, localize=True)
-	date_status = models.CharField(max_length = 20, localize=True)
-
+	date = models.DateTimeField(null = False)
+	date_status = models.CharField(max_length = 20)
+	members = models.ManyToManyField(funding_opportunity, through = 'fodb_date')
 
 
 class fodb_date(models.Model):
-	fodb_id = models.ManyToManyField(funding_opportunity)
-	date_id = models.ManyToManyField(important_date)
+	fodb = models.ForeignKey(funding_opportunity, on_delete=models.CASCADE)
+	date = models.ForeignKey(important_date, on_delete=models.CASCADE)
+
+

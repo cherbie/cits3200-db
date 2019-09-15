@@ -1,6 +1,5 @@
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
 
 from django.shortcuts import render, redirect, render_to_response
 
@@ -9,7 +8,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from django.db import connections, connection
 
-from .models import Post, funding_opportunity, important_date
+from .models import funding_opportunity, important_date
 from .forms import FilterForm
 import time
 
