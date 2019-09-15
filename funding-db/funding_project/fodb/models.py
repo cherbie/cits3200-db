@@ -38,9 +38,12 @@ class funding_opportunity(models.Model):
 
 	objects = models.Manager() # default list of entries
 	filters = FilterManager() # filtered list of entries
-
 	def __str__(self):
 		return self.name
+	class Meta:
+		ordering = ['-name']
+		verbose_name = 'Funding Opportunity'
+		verbose_name_plural = 'Funding Opportunities'
 
 
 class important_date(models.Model):
