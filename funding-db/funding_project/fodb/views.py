@@ -1,6 +1,5 @@
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
 
 from django.shortcuts import render, redirect, render_to_response
 
@@ -9,8 +8,9 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from django.db import connections, connection
 
-from .models import Post, funding_opportunity, important_date
+from .models import funding_opportunity, important_date
 from .forms import FilterForm
+from .modelForm import funding_opportunityForm, important_dateForm
 import time
 
 
@@ -62,20 +62,15 @@ class PostDetailView(DetailView):
 	template_name = 'fodb/funding_opportunity_detail.html'
 
 
-
-
-
-
-
 def error(request, error=None):
 	'''
 		Render the error template if an error has occured.
 	'''
 	if error == None:
 		error = {
-			'title': 'Unexpected Error',
+			'title': 'Sorry this web-page cannot be found :(',
 			'status_code': 404,
-			'message': 'error message.'
+			'message': 'Please double check your url.'
 		}
 	return render(request, 'fodb/error.html', {'error':error})
 
