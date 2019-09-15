@@ -6,7 +6,7 @@ class funding_opportunityForm(ModelForm):
         model = funding_opportunity
         fields = ['name','description','herdc', 'max_amount', 'max_duration', 'duration_type' 'amount_estimated',
         'duration_estimated', 'ecr', 'travel','visiting','wir', 'phd','international','hms','ems,
-        'science','limit_per_uni', 'link', 'closing_month','creation_date','last_updated','is_hidden',]
+        'science','limit_per_uni', 'link', 'closing_month','creation_date','last_updated','is_hidden']
 
         widgets = {
             'description' = forms.TextInput(attrs = {'size' : '200'})
