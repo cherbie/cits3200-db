@@ -5,7 +5,6 @@ from .filters import FilterManager
 import datetime
 
 
-
 class funding_opportunity(models.Model):
 	year_or_month =( ('Y','Year'), ('M','Month'),)
 	herdc_type = (('1','category1'),('2','category2'),('3','category3'),('4','category4'),)
