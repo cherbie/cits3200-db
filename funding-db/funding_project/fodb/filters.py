@@ -14,7 +14,8 @@ class FilterManager(models.Manager):
 		"""
 
 		dict = request.GET.dict() # request paramaters
-		q = None # models.Q object
+		tags = None # models.Q object
+		faculty =  None
 		print(dict)
 		if len(dict) == 0 :
 			return super().get_queryset()
@@ -22,53 +23,60 @@ class FilterManager(models.Manager):
 		print(self.ems_select())
 		print(self.fields[0])
 		if dict.__contains__(self.fields[0]):
-			if q == None:
-				q = self.hms_select()
+			if faculty == None:
+				faculty = self.hms_select()
 			else:
-				q = q | self.hms_select()
-			print(q)
+				faculty = faculty & self.hms_select()
+			print(faculty)
 		if dict.__contains__(self.fields[1]):
-			if q == None:
-				q = self.ems_select()
+			if faculty == None:
+				faculty = self.ems_select()
 			else:
-				q = q | self.ems_select()
+				faculty = faculty & self.ems_select()
 		if dict.__contains__(self.fields[2]):
-			if q == None:
-				q = self.science_select()
+			if faculty == None:
+				faculty = self.science_select()
 			else:
-				q = q | self.science_select()
-			print(q)
+				faculty = faculty & self.science_select()
+			print(faculty)
 		if dict.__contains__(self.fields[3]):
-			if q == None:
-				q = self.travel_select()
+			if tags == None:
+				tags = self.travel_select()
 			else:
-				q = q | self.travel_select()
+				tags = tags | self.travel_select()
 		if dict.__contains__(self.fields[4]):
-			if q == None:
-				q = self.ecr_select()
+			if tags == None:
+				tags = self.ecr_select()
 			else:
-				q = q | self.ecr_select()
+				tags = tags | self.ecr_select()
 		if dict.__contains__(self.fields[5]):
-			if q == None:
-				q = self.international_select()
+			if tags == None:
+				tags = self.international_select()
 			else:
-				q = q | self.international_select()
+				tags = tags | self.international_select()
 		if dict.__contains__(self.fields[6]):
-			if q == None:
-				q = self.wir_select()
+			if tags == None:
+				tags = self.wir_select()
 			else:
-				q = q | self.wir_select()
+				tags = tags | self.wir_select()
 		if dict.__contains__(self.fields[7]):
-			if q == None:
-				q = self.phd_select()
+			if tags == None:
+				tags = self.phd_select()
 			else:
-				q = q | self.phd_select()
+				tags = tags | self.phd_select()
 		if dict.__contains__(self.fields[8]):
-			if q == None:
-				q = self.visiting_select()
+			if tags == None:
+				tags = self.visiting_select()
 			else:
-				q = q | self.visiting_select()
-		return super().get_queryset().filter(q);
+				tags = tags | self.visiting_select()
+
+		# -- RETURN STATEMENTS --
+		if tags is None:
+			return super().get_queryset().filter(faculty)
+		elif faculty is None:
+			return super().get_queryset().filter(tags)
+		else:
+			return super().get_queryset().filter(tags & faculty)
 
 	def hms_select(self):
 		print("entered")
