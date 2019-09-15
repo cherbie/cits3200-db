@@ -71,21 +71,15 @@ class PostDetailView(DetailView):
 	template_name = 'fodb/funding_opportunity_detail.html'
 
 
-
-
-
-
-
-
 def error(request, error=None):
 	'''
 		Render the error template if an error has occured.
 	'''
 	if error == None:
 		error = {
-			'title': 'Unexpected Error',
+			'title': 'Sorry this web-page cannot be found :(',
 			'status_code': 404,
-			'message': 'error message.'
+			'message': 'Please double check your url.'
 		}
 	return render(request, 'fodb/error.html', {'error':error})
 

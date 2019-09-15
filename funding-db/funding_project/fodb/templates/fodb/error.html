@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 
-		<div style="display:center; margin:auto;">
+		<div style="display:center; margin:auto; text-align:center;">
             <h1 style="color:red;">{{error.title}}</h1>
             <h3>{{error.status_code}}</h3>
         </div>
         <div style="display:center; text-align:center; margin:auto;">
             <p style="color:blue;">{{error.message}}</p>
+			<p><a href='/'>Go back to home</a></p>
         </div>
 
 {% endblock content%}
