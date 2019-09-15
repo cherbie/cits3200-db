@@ -5,14 +5,11 @@
     <form action="" method="GET">
         <div class="content-section">
           <div class="sort-container">
-              <div class="filter-title">
-                  <h3>Sort by</h3>
+              <div class="filter-title" style="display:inline-block;">
+                  <h6>{{form.sort.label}}</h6>
               </div>
-              <div class="filter-dropdown">
-                  <select>
-                      <option value="1">Alphabetical</option>
-                      <option value="2">Closest deadline</option>
-                  </select>
+              <div style="display:inline-block;">
+                  {{form.sort}}
               </div>
           </div>
           <div class="faculty-container">

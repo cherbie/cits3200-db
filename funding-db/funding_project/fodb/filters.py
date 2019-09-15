@@ -12,13 +12,11 @@ class FilterManager(models.Manager):
 			@return QuerySet containing all fields with specified values.
 			@param HttpRequest object
 		"""
-
+		self.request = request
 		dict = request.GET.dict() # request paramaters
 		tags = None # models.Q object
 		faculty =  None
 		print(dict)
-		if len(dict) == 0 :
-			return super().get_queryset()
 
 		print(self.ems_select())
 		print(self.fields[0])
@@ -71,12 +69,29 @@ class FilterManager(models.Manager):
 				tags = tags | self.visiting_select()
 
 		# -- RETURN STATEMENTS --
-		if tags is None:
-			return super().get_queryset().filter(faculty)
+		if tags is None and faculty is None:
+			return self.set_order(super().get_queryset())
+		elif tags is None:
+			return self.set_order(super().get_queryset().filter(faculty))
 		elif faculty is None:
-			return super().get_queryset().filter(tags)
+			return self.set_order(super().get_queryset().filter(tags))
 		else:
-			return super().get_queryset().filter(tags & faculty)
+			return self.set_order(super().get_queryset().filter(tags & faculty))
+
+	def set_order(self, queryset):
+		'''
+			Responsible for ordering the resulting queryset.
+			@return queryset
+		'''
+		str = self.request.GET.get('sort')
+		if str == 'desc':
+			queryset = queryset.order_by('-name')
+		elif str == 'close':
+			queryset = queryset.order_by('closing_month')
+		else:
+			queryset = queryset.order_by('name')
+		print(str)
+		return queryset
 
 	def hms_select(self):
 		print("entered")

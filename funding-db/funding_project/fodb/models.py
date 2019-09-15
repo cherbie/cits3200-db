@@ -12,7 +12,7 @@ class funding_opportunity(models.Model):
 	name = models.CharField(max_length = 100)
 	description = models.CharField(max_length = 2500)
 	herdc = models.CharField(blank = True, max_length = 15,  choices = herdc_type)
-	closing_month = models.DateTimeField(null = False)
+	closing_month = models.DateTimeField(null = False) #why is this called closing_month?
 	creation_date = models.DateField(auto_now_add = True)
 	last_updated = models.DateField(auto_now= True)
 	link = models.URLField(max_length = 260)
