@@ -12,6 +12,11 @@ class funding_opportunityForm(ModelForm):
             'description' = forms.TextInput(attrs = {'size' : '200'})
         }
 
+        class Media:
+            css = {
+                'all': ('pretty.css',)
+            }
+
 
 class important_dateForm(ModelForm):
     class Meta:
