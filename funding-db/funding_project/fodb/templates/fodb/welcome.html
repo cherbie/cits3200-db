@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load static%}
+<style>
+  .cover_section{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    min-width: 99vw;
+    width: 99vw;
+    max-width: 99vw;
+    height: 50vh;
+
+    display: grid;
+
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-image: url("{% static "fodb/images/searchbackground.png" %}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+  }
+
+  .welcome_title{
+    display: inline-block;
+    vertical-align: middle;
+    align-self: center;
+    justify-self: center;
+
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8), 0 0 12px black;
+  }
+
+  .welcome_lead{
+    color: #e2b600;
+  }
+
+  .welcome_lead:hover{
+    color: white;
+    text-decoration: none;
+  }
+</style>
+
+
+<section class="cover_section">
+    <!-- <h1 class="welcome_title">
+        Welcome to Funding Research Database
+    </h1> -->
+
+    {% if user.is_authenticated %}
+
+      <h1 class="font-weight-light welcome_title">Funding Oportunities Database</h1>
+      <h3 class="welcome_title"> Get Searching </h3>
+      <a class="btn btn-primary " href="{% url 'fodb-home' %}">View Oportunities</a>
+
+    {% else %}
+
+      <h1 class="font-weight-light welcome_title">Welcome to Funding Research Database</h1>
+      <h4 class="welcome_title">
+        This is the Funding Oportunities Database, please
+        <a class="welcome_lead" href="{% url 'login' %}">
+            login
+        </a>
+        or
+        <a class="welcome_lead" href="{% url 'register' %}">
+            register
+        </a>
+        to view oportunities available to you.
+      </h4>
+
+    {% endif %}
+
+</section>
+
+<!-- Page Content -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="font-weight-light">Page Content</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ab nulla dolorum autem nisi officiis blanditiis voluptatem hic, assumenda aspernatur facere ipsam nemo ratione cumque magnam enim fugiat reprehenderit expedita.</p>
+  </div>
+</section>
+
+
+{% endblock content%}

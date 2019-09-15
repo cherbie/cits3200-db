@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,15 +33,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'fodb.apps.FodbConfig',
-    'users.apps.UsersConfig',
-    'crispy_forms',
     'django.contrib.admin',
+    'django_filters',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'fodb.apps.FodbConfig',
+    'users.apps.UsersConfig',
+    'crispy_forms'
+
 ]
 
 MIDDLEWARE = [
@@ -57,7 +61,7 @@ ROOT_URLCONF = 'funding_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['./templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +73,13 @@ TEMPLATES = [
         },
     },
 ]
+
+TEMPLATE_DIRS = (
+   # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+   # Always use forward slashes, even on Windows.
+   # Don't forget to use absolute paths, not relative paths.
+   BASE_DIR + '../fodb/templates',
+)
 
 WSGI_APPLICATION = 'funding_project.wsgi.application'
 
@@ -122,10 +133,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'fodb-home'
 
 LOGIN_URL = 'login'
-
-

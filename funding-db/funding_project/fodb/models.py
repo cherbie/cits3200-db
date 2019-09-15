@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from .filters import FilterManager
 import datetime
 
 
@@ -35,6 +36,9 @@ class funding_opportunity(models.Model):
 	science = models.BooleanField(default = False)
 
 	is_hidden = models.BooleanField(default = False)
+
+	objects = models.Manager() # default list of entries
+	filters = FilterManager() # filtered list of entries
 
 	def __str__(self):
 		return self.name
