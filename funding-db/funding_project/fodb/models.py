@@ -45,7 +45,7 @@ class funding_opportunity(models.Model):
 
 
 class important_date(models.Model):
-	milestone = models.CharField(max_length = 35)
+	milestone = models.CharField(max_length = 200)
 	date = models.DateTimeField(null = False)
 	date_status = models.CharField(max_length = 20)
 	members = models.ManyToManyField(funding_opportunity, through = 'fodb_date')

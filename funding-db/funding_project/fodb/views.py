@@ -10,6 +10,7 @@ from django.db import connections, connection
 
 from .models import funding_opportunity, important_date
 from .forms import FilterForm
+from .modelForm import funding_opportunityForm, important_dateForm
 import time
 
 
@@ -68,6 +69,7 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
 	model = funding_opportunity
 	template_name = 'fodb/funding_opportunity_detail.html'
+
 
 
 
