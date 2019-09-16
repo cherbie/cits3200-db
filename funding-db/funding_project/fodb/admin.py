@@ -15,23 +15,22 @@ class important_dateInline(admin.TabularInline):
     model = important_date
     extra = 1
 
+
 class FundingOpportunityAdmin(admin.ModelAdmin):
 	fieldsets = [
-        ('Funding Opportunity',{'fields': ['name','description','link','herdc','limit_per_uni']}),
+        ('Funding Opportunity',{'fields': [('name','is_hidden'),'description','link','herdc','limit_per_uni']}),
         ('Date Information', {'fields': ['closing_date']}),
-        ('Amount and Duration', {'fields': ['max_amount','amount_estimated','max_duration','duration_type','duration_estimated']}),
-        ('Tags', {'fields': ['ecr','travel','visiting','wir','phd','international','hms','ems','science','is_hidden' ]}),
+        ('Amount and Duration', {'fields': [('max_amount','amount_estimated'),('max_duration','duration_estimated') ,'duration_type']}),
+        ('Tags', {'fields': ['ecr','travel','visiting','wir','phd','international','hms','ems','science' ]}),
     ]
 	inlines = [important_dateInline]
 	list_filter = ('closing_date', )
-	list_display = ('name', 'closing_date','max_amount','max_duration')
+	list_display = ('name', 'closing_date','max_amount','max_duration', 'is_hidden')
 	search_fields = ['description','name']
 
 
 admin.site.register(funding_opportunity,FundingOpportunityAdmin)
 
-class UserAdmin(admin.ModelAdmin):
-	search_field = ('name')
 
 
 

@@ -17,9 +17,14 @@ import time
 # Create your views here.
 # This is where the routes are held
 
+
 def opp(request):
 	context = {"test": "afdsabfvadshivabdsvias"}
 	display = funding_opportunity.objects.all().values()
+
+
+def research(request):
+	# researches = {}
 
 	researches = []
 
@@ -67,6 +72,7 @@ class PostDetailView(DetailView):
 	template_name = 'fodb/funding_opportunity_detail.html'
 
 
+
 def error(request, error=None):
 	'''
 		Render the error template if an error has occured.
@@ -105,3 +111,10 @@ def db_update(request, args, kwargs):
 		"action": "/",
 	}
 	return render(request, 'fodb/db-update.html', prop)
+
+
+
+
+
+
+
