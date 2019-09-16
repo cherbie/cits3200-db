@@ -6,6 +6,11 @@ class FilterForm(forms.Form):
         Note: The QuerySet generation logic has been seperated from the forms class
         This form only provides the structure requirements
     '''
+    sorting = [
+        ('asc', 'A-Z'),
+        ('desc', 'Z-A'),
+        ('close', 'Closest deadline')]
+    sort = forms.ChoiceField(required=False, initial='asc', choices=sorting, label='Sort by')
     ecr = forms.BooleanField(required=False, initial='False', label='ECR')
     travel = forms.BooleanField(required=False, initial='False', label='Travel')
     visiting = forms.BooleanField(required=False, initial='False', label='Visiting')
