@@ -11,7 +11,8 @@ class FilterForm(forms.Form):
     sorting = [
         ('asc', 'A-Z'),
         ('desc', 'Z-A'),
-        ('close', 'Closest deadline')]
+        ('close-asc', 'Closest deadline'),
+        ('close-desc', 'Furthest deadline')]
     sort = forms.ChoiceField(required=False, initial='asc', choices=sorting, label='Sort by')
     ecr = forms.BooleanField(required=False, initial='False', label='ECR')
     travel = forms.BooleanField(required=False, initial='False', label='Travel')

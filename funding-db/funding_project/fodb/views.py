@@ -1,4 +1,3 @@
-
 from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, redirect, render_to_response
@@ -24,13 +23,14 @@ def opp(request):
 	researches = []
 
 	for research in display:
-		researches.append(research)
+		researchers.append(research)
 
-	context["researches"] = researches
+	context["researchers"] = researchers
 
 	print("Here\n")
 	print(researches)
 	return render(request, 'fodb/tables.html', context)
+
 
 @login_required(login_url='login')
 def home(request):
@@ -42,13 +42,16 @@ def home(request):
 	paginator = Paginator(qs, 25) # Show 25 contacts per page
 	page = request.GET.get('page')
 	display = paginator.get_page(page)
+	context = {
+		'posts': display,
+		'form': form
+	}
 
-	return render(request, 'fodb/home.html', {'posts': display, 'form': form})
+	return render(request, 'fodb/home.html', context)
 
 # you can change this to the welcome page?
 def welcome(request):
  	return render(request,'fodb/welcome.html', {'title':'Welcome'})
-
 
 
 class PostListView(ListView):
