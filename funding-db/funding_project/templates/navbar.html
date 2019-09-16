@@ -19,13 +19,8 @@
             </li>
             {% endif %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'fodb-home' %}">
+                <a class="nav-link" href="{% url 'fodb-welcome' %}">
                 <span>Home</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/researches/">
-                <span>Researches</span>
                 </a>
             </li>
             {% if user.is_authenticated %}
