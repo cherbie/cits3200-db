@@ -7,7 +7,7 @@ import datetime
 
 class funding_opportunity(models.Model):
 	year_or_month =( ('years','year'), ('months','month'),)
-	herdc_type = (('1','category1'),('2','category2')name,('3','category3'),('4','category4'),)
+	herdc_type = (('1','category1'),('2','category2'),('3','category3'),('4','category4'),)
 
 	name = models.CharField(max_length = 100)
 	description = models.TextField()
