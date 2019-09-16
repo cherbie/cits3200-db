@@ -48,11 +48,6 @@ class important_date(models.Model):
 	milestone = models.CharField(max_length = 200)
 	date = models.DateTimeField(null = False)
 	date_status = models.CharField(max_length = 20)
-	members = models.ManyToManyField(funding_opportunity, through = 'fodb_date')
-
-
-class fodb_date(models.Model):
-	fodb = models.ForeignKey(funding_opportunity, on_delete=models.CASCADE)
-	date = models.ForeignKey(important_date, on_delete=models.CASCADE)
+	members = models.ForeignKey(funding_opportunity,on_delete=models.CASCADE)
 
 

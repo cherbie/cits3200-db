@@ -1,6 +1,6 @@
 from django.db import models
 from django.forms import ModelForm, Textarea
-from .models import funding_opportunity, important_date, fodb_date
+from .models import funding_opportunity, important_date
 
 class funding_opportunityForm(ModelForm):
     class Meta:
@@ -15,7 +15,16 @@ class funding_opportunityForm(ModelForm):
 
         help_text = {
             'description' : ('the max length is 2500.'),
-            'is_hidden' : ('the opportunity will be hidden')
+            'is_hidden' : ('the opportunity will be hidden'),
+            'herdc' : (''),
+            'ecr' : (''),
+            'travel' :(''),
+            'wir' : (''),
+            'phd' : (''),
+            'hms' : (''),
+            'ems' : (''),
+            'science' : (''),
+
         }
 
         label = {
@@ -35,6 +44,11 @@ class important_dateForm(ModelForm):
 
         widgets = {
             'milestone' : Textarea(attrs = {'rows' : 10, 'clos' : 20}),
+        }
+
+        help_text = {
+            'milestone' : (''),
+            'date_status' : (''),
         }
 
         label = {
