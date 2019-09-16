@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'fodb/tables.css' %}">
 
 {% if user.is_authenticated %}
+
 <!-- Work under here -->
 
     <section class="head_container">
@@ -18,6 +19,24 @@
             <div class="search_form">
                 <input type="text" placeholder="Search..">
             </div>
+
+    <div class="row">
+        {% include './home-filter.html' %}
+    <div class="col-md-9">
+        <!--{% for post in filter.qs %}
+        <div>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.description }}</p>
+        </div>
+        {% endfor %}
+        -->
+
+
+
+
+        <div style="">
+            <p><strong>Number of entries: <i>{{posts.paginator.count}}</i></strong></p>
+
         </div>
     </section>
 
@@ -68,11 +87,19 @@
                             </div>
                         </div>
 
+
                         <div class="content_tags">
                             <div class="content_department">
                                 {% if post.hms %}
                                 <span class="tags tags_yellow">HMS</span>
                                 {% endif %}
+
+    {% for post in posts %}
+
+        <article class="media content-section">
+            <div class="media-body">
+               <div class="article-metadata ">
+
 
                                 {% if post.ems %}
                                 <span class="tags tags_green">EMS</span>

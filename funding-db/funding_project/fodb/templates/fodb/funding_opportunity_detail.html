@@ -15,8 +15,12 @@
       </div>
 
     <div class="col-md-10">
+      <br>
+                  <br>
+
           <article class="media content-section">
               <div class="media-body">
+
 
                    <div class="article-metadata ">
                         <small class="text-muted float-right"> Date updated: {{ object.last_updated|date:"d F Y" }}</small>
@@ -35,15 +39,15 @@
 
                   <h5 class="article-title" >
                         {% if object.amount_estimated == True %}
-                            <p class="article-content"> Estimated Max Amount: ${{ object.max_amount }}</p>
+                            <p class="article-content"> Max Amount: ${{ object.max_amount }} (Estimated)</p>
                         {% else %}
                             <p class="article-content"> Max Amount: ${{ object.max_amount }}</p>
                         {% endif %}
 
                         {% if object.duration_estimated == True %}
-                            <p class="article-content"> Estimated Max Amount: ${{ object.max_duration }}</p>
+                            <p class="article-content">Max Amount: ${{ object.max_duration }} (Estimated)</p>
                         {% else %}
-                            <p class="article-content"> Max Duration: {{ object.max_duration }} months</p>
+                            <p class="article-content"> Max Duration: {{ object.max_duration }}  {{object.duration_type}}</p>
                         {% endif %}
                   </h5>
                   <br>
@@ -52,9 +56,16 @@
 
                   <h4 class="article-title" > Tags </h4>
 
+                    {% if object.ecr == True %}
+                      <p class="article-content"> ECR </p>
+
+                    {% endif %}
+
                   <br>
                   <br>
 
+                   <div class="article-metadata "></div>
+                  <h4 class="article-title" > Important Dates </h4>
 
 
               </div>
