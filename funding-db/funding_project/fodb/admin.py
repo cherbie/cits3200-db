@@ -25,7 +25,7 @@ class FundingOpportunityAdmin(admin.ModelAdmin):
     ]
 	inlines = [important_dateInline]
 	list_filter = ('closing_date', )
-	list_display = ('name', 'closing_date','max_amount','max_duration')
+	list_display = ('name', 'closing_date','max_amount','max_duration', 'is_hidden')
 	search_fields = ['description','name']
 
 
