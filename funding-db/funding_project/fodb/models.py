@@ -56,7 +56,7 @@ class important_date(models.Model):
 	members = models.ForeignKey(funding_opportunity, on_delete = models.CASCADE)
 
 	def __str__(self):
-		return self.milestone , self.date
+		return self.milestone
 
 	class Meta:
 		ordering = ['-date']
