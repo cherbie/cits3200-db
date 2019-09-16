@@ -34,7 +34,7 @@ class funding_opportunity(models.Model):
 	ems = models.BooleanField(default = False, verbose_name = 'EMS')
 	science = models.BooleanField(default = False, verbose_name = 'Science')
 
-	is_hidden = models.BooleanField(default = False, verbose_name = 'Hide from regular view')
+	is_hidden = models.BooleanField(default = False, verbose_name = 'Hidden from regular view')
 
 	objects = models.Manager() # default list of entries
 	filters = FilterManager() # filtered list of entries
@@ -56,7 +56,7 @@ class important_date(models.Model):
 	members = models.ForeignKey(funding_opportunity, on_delete = models.CASCADE)
 
 	def __str__(self):
-		return self.milestone , self.date
+		return self.milestone
 
 	class Meta:
 		ordering = ['-date']

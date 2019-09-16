@@ -19,25 +19,6 @@
             <div class="search_form">
                 <input type="text" placeholder="Search..">
             </div>
-
-    <div class="row">
-        {% include './home-filter.html' %}
-    <div class="col-md-9">
-        <!--{% for post in filter.qs %}
-        <div>
-            <h3>{{ post.title }}</h3>
-            <p>{{ post.description }}</p>
-        </div>
-        {% endfor %}
-        -->
-
-
-
-
-        <div style="">
-            <p><strong>Number of entries: <i>{{posts.paginator.count}}</i></strong></p>
-
-        </div>
     </section>
 
     <section class="research_content container">
@@ -63,7 +44,7 @@
                                     Deadline :
                                 </h7>
                                 <h7>
-                                    {{ post.closing_month|date:"d F Y" }}
+                                    {{ post.closing_date|date:"d F Y" }}
                                 </h7>
                             </div>
                             <div class="important_info amount_info">
@@ -93,13 +74,6 @@
                                 {% if post.hms %}
                                 <span class="tags tags_yellow">HMS</span>
                                 {% endif %}
-
-  
-
-        <article class="media content-section">
-            <div class="media-body">
-               <div class="article-metadata ">
-
 
                                 {% if post.ems %}
                                 <span class="tags tags_green">EMS</span>
@@ -135,7 +109,6 @@
                                 {% endif %}
                             </div>
                         </div>
-
                         <hr>
                     </div>
                 </a>
