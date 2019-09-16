@@ -10,7 +10,7 @@ from . import views
 urlpatterns = [
     path('', views.welcome, name='fodb-welcome'),
     path('opportunities/', views.home, name="fodb-home"),
-    path('researchers/', views.research, name='research'),
+    path('researchers/', views.opp, name='research'),
     #path('', PostListView.as_view(), name='fodb-home'),
     path('opportunity/<int:pk>', PostDetailView.as_view(), name='fodb-detail'),
     re_path(r'^(add)|(edit)', views.db_update, name='fodb-db-update'),

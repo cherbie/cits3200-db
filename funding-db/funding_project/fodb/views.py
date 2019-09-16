@@ -16,30 +16,21 @@ import time
 
 # Create your views here.
 # This is where the routes are held
-def dictfetchall(cursor):
-    "Return all rows from a cursor as a dict"
-    columns = [col[0] for col in cursor.description]
-    return [
-        dict(zip(columns, row))
-        for row in cursor.fetchall()
-    ]
 
-def research(request):
-	# researches = {}
+def opp(request):
+	context = {"test": "afdsabfvadshivabdsvias"}
+	display = funding_opportunity.objects.all().values()
 
-	# rows = dictfetchall(funding_opportunity.objects.raw('SELECT * FROM funding_opportunity'))
+	researches = []
 
-	# researches.update(rows)
+	for research in display:
+		researches.append(research)
 
-	# page = request.GET.get('page')
-	# display = paginator.get_page(page)
+	context["researches"] = researches
 
-	form = FilterForm() # manage the html options of the fields
-	qs = funding_opportunity.filters.filter_qs(request) # returns filtered queryset
-	paginator = Paginator(qs, 25) # Show 25 contacts per page
-	page = request.GET.get('page')
-	display = paginator.get_page(page)
-	return render(request, 'fodb/tables.html', {'researches':display,'form': form})
+	print("Here\n")
+	print(researches)
+	return render(request, 'fodb/tables.html', context)
 
 @login_required(login_url='login')
 def home(request):

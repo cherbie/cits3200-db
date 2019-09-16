@@ -1,52 +1,140 @@
 {% extends "base.html" %}
+
+{% load static %}
+
 {% block content %}
+
+<!-- Load css under here -->
+<link rel="stylesheet" type="text/css" href="{% static 'fodb/tables.css' %}">
+
 {% if user.is_authenticated %}
-    <div class="row">
-        {% include './home-filter.html' %}
-    <div class="col-md-9">
-        <!--{% for post in filter.qs %}
-        <div>
-            <h3>{{ post.title }}</h3>
-            <p>{{ post.description }}</p>
-        </div>
-        {% endfor %}
-        -->
-        <div style="">
-            <p><strong>Number of entries: <i>{{posts.paginator.count}}</i></strong></p>
-        </div>
+<!-- Work under here -->
 
-    {% for post in posts %}
-        <article class="media content-section">
-            <div class="media-body">
-               <div class="article-metadata ">
-
-                  <small class="text-muted float-right"> Date updated: {{ post.last_updated|date:"d F Y" }}</small>
-
-
-              <h2><a class="article-title" href="{% url 'fodb-detail' post.id %}">{{ post.name }}</a></h2>
-              </div>
-               <p class="article-content">{{ post.description }}</p>
+    <section class="head_container">
+        <div class="search_container">
+            <h1>
+                Funding Opportunities
+            </h1>
+            <div class="search_form">
+                <input type="text" placeholder="Search..">
             </div>
-        </article>
-    {% endfor %}
-        <div class="pagination">
-            <span class="step-links">
-                {% if posts.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ posts.previous_page_number }}">previous</a>
-                {% endif %}
-
-                <span class="current">
-                    Page {{ posts.number }} of {{ posts.paginator.num_pages }}
-                </span>
-
-                {% if posts.has_next %}
-                    <a href="?page={{ posts.next_page_number }}">next</a>
-                    <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
-                {% endif %}
-            </span>
         </div>
-    </div>
-  </div>
+    </section>
+
+    <section class="research_content container">
+        {% include './home-filter.html' %}
+        <div class="funding_column">
+            <div class="funding_header">
+                <p class="current">
+                    Page {{ posts.number }}
+                </p>
+                <p><i>{{posts.paginator.count}}</i> entries</p>
+            </div>
+
+            <div class="content_section">
+                {% for post in posts %}
+                <a style="text-decoration: none; color: black;" target="blank" href="{% url 'fodb-detail' post.id %}">
+                    <div class="content_card">
+                        <h3>
+                            {{ post.name }}
+                        </h3>
+                        <div class="info_container">
+                            <div class="important_info deadline_info">
+                                <h7>
+                                    Deadline :
+                                </h7>
+                                <h7>
+                                    {{ post.closing_month|date:"d F Y" }}
+                                </h7>
+                            </div>
+                            <div class="important_info amount_info">
+                                <h7>
+                                    amount :
+                                </h7>
+                                <h7>
+                                    $ {{ post.max_amount }}
+                                    {% if post.amount_estimated %}
+                                    <span><small><small> <i>(Estimated)</i></small></small></span>
+                                    {% endif %}
+                                </h7>
+                            </div>
+                            <div class="important_info">
+                                <h7>
+                                    Duration :
+                                </h7>
+                                <h7>
+                                    {{ post.max_duration }} {{ post.duration_type}}
+                                </h7>
+                            </div>
+                        </div>
+
+                        <div class="content_tags">
+                            <div class="content_department">
+                                {% if post.hms %}
+                                <span class="tags tags_yellow">HMS</span>
+                                {% endif %}
+
+                                {% if post.ems %}
+                                <span class="tags tags_green">EMS</span>
+                                {% endif %}
+
+                                {% if post.science %}
+                                <span class="tags tags_blue">Science</span>
+                                {% endif %}
+                            </div>
+                            <div class="content_type">
+                                {% if post.ecr %}
+                                <span class="tags_icon"><i class="fas fa-business-time"></i></span>
+                                {% endif %}
+
+                                {% if post.travel %}
+                                <span class="tags_icon"><i class="fas fa-plane-departure"></i></span>
+                                {% endif %}
+
+                                {% if post.visiting %}
+                                <span class="tags_icon"><i class="fas fa-map-marked-alt"></i></span>
+                                {% endif %}
+
+                                {% if post.wir %}
+                                <span class="tags_icon"><i class="fas fa-female"></i><i class="fas fa-microscope"></i></span>
+                                {% endif %}
+
+                                {% if post.phd %}
+                                <span class="tags_icon"><i class="fas fa-graduation-cap"></i></span>
+                                {% endif %}
+
+                                {% if post.international %}
+                                <span class="tags_icon"><i class="fas fa-globe"></i></span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <hr>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+            <br>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if posts.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ posts.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+                    </span>
+
+                    {% if posts.has_next %}
+                        <a href="?page={{ posts.next_page_number }}">next</a>
+                        <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </section>
+
 {% endif %}
+
 {% endblock content%}
