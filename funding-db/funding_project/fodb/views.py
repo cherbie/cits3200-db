@@ -24,6 +24,13 @@ def dictfetchall(cursor):
         for row in cursor.fetchall()
     ]
 
+
+
+
+
+
+        
+
 def research(request):
 	# researches = {}
 
@@ -71,6 +78,7 @@ class PostDetailView(DetailView):
 	template_name = 'fodb/funding_opportunity_detail.html'
 
 
+
 def error(request, error=None):
 	'''
 		Render the error template if an error has occured.
@@ -109,3 +117,10 @@ def db_update(request, args, kwargs):
 		"action": "/",
 	}
 	return render(request, 'fodb/db-update.html', prop)
+
+
+
+
+
+
+
