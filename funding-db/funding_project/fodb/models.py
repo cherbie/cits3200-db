@@ -6,7 +6,7 @@ import datetime
 
 
 class funding_opportunity(models.Model):
-	year_or_month =( ('Y','Year'), ('M','Month'),)
+	year_or_month =( ('Y','year'), ('M','month'),)
 	herdc_type = (('1','category1'),('2','category2'),('3','category3'),('4','category4'),)
 
 	name = models.CharField(max_length = 100)
@@ -40,6 +40,7 @@ class funding_opportunity(models.Model):
 	filters = FilterManager() # filtered list of entries
 	def __str__(self):
 		return self.name
+
 	class Meta:
 		ordering = ['-name']
 		verbose_name = 'Funding Opportunity'
