@@ -1,0 +1,90 @@
+footer{
+    position: absolute;
+    bottom: 0;
+}
+
+.wiki_container{
+    margin-right: auto;
+    margin-left: auto;
+    width: 90vw;
+    max-width: 1600px;
+
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    gap: 1em;
+}
+
+.return_button{
+    display: inline-block;
+    text-align: center;
+
+    text-transform: uppercase;
+    padding: 6px 18px;
+
+    color: white;
+
+    background-color: #e2b600;
+    border-radius: 5px;
+}
+
+.return_button .fas{
+    transition: 0.3s linear;
+}
+
+.return_button:hover{
+    color: white;
+    text-decoration: none;
+}
+
+.return_button:hover .fas{
+    transform: translateX(-10px);
+}
+
+.detail_container{
+    display: grid;
+    gap: 1em;
+
+    padding: 10px;
+
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.detail_container h2{
+    text-transform: capitalize;
+    margin: 0px;
+}
+
+.detail_container hr{
+    margin: 0px;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.info_container{
+    grid-template-columns: 1fr;
+    gap: 1em;
+}
+
+.important_info{
+    grid-template-columns: 1fr max-content;
+}
+
+.description_info{
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 1em;
+}
+
+.description_info h5{
+    margin: 0px;
+}
+
+.description_info h6{
+    margin: 0px;
+}
+
+.light{
+    font-weight: 200;
+}

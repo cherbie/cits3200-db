@@ -16,9 +16,14 @@ import time
 # Create your views here.
 # This is where the routes are held
 
+
 def opp(request):
 	context = {"test": "afdsabfvadshivabdsvias"}
 	display = funding_opportunity.objects.all().values()
+
+
+def research(request):
+	# researches = {}
 
 	researches = []
 
@@ -49,6 +54,11 @@ def home(request):
 
 	return render(request, 'fodb/home.html', context)
 
+@login_required(login_url='login')
+def details(request, pk):
+	opp = funding_opportunity.objects.get(id=pk)
+	return render(request, 'fodb/details.html', {'opp':opp})
+
 # you can change this to the welcome page?
 def welcome(request):
  	return render(request,'fodb/welcome.html', {'title':'Welcome'})
@@ -63,6 +73,7 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
 	model = funding_opportunity
 	template_name = 'fodb/funding_opportunity_detail.html'
+
 
 
 def error(request, error=None):
@@ -103,3 +114,10 @@ def db_update(request, args, kwargs):
 		"action": "/",
 	}
 	return render(request, 'fodb/db-update.html', prop)
+
+
+
+
+
+
+

@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'fodb/tables.css' %}">
 
 {% if user.is_authenticated %}
+
 <!-- Work under here -->
 
     <section class="head_container">
@@ -18,7 +19,6 @@
             <div class="search_form">
                 <input type="text" placeholder="Search..">
             </div>
-        </div>
     </section>
 
     <section class="research_content container">
@@ -44,7 +44,7 @@
                                     Deadline :
                                 </h7>
                                 <h7>
-                                    {{ post.closing_month|date:"d F Y" }}
+                                    {{ post.closing_date|date:"d F Y" }}
                                 </h7>
                             </div>
                             <div class="important_info amount_info">
@@ -67,6 +67,7 @@
                                 </h7>
                             </div>
                         </div>
+
 
                         <div class="content_tags">
                             <div class="content_department">
@@ -108,7 +109,6 @@
                                 {% endif %}
                             </div>
                         </div>
-
                         <hr>
                     </div>
                 </a>

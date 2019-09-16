@@ -7,7 +7,7 @@
     margin: 0px;
     padding: 0px;
     width: 100vw;
-    height: 50vh;
+    height: 30vh;
 
     display: grid;
     grid-template-rows: max-content max-content;
@@ -121,14 +121,15 @@
 
 .content_section{
     display: grid;
-    gap: 2em;
+    grid-auto-rows: max-content;
+    gap: 20px;
 }
 
 .content_card{
     position: relative;
 
     padding: 10px;
-
+    margin: 0px;
     display: grid;
     gap: 0.3em;
 
