@@ -44,7 +44,7 @@ class funding_opportunity(models.Model):
 
 
 	class Meta:
-		ordering = ['-name']
+		ordering = ['name']
 		verbose_name = 'Funding Opportunity'
 		verbose_name_plural = 'Funding Opportunities'
 

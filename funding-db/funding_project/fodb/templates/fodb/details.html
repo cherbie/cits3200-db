@@ -78,13 +78,14 @@
                 {% if opp.hms %}
                 <span class="tags tags_yellow">HMS</span>
                 {% endif %}
-
                 {% if opp.ems %}
                 <span class="tags tags_green">EMS</span>
                 {% endif %}
-
                 {% if opp.science %}
                 <span class="tags tags_blue">Science</span>
+                {% endif %}
+                {% if not opp.hms and not opp.ems and not opp.science %}
+                <span class="tags tags_blue">Not Specified</span>
                 {% endif %}
             </div>
 
