@@ -255,7 +255,35 @@
     background-color: green;
 }
 
+.tags_black{
+    background-color: black;
+}
+
 .tags_icon{
+    position: relative;
     font-size: 15px;
     margin-right: 0.5em;
+}
+
+.tags_flags{
+    position: absolute;
+    right: 0;
+    white-space: nowrap;
+    font-size: 12px;
+
+    visibility: hidden;
+
+    background-color: white;
+
+    z-index: 1;
+
+    padding: 2px;
+    border-radius: 5px;
+    border: 1px solid black;
+
+    bottom: -30px;
+}
+
+.tags_icon:hover .tags_flags{
+    visibility: visible;
 }

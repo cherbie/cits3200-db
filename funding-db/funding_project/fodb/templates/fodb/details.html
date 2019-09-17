@@ -20,22 +20,6 @@
         <hr>
 
         <div class="info_container">
-            <div class="important_info">
-                <h5>
-                    Create date :
-                </h5>
-                <h5>
-                    {{ opp.creation_date|date:"d F Y" }}
-                </h5>
-            </div>
-            <div class="important_info">
-                <h5>
-                    Last updated :
-                </h5>
-                <h5>
-                    {{ opp.last_updated|date:"d F Y" }}
-                </h5>
-            </div>
             <div class="important_info deadline_info">
                 <h5>
                     Deadline :
@@ -72,7 +56,7 @@
 
         <div class="content_tags">
             <h5>
-                Department :
+                Faculty :
             </h5>
             <div class="content_department">
                 {% if opp.hms %}
@@ -85,7 +69,7 @@
                 <span class="tags tags_blue">Science</span>
                 {% endif %}
                 {% if not opp.hms and not opp.ems and not opp.science %}
-                <span class="tags tags_blue">Not Specified</span>
+                <span class="tags tags_black">Not Specified</span>
                 {% endif %}
             </div>
 
@@ -97,27 +81,51 @@
             </h5>
             <div class="content_type">
                 {% if opp.ecr %}
-                <span class="tags_icon"><i class="fas fa-business-time"></i></span>
+                <span class="tags_icon"><i class="fas fa-business-time"></i>
+                    <span class="tags_flags">
+                        Early career research
+                    </span>
+                </span>
                 {% endif %}
 
                 {% if opp.travel %}
-                <span class="tags_icon"><i class="fas fa-plane-departure"></i></span>
+                <span class="tags_icon"><i class="fas fa-plane-departure"></i>
+                    <span class="tags_flags">
+                        Involve traveling
+                    </span>
+                </span>
                 {% endif %}
 
                 {% if opp.visiting %}
-                <span class="tags_icon"><i class="fas fa-map-marked-alt"></i></span>
+                <span class="tags_icon"><i class="fas fa-map-marked-alt"></i>
+                    <span class="tags_flags">
+                        Visiting
+                    </span>
+                </span>
                 {% endif %}
 
                 {% if opp.wir %}
-                <span class="tags_icon"><i class="fas fa-female"></i><i class="fas fa-microscope"></i></span>
+                <span class="tags_icon"><i class="fas fa-female"></i><i class="fas fa-microscope"></i>
+                    <span class="tags_flags">
+                        Women in research
+                    </span>
+                </span>
                 {% endif %}
 
                 {% if opp.phd %}
-                <span class="tags_icon"><i class="fas fa-graduation-cap"></i></span>
+                <span class="tags_icon"><i class="fas fa-graduation-cap"></i>
+                    <span class="tags_flags">
+                        PhD
+                    </span>
+                </span>
                 {% endif %}
 
                 {% if opp.international %}
-                <span class="tags_icon"><i class="fas fa-globe"></i></span>
+                <span class="tags_icon"><i class="fas fa-globe"></i>
+                    <span class="tags_flags">
+                        International
+                    </span>
+                </span>
                 {% endif %}
             </div>
         </div>
@@ -139,8 +147,29 @@
                 </strong>
             </h6>
             <h6>
-                <a href="{{ opp.link }}"> {{ opp.link }}</a>
+                <a target="_blank" href="{{ opp.link }}"> {{ opp.link }}</a>
             </h6>
+        </div>
+
+        <hr>
+
+        <div class="info_container">
+            <div class="important_info">
+                <h5>
+                    Create on :
+                </h5>
+                <h5>
+                    {{ opp.creation_date|date:"d F Y" }}
+                </h5>
+            </div>
+            <div class="important_info">
+                <h5>
+                    Last updated :
+                </h5>
+                <h5>
+                    {{ opp.last_updated|date:"d F Y" }}
+                </h5>
+            </div>
         </div>
     </div>
 </div>
