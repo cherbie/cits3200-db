@@ -7,9 +7,9 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from django.db import connections, connection
 
-from .models import funding_opportunity, important_date
+from .models import funding_opportunity
 from .forms import FilterForm
-from .modelForm import funding_opportunityForm, important_dateForm
+from .modelForm import funding_opportunityForm
 import time
 
 

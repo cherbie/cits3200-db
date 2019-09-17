@@ -9,7 +9,8 @@ class funding_opportunity(models.Model):
 	year_or_month =( ('years','year'), ('months','month'),)
 	herdc_type = (('1','category1'),('2','category2'),('3','category3'),('4','category4'),)
 
-	name = models.CharField(max_length = 100)
+	provider = models.CharField(max_length = 100, verbose_name = 'Funding provider', default = 'please add funding provider here')
+	name = models.CharField(max_length = 100, verbose_name = 'Title')
 	description = models.TextField()
 	herdc = models.CharField(blank = True, max_length = 15,  choices = herdc_type)
 	closing_date = models.DateTimeField(null = False ,  verbose_name = 'Closing Date') #why is this called closing_month?
@@ -36,6 +37,12 @@ class funding_opportunity(models.Model):
 
 	is_hidden = models.BooleanField(default = False, verbose_name = 'Hidden from regular view')
 
+	External_deadline  = models.DateTimeField(blank = True, null = True)
+	Internal_deadline = models.DateTimeField(blank = True, null = True)
+	EOI_deadline  =  models.DateTimeField(blank = True, null = True, verbose_name = 'Expression of interest deadline')
+	Minimum_data_deadline = models.DateTimeField(blank = True, null = True)
+
+
 	objects = models.Manager() # default list of entries
 	filters = FilterManager() # filtered list of entries
 	def __str__(self):
@@ -47,21 +54,6 @@ class funding_opportunity(models.Model):
 		ordering = ['name']
 		verbose_name = 'Funding Opportunity'
 		verbose_name_plural = 'Funding Opportunities'
-
-
-class important_date(models.Model):
-	milestone = models.CharField(max_length = 200)
-	date = models.DateTimeField(null = False)
-	date_status = models.CharField(max_length = 20)
-	members = models.ForeignKey(funding_opportunity, on_delete = models.CASCADE)
-
-	def __str__(self):
-		return self.milestone
-
-	class Meta:
-		ordering = ['-date']
-		verbose_name = 'Important Dates'
-		verbose_name_plural = 'Important Dates'
 
 
 #class fodb_date(models.Model):

@@ -1,6 +1,6 @@
 from django.db import models
 from django.forms import ModelForm, Textarea
-from .models import funding_opportunity, important_date
+from .models import funding_opportunity
 
 class funding_opportunityForm(ModelForm):
     class Meta:
@@ -28,15 +28,4 @@ class funding_opportunityForm(ModelForm):
         }
 
 
-class important_dateForm(ModelForm):
-    class Meta:
-        model = important_date
-        fields = ['milestone', 'date', 'date_status']
 
-        widgets = {
-            'milestone' : Textarea(attrs = {'rows' : 10, 'clos' : 20}),
-        }
-
-        label = {
-            'milestone' : ('insert here'),
-        }
