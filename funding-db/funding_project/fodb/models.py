@@ -18,8 +18,8 @@ class funding_opportunity(models.Model):
 	link = models.URLField(max_length = 260)
 	limit_per_uni = models.BooleanField(default = False, verbose_name = 'Limited Per University')
 
-	max_amount = models.PositiveIntegerField(blank = True,  verbose_name = 'Max Amount')
-	max_duration = models.PositiveIntegerField(blank = True,  verbose_name = 'Duration Length')
+	max_amount = models.PositiveIntegerField(blank = True,  default = 0, verbose_name = 'Max Amount')
+	max_duration = models.PositiveIntegerField(blank = True, default = 0, verbose_name = 'Duration Length')
 	duration_type = models.CharField(max_length = 6, choices = year_or_month, verbose_name = 'Duration Type')
 	amount_estimated = models.BooleanField(default = False )
 	duration_estimated = models.BooleanField(default = False)
