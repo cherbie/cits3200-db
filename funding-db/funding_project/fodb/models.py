@@ -8,11 +8,11 @@ import datetime
 
 class funding_opportunity(models.Model):
 	Year_or_Month =( ('Y','year'), ('M','month'),)
-	Forecast_Mon = (('Jan'), ('Feb'), ('Mar'), ('Apr'), ('May'), ('Jun'), ('Jul'), ('Aug'), ('Sep'), ('Oct'), ('Nov'), ('Dec'),)
+	Forecast_Mon = (('1','Jan'), ('2','Feb'), ('3','Mar'), ('4','Apr'), ('5','May'), ('6','Jun'), ('7','Jul'), ('8','Aug'), ('9','Sep'), ('10','Oct'), ('11','Nov'), ('12','Dec'),)
 
-	provider = models.CharField(max_length = 100, verbose_name = 'Funding provider')
+	provider = models.CharField(max_length = 100, verbose_name = 'Funding provider',default = 'none')
 	name = models.CharField(max_length = 100, verbose_name = 'Title')
-	description = models.CharField()
+	description = models.CharField(max_length = 50000)
 	closing_month = models.DateTimeField(null = False)
 	creation_date = models.DateField(auto_now_add = True)
 	last_updated = models.DateField(auto_now= True)
