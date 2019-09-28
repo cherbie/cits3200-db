@@ -12,7 +12,7 @@ class funding_opportunity(models.Model):
 	provider = models.CharField(max_length = 100, verbose_name = 'Funding provider',default = 'none')
 	name = models.CharField(max_length = 100, verbose_name = 'Title')
 	description = models.CharField(max_length = 50000)
-	closing_month = models.DateTimeField(null = False)
+	closing_date = models.DateTimeField(null = False)
 	creation_date = models.DateField(auto_now_add = True)
 	last_updated = models.DateField(auto_now= True)
 	link = models.URLField(max_length = 260)
@@ -30,6 +30,7 @@ class funding_opportunity(models.Model):
 	wir = models.BooleanField(default = False)
 	phd = models.BooleanField(default = False)
 	international = models.BooleanField(default = False)
+
 	hms = models.BooleanField(default = False, verbose_name = 'HMS')
 	ems = models.BooleanField(default = False, verbose_name = 'EMS')
 	science = models.BooleanField(default = False, verbose_name = 'SCI')
@@ -56,8 +57,3 @@ class funding_opportunity(models.Model):
 		verbose_name = 'Funding Opportunity'
 		verbose_name_plural = 'Funding Opportunities'
 
-
-#class fodb_date(models.Model):
-#	fodb = models.ForeignKey(funding_opportunity, on_delete=models.CASCADE)
-#	date = models.ForeignKey(important_date, on_delete=models.CASCADE)
-#

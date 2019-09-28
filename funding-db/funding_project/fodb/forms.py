@@ -28,7 +28,7 @@ class FilterForm(forms.Form):
 class funding_opportunityForm(ModelForm):
     class Meta:
         model = funding_opportunity
-        fields = ['name','description','herdc', 'max_amount', 'max_duration', 'duration_type', 'amount_estimated',
+        fields = ['name','description', 'max_amount', 'max_duration', 'duration_type', 'amount_estimated',
         'duration_estimated', 'ecr', 'travel','visiting','wir', 'phd','international','hms','ems',
         'science','limit_per_uni', 'link', 'closing_date','is_hidden']
 
