@@ -27,7 +27,8 @@ SECRET_KEY = '#83vf$qugojs09%cg!ygs=p=@c=&8)-1#l^5(pflgq5=s0*xy!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# For AWS deployment
+ALLOWED_HOSTS = ['ec2-54-79-24-124.ap-southeast-2.compute.amazonaws.com']
 
 
 # Application definition
@@ -141,3 +142,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'fodb-home'
 
 LOGIN_URL = 'login'
+
+# For AWS deployment
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
