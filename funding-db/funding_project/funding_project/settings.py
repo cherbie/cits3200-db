@@ -31,8 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', 'ec2-13-236-86-13.ap-southeast-2.compute.amazonaws.com']
 
 # For AWS deployment
-SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
-
+SETTINGS_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Application definition
 
