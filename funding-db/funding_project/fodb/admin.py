@@ -25,6 +25,22 @@ class FundingOpportunityAdmin(admin.ModelAdmin):
 	search_fields = ['description','name']
 
 
+    # this changes the title at /admin/fodb/funding_opportunity/ 
+    def changelist_view(self, request, extra_context=None):
+        extra_context = {'title': 'Select Funding Opportunity to edit'}
+        return super(FundingOpportunityAdmin, self).changelist_view(request, extra_context=extra_context)
+
+    
+    
+    # this changes the title at /admin/fodb/funding_opportunity/6/change/
+    def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+        response = super(FundingOpportunityAdmin, self).render_change_form(request, context, add, change, form_url, obj)
+        response.context_data['title'] = "Edit Funding Opportunity" if response.context_data['object_id'] else "Add Funding Opportunity"
+        return response
+
+admin.site.index_title = 'Funding Opportunities Administration'
+admin.site.site_title = 'FODB Admin'
+
 admin.site.register(funding_opportunity,FundingOpportunityAdmin)
 
 
