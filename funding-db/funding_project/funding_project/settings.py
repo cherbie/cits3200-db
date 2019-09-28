@@ -28,7 +28,7 @@ SECRET_KEY = '#83vf$qugojs09%cg!ygs=p=@c=&8)-1#l^5(pflgq5=s0*xy!'
 DEBUG = True
 
 # For AWS deployment
-ALLOWED_HOSTS = ['ec2-54-79-24-124.ap-southeast-2.compute.amazonaws.com']
+ALLOWED_HOSTS = ['localhost', 'ec2-13-236-86-13.ap-southeast-2.compute.amazonaws.com']
 
 
 # Application definition
