@@ -1,4 +1,3 @@
-
 from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, redirect, render_to_response
@@ -16,30 +15,27 @@ import time
 
 # Create your views here.
 # This is where the routes are held
-def dictfetchall(cursor):
-    "Return all rows from a cursor as a dict"
-    columns = [col[0] for col in cursor.description]
-    return [
-        dict(zip(columns, row))
-        for row in cursor.fetchall()
-    ]
+
+
+def opp(request):
+	context = {"test": "afdsabfvadshivabdsvias"}
+	display = funding_opportunity.objects.all().values()
+
 
 def research(request):
 	# researches = {}
 
-	# rows = dictfetchall(funding_opportunity.objects.raw('SELECT * FROM funding_opportunity'))
+	researches = []
 
-	# researches.update(rows)
+	for research in display:
+		researchers.append(research)
 
-	# page = request.GET.get('page')
-	# display = paginator.get_page(page)
+	context["researchers"] = researchers
 
-	form = FilterForm() # manage the html options of the fields
-	qs = funding_opportunity.filters.filter_qs(request) # returns filtered queryset
-	paginator = Paginator(qs, 25) # Show 25 contacts per page
-	page = request.GET.get('page')
-	display = paginator.get_page(page)
-	return render(request, 'fodb/tables.html', {'researches':display,'form': form})
+	print("Here\n")
+	print(researches)
+	return render(request, 'fodb/tables.html', context)
+
 
 @login_required(login_url='login')
 def home(request):
@@ -47,17 +43,25 @@ def home(request):
 		Rendering of fodb/home.html ... applying filter QuerySet from ./filter.py
 	'''
 	form = FilterForm() # manage the html options of the fields
-	qs = funding_opportunity.filters.filter_qs(request) # returns filtered queryset
+	qs = funding_opportunity.filters.filter_qs(request).exclude(is_hidden=True) # returns filtered queryset
 	paginator = Paginator(qs, 25) # Show 25 contacts per page
 	page = request.GET.get('page')
 	display = paginator.get_page(page)
+	context = {
+		'posts': display,
+		'form': form
+	}
 
-	return render(request, 'fodb/home.html', {'posts': display, 'form': form})
+	return render(request, 'fodb/home.html', context)
+
+@login_required(login_url='login')
+def details(request, pk):
+	opp = funding_opportunity.objects.get(id=pk)
+	return render(request, 'fodb/details.html', {'opp':opp})
 
 # you can change this to the welcome page?
 def welcome(request):
  	return render(request,'fodb/welcome.html', {'title':'Welcome'})
-
 
 
 class PostListView(ListView):
@@ -72,20 +76,15 @@ class PostDetailView(DetailView):
 
 
 
-
-
-
-
-
 def error(request, error=None):
 	'''
 		Render the error template if an error has occured.
 	'''
 	if error == None:
 		error = {
-			'title': 'Unexpected Error',
+			'title': 'Sorry this web-page cannot be found :(',
 			'status_code': 404,
-			'message': 'error message.'
+			'message': 'Please double check your url.'
 		}
 	return render(request, 'fodb/error.html', {'error':error})
 

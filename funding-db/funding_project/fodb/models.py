@@ -5,7 +5,6 @@ from .filters import FilterManager
 import datetime
 
 
-
 class funding_opportunity(models.Model):
 	Year_or_Month =( ('Y','year'), ('M','month'),)
 	Forecast_Mon = (('1','Jan'), ('2','Feb'), ('3','Mar'), ('4','Apr'), ('5','May'), ('6','Jun'), ('7','Jul'), ('8','Aug'), ('9','Sep'), ('10','Oct'), ('11','Nov'), ('12','Dec'),)
@@ -17,7 +16,7 @@ class funding_opportunity(models.Model):
 	creation_date = models.DateField(auto_now_add = True)
 	last_updated = models.DateField(auto_now= True)
 	link = models.URLField(max_length = 260)
-	limit_per_uni = models.BooleanField(default = False)
+	limit_per_uni = models.BooleanField(default = False, verbose_name = 'Limited Per University')
 
 	max_amount = models.IntegerField(blank = True)
 	max_duration = models.IntegerField(blank = True)
@@ -36,7 +35,7 @@ class funding_opportunity(models.Model):
 	science = models.BooleanField(default = False, verbose_name = 'SCI')
 	fable = models.BooleanField(default = False, verbose_name = 'FABLE')
 
-	is_hidden = models.BooleanField(default = False)
+	is_hidden = models.BooleanField(default = False, verbose_name = 'Hidden from regular view')
 
 	External_deadline = models.DateTimeField(blank = True, null = True)
 	Forecast_Month = models.CharField(blank = True, max_length = 15,  choices = Forecast_Mon)
@@ -47,9 +46,18 @@ class funding_opportunity(models.Model):
 
 	objects = models.Manager() # default list of entries
 	filters = FilterManager() # filtered list of entries
-
 	def __str__(self):
 		return self.name
 
 
 
+	class Meta:
+		ordering = ['name']
+		verbose_name = 'Funding Opportunity'
+		verbose_name_plural = 'Funding Opportunities'
+
+
+#class fodb_date(models.Model):
+#	fodb = models.ForeignKey(funding_opportunity, on_delete=models.CASCADE)
+#	date = models.ForeignKey(important_date, on_delete=models.CASCADE)
+#

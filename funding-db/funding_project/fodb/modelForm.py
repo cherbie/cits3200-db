@@ -7,7 +7,7 @@ class funding_opportunityForm(ModelForm):
         model = funding_opportunity
         fields = ['name','description', 'max_amount', 'max_duration', 'duration_type', 'amount_estimated',
         'duration_estimated', 'ecr', 'travel','visiting','wir', 'phd','international','hms','ems',
-        'science','limit_per_uni', 'link', 'closing_month','is_hidden']
+        'science','limit_per_uni', 'link', 'closing_date','is_hidden']
 
         widgets = {
             'description' : Textarea(attrs = {'rows' : 40, 'clos' : 60}),
@@ -25,6 +25,8 @@ class funding_opportunityForm(ModelForm):
             'max_amount' : ('the largest funding amount'),
             'max_duration' : ('the largest last time, year or month'),
             'link' : ('the link of the real funding website'),
-            'closing_month' : ('Year-Month-Day H:M:S'),
+            'closing_date' : ('Year-Month-Day H:M:S'),
         }
+
+
 
