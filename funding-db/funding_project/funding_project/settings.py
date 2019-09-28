@@ -30,6 +30,9 @@ DEBUG = True
 # For AWS deployment
 ALLOWED_HOSTS = ['localhost', 'ec2-13-236-86-13.ap-southeast-2.compute.amazonaws.com']
 
+# For AWS deployment
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
+
 
 # Application definition
 
@@ -62,7 +65,7 @@ ROOT_URLCONF = 'funding_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['./templates'],
+        'DIRS': [os.path.join(SETTINGS_PATH, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
