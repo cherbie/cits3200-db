@@ -11,7 +11,7 @@ class funding_opportunity(models.Model):
 
 	provider = models.CharField(max_length = 100, verbose_name = 'Funding provider',default = 'none')
 	name = models.CharField(max_length = 100, verbose_name = 'Title')
-	description = models.CharField(max_length = 50000)
+	description = models.TextField()
 	closing_date = models.DateTimeField(null = False)
 	creation_date = models.DateField(auto_now_add = True)
 	last_updated = models.DateField(auto_now= True)
