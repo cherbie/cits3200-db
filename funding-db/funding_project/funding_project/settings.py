@@ -29,7 +29,7 @@ DEBUG = True
 
 # For AWS deployment
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 
-                 'ec2-13-211-152-223.ap-southeast-2.compute.amazonaws.com', 'uwa-fundop.ml']
+                 'ec2-13-211-152-223.ap-southeast-2.compute.amazonaws.com', 'uwa-fodb.ml']
 
 # For AWS deployment
 SETTINGS_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
