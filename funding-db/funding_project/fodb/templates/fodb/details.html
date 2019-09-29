@@ -13,9 +13,15 @@
     </div>
 
     <div class="detail_container">
+        {% if user.is_superuser %}
+        <a class="edit_button" href="admin/fodb/funding_opportunity/opp.id/change"><i class="fas fa-pen"></i> edit</a>
+        {% endif %}
         <h2>
             {{ opp.name }}
         </h2>
+        <h3>
+            {{ opp.provider }}
+        </h3>
 
         <hr>
 
@@ -50,6 +56,38 @@
                     {% endif %}
                 </h5>
             </div>
+            <div class="important_info">
+                <h5>
+                    External deadline :
+                </h5>
+                <h5>
+                    {{ opp.External_deadline|date:"d F Y" }}
+                </h5>
+            </div>
+            <div class="important_info">
+                <h5>
+                    Internal deadline :
+                </h5>
+                <h5>
+                    {{ opp.Internal_deadline|date:"d F Y" }}
+                </h5>
+            </div>
+            <div class="important_info">
+                <h5>
+                    EOI deadline :
+                </h5>
+                <h5>
+                    {{ opp.EOI_deadline|date:"d F Y" }}
+                </h5>
+            </div>
+            <div class="important_info">
+                <h5>
+                    Minimum data deadline :
+                </h5>
+                <h5>
+                    {{ opp.Minimum_data_deadline|date:"d F Y" }}
+                </h5>
+            </div>
         </div>
 
         <hr>
@@ -66,7 +104,7 @@
                 <span class="tags tags_green">EMS</span>
                 {% endif %}
                 {% if opp.science %}
-                <span class="tags tags_blue">Science</span>
+                <span class="tags tags_blue">Sci</span>
                 {% endif %}
                 {% if not opp.hms and not opp.ems and not opp.science %}
                 <span class="tags tags_black">Not Specified</span>

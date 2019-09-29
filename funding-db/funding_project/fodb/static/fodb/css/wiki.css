@@ -41,7 +41,20 @@ footer{
     transform: translateX(-10px);
 }
 
+.edit_button{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    display: inline-block;
+    text-align: center;
+
+    text-transform: capitalize;
+    padding: 5px 10px;
+    border-radius: 25px;
+}
+
 .detail_container{
+    position: relative;
     display: grid;
     gap: 1em;
 
@@ -51,7 +64,7 @@ footer{
     border: 1px solid black;
 }
 
-.detail_container h2{
+.detail_container h2,h3{
     text-transform: capitalize;
     margin: 0px;
 }

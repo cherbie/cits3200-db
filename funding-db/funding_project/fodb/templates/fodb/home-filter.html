@@ -14,7 +14,7 @@
             <select name="sort" class="form-control">
                 <option value="asc">A to Z</option>
                 <option value="desc">Z to A</option>
-                <option value="close-asc" selected>Closest Deadline</option>
+                <option value="close-asc" selected>Nearest Deadline</option>
                 <option value="close-desc">Furthest Deadline</option>
             </select>
         </div>
@@ -77,7 +77,7 @@
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.ecr.id_for_label}}">
-                    {{form.ecr.label}} <span class="tags_icon"><i class="fas fa-business-time"></i></span>
+                    <span class="tags_icon"><i class="fas fa-business-time"></i></span> {{form.ecr.label}}
                 </label>
             </div>
             <div class="custom-control custom-checkbox">
@@ -87,7 +87,7 @@
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.travel.id_for_label}}">
-                    {{form.travel.label}} <span class="tags_icon"><i class="fas fa-plane-departure"></i></span>
+                    <span class="tags_icon"><i class="fas fa-plane-departure"></i></span> {{form.travel.label}}
                 </label>
             </div>
             <div class="custom-control custom-checkbox">
@@ -97,7 +97,7 @@
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.visiting.id_for_label}}">
-                    {{form.visiting.label}} <span class="tags_icon"><i class="fas fa-map-marked-alt"></i></span>
+                    <span class="tags_icon"><i class="fas fa-map-marked-alt"></i></span> {{form.visiting.label}}
                 </label>
             </div>
             <div class="custom-control custom-checkbox">
@@ -107,7 +107,7 @@
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.wir.id_for_label}}">
-                    {{form.wir.label}} <span class="tags_icon"><i class="fas fa-female"></i><i class="fas fa-microscope"></i></span>
+                    <span class="tags_icon"><i class="fas fa-female"></i><i class="fas fa-microscope"></i></span> {{form.wir.label}}
                 </label>
             </div>
             <div class="custom-control custom-checkbox">
@@ -117,7 +117,7 @@
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.international.id_for_label}}">
-                    {{form.international.label}} <span class="tags_icon"><i class="fas fa-graduation-cap"></i></span>
+                    <span class="tags_icon"><i class="fas fa-globe"></i></span>{{form.international.label}}
                 </label>
             </div>
             <div class="custom-control custom-checkbox">
@@ -127,7 +127,7 @@
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.phd.id_for_label}}">
-                    {{form.phd.label}} <span class="tags_icon"><i class="fas fa-globe"></i></span>
+                    <span class="tags_icon"><i class="fas fa-graduation-cap"></i></span>{{form.phd.label}}
                 </label>
             </div>
         </div>

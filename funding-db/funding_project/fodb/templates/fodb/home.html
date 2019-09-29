@@ -35,9 +35,25 @@
                 {% for post in posts %}
                 <a target="_blank" style="text-decoration: none; color: black;" href="{% url 'fodb-detail' post.id %}">
                     <div class="content_card">
+                        <div class="noting_flag">
+                            <i class="fas fa-flag hover_note">
+                                <span class="hover_text">
+                                    Limited applications. Please contact researchgrants-ore@uwa.edu.au
+                                </span>
+                            </i>
+                        </div>
+
+                        <!-- <div class="content_card_filler">
+                            <div class="filler_div filler_div_top"></div>
+                            <div class="filler_div filler_div_bottom"></div>
+                        </div> -->
+
                         <h3>
                             {{ post.name }}
                         </h3>
+                        <h4>
+                            {{ post.provider }}
+                        </h4>
                         <div class="info_container">
                             <div class="important_info deadline_info">
                                 <h7>
@@ -66,21 +82,45 @@
                                     {{ post.max_duration }} {{ post.duration_type}}
                                 </h7>
                             </div>
+                            <div class="important_info">
+                                <h7>
+                                    External deadline :
+                                </h7>
+                                <h7>
+                                    {{ post.External_deadline|date:"d F Y" }}
+                                </h7>
+                            </div>
+                            <div class="important_info">
+                                <h7>
+                                    Internal deadline :
+                                </h7>
+                                <h7>
+                                    {{ post.Internal_deadline|date:"d F Y" }}
+                                </h7>
+                            </div>
+                            <div class="important_info">
+                                <h7>
+                                    EOI deadline :
+                                </h7>
+                                <h7>
+                                    {{ post.EOI_deadline|date:"d F Y" }}
+                                </h7>
+                            </div>
                         </div>
 
 
                         <div class="content_tags">
                             <div class="content_department">
                                 {% if post.hms %}
-                                <span class="tags tags_yellow">HMS</span>
+                                <span class="tags tags_yellow">hms</span>
                                 {% endif %}
 
                                 {% if post.ems %}
-                                <span class="tags tags_green">EMS</span>
+                                <span class="tags tags_green">ems</span>
                                 {% endif %}
 
                                 {% if post.science %}
-                                <span class="tags tags_blue">Science</span>
+                                <span class="tags tags_blue">sci</span>
                                 {% endif %}
 
                                 {% if not post.hms and not post.ems and not post.science %}
@@ -137,7 +177,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <hr>
+                        <!-- <hr> -->
                     </div>
                 </a>
                 {% endfor %}
