@@ -5,7 +5,7 @@ class FilterManager(models.Manager):
 	'''
         Customly manage filters.
 	'''
-	fields = ['hms','ems','science','travel','ecr','international','wir','phd','visiting']
+	fields = ['hms','ems','science','travel','ecr','international','wir','phd','visiting', 'month']
 
 	def filter_qs(self, request):
 		"""
@@ -36,7 +36,15 @@ class FilterManager(models.Manager):
 				faculty = self.science_select()
 			else:
 				faculty = faculty & self.science_select()
-			print(faculty)
+		if dict.__contains__(self.fields[9]):
+			if dict.__getitem__(self.fields[9]) == '-1':
+				faculty = faculty
+			elif faculty == None:
+				faculty = self.month_select(dict.__getitem__(self.fields[9]))
+			else:
+				faculty = faculty & self.month_select(dict.__getitem__(self.fields[9]))
+
+		# -- OR results --
 		if dict.__contains__(self.fields[3]):
 			if tags == None:
 				tags = self.travel_select()
@@ -67,6 +75,7 @@ class FilterManager(models.Manager):
 				tags = self.visiting_select()
 			else:
 				tags = tags | self.visiting_select()
+
 
 		# -- RETURN STATEMENTS --
 		if tags is None and faculty is None:
@@ -122,3 +131,6 @@ class FilterManager(models.Manager):
 
 	def visiting_select(self):
 		return Q(visiting='True')
+
+	def month_select(self, month):
+		return Q(External_deadline__month = month)
