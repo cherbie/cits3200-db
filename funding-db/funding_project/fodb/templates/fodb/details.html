@@ -14,7 +14,7 @@
 
     <div class="detail_container">
         {% if user.is_superuser %}
-        <a class="edit_button" href="admin/fodb/funding_opportunity/opp.id/change"><i class="fas fa-pen"></i> edit</a>
+        <a class="edit_button" href="/admin/fodb/funding_opportunity/{{ opp.id }}/change/"><i class="fas fa-pen"></i> edit</a>
         {% endif %}
         <h2>
             {{ opp.name }}
