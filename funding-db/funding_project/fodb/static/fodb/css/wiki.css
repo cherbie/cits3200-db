@@ -7,22 +7,21 @@ footer{
     margin-right: auto;
     margin-left: auto;
     width: 90vw;
-    max-width: 1600px;
+    max-width: 1200px;
 
     margin-top: 10px;
     display: grid;
-    grid-template-columns: 1fr 6fr;
+    grid-template-columns: 1fr 6fr 1fr;
     gap: 1em;
 }
 
 .return_button{
     display: inline-block;
     text-align: center;
-
     text-transform: uppercase;
     padding: 6px 18px;
-
     color: white;
+    
 
     background-color: #e2b600;
     border-radius: 5px;
@@ -58,10 +57,15 @@ footer{
     display: grid;
     gap: 1em;
 
-    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px; 
+    padding-left: 20px; 
+    padding-right: 20px;
+
+    background-color: #ebebeb;
 
     border-radius: 5px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .detail_container h2,h3{
