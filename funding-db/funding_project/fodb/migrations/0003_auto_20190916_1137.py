@@ -10,10 +10,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterModelOptions(
-            name='important_date',
-            options={'ordering': ['-date'], 'verbose_name': 'Important Dates', 'verbose_name_plural': 'Important Dates'},
-        ),
         migrations.AlterField(
             model_name='funding_opportunity',
             name='closing_date',
