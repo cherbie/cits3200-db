@@ -23,7 +23,7 @@ class FilterForm(forms.Form):
     hms = forms.BooleanField(required=False, initial='False', label='HMS')
     ems = forms.BooleanField(required=False, initial='False', label='EMS')
     science = forms.BooleanField(required=False, initial='False', label='Science')
-
+    fable = forms.BooleanField(required=False, initial='False', label='FABLE')
 
 class funding_opportunityForm(ModelForm):
     class Meta:
