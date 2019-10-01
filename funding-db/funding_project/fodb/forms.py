@@ -32,6 +32,9 @@ class funding_opportunityForm(ModelForm):
         'duration_estimated', 'ecr', 'travel','visiting','wir', 'phd','international','hms','ems',
         'science','limit_per_uni', 'link', 'closing_date','is_hidden']
 
+        widgets = {
+            'description' : Textarea(attrs = {'rows' : 40, 'clos' : 60}),
+        }
 
         help_text = {
             'description' : ('the max length is 2500.'),
