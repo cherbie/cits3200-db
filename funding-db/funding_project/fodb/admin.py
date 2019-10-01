@@ -28,6 +28,7 @@ class FundingOpportunityAdmin(admin.ModelAdmin):
     search_fields = ['description','name']
     actions = ['make_hidden', 'make_unhidden', 'export_funding_opportunity']
 
+
     def make_hidden(self, request, queryset):
         for funding_opportunity in queryset:
             funding_opportunity.is_hidden = True
