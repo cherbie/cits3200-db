@@ -1,3 +1,5 @@
 *.pyc
 funding-db/funding_project/fodb/migrations/0004_auto_20191001_1315.py
 funding-db/funding_project/users/migrations/0002_remove_profile_user.py
+funding-db/funding_project/fodb/migrations/0002_remove_funding_opportunity_fable.py
+funding-db/funding_project/fodb/migrations/0003_funding_opportunity_fable.py
