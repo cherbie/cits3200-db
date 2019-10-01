@@ -7,7 +7,7 @@ footer{
     margin-right: auto;
     margin-left: auto;
     width: 90vw;
-    max-width: 1200px;
+    max-width: 1300px;
 
     margin-top: 10px;
     display: grid;
@@ -21,7 +21,8 @@ footer{
     text-transform: uppercase;
     padding: 6px 18px;
     color: white;
-    
+
+    white-space: nowrap;
 
     background-color: #e2b600;
     border-radius: 5px;
@@ -58,11 +59,11 @@ footer{
     gap: 1em;
 
     padding-top: 15px;
-    padding-bottom: 15px; 
-    padding-left: 20px; 
+    padding-bottom: 15px;
+    padding-left: 20px;
     padding-right: 20px;
 
-    background-color: #ebebeb;
+    /* background-color: #ebebeb; */
 
     border-radius: 5px;
     /* border: 1px solid black; */

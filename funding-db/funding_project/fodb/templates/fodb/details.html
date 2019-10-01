@@ -13,6 +13,10 @@
     </div>
 
     <div class="detail_container">
+        <div class="content_card_filler">
+            <div class="filler_div filler_div_top"></div>
+            <div class="filler_div filler_div_bottom"></div>
+        </div>
         {% if user.is_superuser %}
         <a class="edit_button" href="/admin/fodb/funding_opportunity/{{ opp.id }}/change/"><i class="fas fa-pen"></i> edit</a>
         {% endif %}
