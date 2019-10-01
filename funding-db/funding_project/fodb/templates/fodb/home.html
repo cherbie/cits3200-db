@@ -16,9 +16,13 @@
             <h1>
                 Funding Opportunities
             </h1>
-            <div class="search_form">
-                <input type="text" placeholder="Search..">
-            </div>
+            <form action="">
+                <div class="search_form">
+                    <input type="text" placeholder="Search..">
+                    <button type="submit" class="btn btn-warning search_button"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+        </div>
     </section>
 
     <section class="research_content container">
@@ -35,9 +39,25 @@
                 {% for post in posts %}
                 <a target="_blank" style="text-decoration: none; color: black;" href="{% url 'fodb-detail' post.id %}">
                     <div class="content_card">
-                        <h3>
-                            {{ post.name }}
-                        </h3>
+                        <div class="noting_flag">
+                            <i class="fas fa-flag hover_note">
+                                <span class="hover_text">
+                                    Limited applications. Please contact researchgrants-ore@uwa.edu.au
+                                </span>
+                            </i>
+                        </div>
+
+                        <div class="content_header">
+                            <h3>
+                                {{ post.name }}
+                            </h3>
+                            <h4>
+                                {{ post.provider }}
+                            </h4>
+                        </div>
+
+                        <hr>
+
                         <div class="info_container">
                             <div class="important_info deadline_info">
                                 <h7>
@@ -66,21 +86,45 @@
                                     {{ post.max_duration }} {{ post.duration_type}}
                                 </h7>
                             </div>
+                            <div class="important_info">
+                                <h7>
+                                    External deadline :
+                                </h7>
+                                <h7>
+                                    {{ post.External_deadline|date:"d F Y" }}
+                                </h7>
+                            </div>
+                            <div class="important_info">
+                                <h7>
+                                    Internal deadline :
+                                </h7>
+                                <h7>
+                                    {{ post.Internal_deadline|date:"d F Y" }}
+                                </h7>
+                            </div>
+                            <div class="important_info">
+                                <h7>
+                                    EOI deadline :
+                                </h7>
+                                <h7>
+                                    {{ post.EOI_deadline|date:"d F Y" }}
+                                </h7>
+                            </div>
                         </div>
 
 
                         <div class="content_tags">
                             <div class="content_department">
                                 {% if post.hms %}
-                                <span class="tags tags_yellow">HMS</span>
+                                <span class="tags tags_yellow">hms</span>
                                 {% endif %}
 
                                 {% if post.ems %}
-                                <span class="tags tags_green">EMS</span>
+                                <span class="tags tags_green">ems</span>
                                 {% endif %}
 
                                 {% if post.science %}
-                                <span class="tags tags_blue">Science</span>
+                                <span class="tags tags_blue">sci</span>
                                 {% endif %}
 
                                 {% if not post.hms and not post.ems and not post.science %}
@@ -89,7 +133,7 @@
                             </div>
                             <div class="content_type">
                                 {% if post.ecr %}
-                                <span class="tags_icon"><i class="fas fa-business-time"></i>
+                                <span class="tags_icon"><i class="fas fa-business-time fa-fw"></i>
                                     <span class="tags_flags">
                                         Early career research
                                     </span>
@@ -97,7 +141,7 @@
                                 {% endif %}
 
                                 {% if post.travel %}
-                                <span class="tags_icon"><i class="fas fa-plane-departure"></i>
+                                <span class="tags_icon"><i class="fas fa-plane-departure fa-fw"></i>
                                     <span class="tags_flags">
                                         Involve traveling
                                     </span>
@@ -105,7 +149,7 @@
                                 {% endif %}
 
                                 {% if post.visiting %}
-                                <span class="tags_icon"><i class="fas fa-map-marked-alt"></i>
+                                <span class="tags_icon"><i class="fas fa-map-marked-alt fa-fw"></i>
                                     <span class="tags_flags">
                                         Visiting
                                     </span>
@@ -113,7 +157,7 @@
                                 {% endif %}
 
                                 {% if post.wir %}
-                                <span class="tags_icon"><i class="fas fa-female"></i><i class="fas fa-microscope"></i>
+                                <span class="tags_icon"><i class="fas fa-female fa-sm"></i><i class="fas fa-microscope fa-sm"></i>
                                     <span class="tags_flags">
                                         Women in research
                                     </span>
@@ -121,7 +165,7 @@
                                 {% endif %}
 
                                 {% if post.phd %}
-                                <span class="tags_icon"><i class="fas fa-graduation-cap"></i>
+                                <span class="tags_icon"><i class="fas fa-graduation-cap fa-fw"></i>
                                     <span class="tags_flags">
                                         PhD
                                     </span>
@@ -129,7 +173,7 @@
                                 {% endif %}
 
                                 {% if post.international %}
-                                <span class="tags_icon"><i class="fas fa-globe"></i>
+                                <span class="tags_icon"><i class="fas fa-globe fa-fw"></i>
                                     <span class="tags_flags">
                                         International
                                     </span>
@@ -137,7 +181,6 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <hr>
                     </div>
                 </a>
                 {% endfor %}

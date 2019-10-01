@@ -7,22 +7,22 @@ footer{
     margin-right: auto;
     margin-left: auto;
     width: 90vw;
-    max-width: 1600px;
+    max-width: 1300px;
 
     margin-top: 10px;
     display: grid;
-    grid-template-columns: 1fr 6fr;
+    grid-template-columns: 1fr 6fr 1fr;
     gap: 1em;
 }
 
 .return_button{
     display: inline-block;
     text-align: center;
-
     text-transform: uppercase;
     padding: 6px 18px;
-
     color: white;
+
+    white-space: nowrap;
 
     background-color: #e2b600;
     border-radius: 5px;
@@ -41,17 +41,35 @@ footer{
     transform: translateX(-10px);
 }
 
+.edit_button{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    display: inline-block;
+    text-align: center;
+
+    text-transform: capitalize;
+    padding: 5px 10px;
+    border-radius: 25px;
+}
+
 .detail_container{
+    position: relative;
     display: grid;
     gap: 1em;
 
-    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    /* background-color: #ebebeb; */
 
     border-radius: 5px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
-.detail_container h2{
+.detail_container h2,h3{
     text-transform: capitalize;
     margin: 0px;
 }

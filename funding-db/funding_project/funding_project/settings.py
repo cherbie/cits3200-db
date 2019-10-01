@@ -28,7 +28,8 @@ SECRET_KEY = '#83vf$qugojs09%cg!ygs=p=@c=&8)-1#l^5(pflgq5=s0*xy!'
 DEBUG = True
 
 # For AWS deployment
-ALLOWED_HOSTS = ['localhost', 'ec2-13-236-86-13.ap-southeast-2.compute.amazonaws.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 
+                 'ec2-13-211-152-223.ap-southeast-2.compute.amazonaws.com', 'uwa-fodb.ml']
 
 # For AWS deployment
 SETTINGS_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -126,9 +127,12 @@ TIME_ZONE = 'Australia/Perth'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
+DTAE_FORMATE = 'd-m-Y'
+DATETIME_FORMATE = 'd-m-Y H:i:s'
 
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)
