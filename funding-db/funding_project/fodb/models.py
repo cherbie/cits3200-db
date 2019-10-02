@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from .filters import FilterManager
-import datetime
+from datetime import datetime
 
 
 class funding_opportunity(models.Model):
@@ -49,7 +49,6 @@ class funding_opportunity(models.Model):
 	filters = FilterManager() # filtered list of entries
 	def __str__(self):
 		return self.name
-
 
 
 	class Meta:

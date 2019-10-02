@@ -28,6 +28,10 @@ class FundingOpportunityAdmin(admin.ModelAdmin):
     search_fields = ['description','name']
     actions = ['make_hidden', 'make_unhidden', 'export_funding_opportunity']
 
+    def dateformat(self):
+        self.closing_date = datetime.strftime(self.closing_date, "%d-%m-%Y %H:%M:%S")
+        return self.closing_date
+
 
     def make_hidden(self, request, queryset):
         for funding_opportunity in queryset:
