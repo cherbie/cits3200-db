@@ -51,7 +51,7 @@
             <div class="custom-control custom-checkbox">
                 <input class="custom-control-input" type="checkbox"
                 id="{{form.science.id_for_label}}" name={{form.science.name}} value="True"
-                {% if form.science.value == "True" %}
+                {% if form.science.value == True %}
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.science.id_for_label}}">
@@ -73,7 +73,7 @@
                 <input class="custom-control-input" type="checkbox"
                 id="{{form.ecr.id_for_label}}" name={{form.ecr.name}} value="True"
                 {{form.ecr.value}}
-                {% if form.ecr.value == "True" %}
+                {% if form.ecr.value == True %}
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.ecr.id_for_label}}">
@@ -83,7 +83,7 @@
             <div class="custom-control custom-checkbox">
                 <input class="custom-control-input" type="checkbox"
                 id="{{form.travel.id_for_label}}" name={{form.travel.name}} value="True"
-                {% if form.travel.value == "True" %}
+                {% if form.travel.value == True %}
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.travel.id_for_label}}">
@@ -103,7 +103,7 @@
             <div class="custom-control custom-checkbox">
                 <input class="custom-control-input" type="checkbox"
                 id="{{form.wir.id_for_label}}" name="{{form.wir.name}}" value="True"
-                {% if form.wir.value == "True" %}
+                {% if form.wir.value == True %}
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.wir.id_for_label}}">
@@ -113,7 +113,7 @@
             <div class="custom-control custom-checkbox">
                 <input class="custom-control-input" type="checkbox"
                 id="{{form.international.id_for_label}}" name="{{form.international.name}}" value="True"
-                {% if form.international.value == "True" %}
+                {% if form.international.value == True %}
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.international.id_for_label}}">
@@ -123,7 +123,7 @@
             <div class="custom-control custom-checkbox">
                 <input class="custom-control-input" type="checkbox"
                 id="{{form.phd.id_for_label}}" name="{{form.phd.name}}" value="True"
-                {% if form.phd.value == "True" %}
+                {% if form.phd.value == True %}
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.phd.id_for_label}}">

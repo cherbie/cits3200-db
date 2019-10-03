@@ -42,7 +42,7 @@ def home(request):
 	'''
 		Rendering of fodb/home.html ... applying filter QuerySet from ./filter.py
 	'''
-	form = FilterForm() # manage the html options of the fields
+	form = FilterForm(data=request.GET.dict()) # manage the html options of the fields
 	qs = funding_opportunity.filters.filter_qs(request).exclude(is_hidden=True) # returns filtered queryset
 	paginator = Paginator(qs, 25) # Show 25 contacts per page
 	page = request.GET.get('page')
@@ -51,7 +51,7 @@ def home(request):
 		'posts': display,
 		'form': form
 	}
-
+	
 	return render(request, 'fodb/home.html', context)
 
 @login_required(login_url='login')
