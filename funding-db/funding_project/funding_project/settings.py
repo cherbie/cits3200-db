@@ -148,3 +148,10 @@ LOGIN_URL = 'login'
 
 # For AWS deployment
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+# Auth test
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'fodbdjangoauth@gmail.com'
+EMAIL_HOST_PASSWORD = 'DjangoAuth2019'
+EMAIL_PORT = 587
