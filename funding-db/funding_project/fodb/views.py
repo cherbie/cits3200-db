@@ -32,8 +32,6 @@ def research(request):
 
 	context["researchers"] = researchers
 
-	print("Here\n")
-	print(researches)
 	return render(request, 'fodb/tables.html', context)
 
 
@@ -42,17 +40,22 @@ def home(request):
 	'''
 		Rendering of fodb/home.html ... applying filter QuerySet from ./filter.py
 	'''
+	if request.method == 'POST':
+		queryset = funding_opportunity.filters.search_qs(request).exclude(is_hidden=True) # returns filtered queryset including 'GET' parameters
+	elif request.method == 'GET':
+		queryset = funding_opportunity.filters.filter_qs(request).exclude(is_hidden=True) # returns filtered queryset
+	else:
+		return error(request, error={'title': 'Forbidden request', 'status': 403, 'message': 'The request has been rejected, please return to the webpage.'})
+
+	# RENDERING DETAILS
 	form = FilterForm(data=request.GET.dict()) # manage the html options of the fields
-	qs = funding_opportunity.filters.filter_qs(request).exclude(is_hidden=True) # returns filtered queryset
-	paginator = Paginator(qs, 25) # Show 25 contacts per page
+	paginator = Paginator(queryset, 10) # Show 25 contacts per page
 	page = request.GET.get('page')
 	display = paginator.get_page(page)
 	context = {
 		'posts': display,
 		'form': form
 	}
-
-	print(form['month'].value())
 
 	return render(request, 'fodb/home.html', context)
 

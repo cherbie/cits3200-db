@@ -7,25 +7,31 @@ class FilterManager(models.Manager):
 	'''
 	fields = ['hms','ems','science','travel','ecr','international','wir','phd','visiting', 'month']
 
-	def filter_qs(self, request):
+	def search_qs(self, request):
+		self.request = request
+		text = request.POST.__getitem__('search').upper() # search query
+		queryset = super().get_queryset().filter(Q(name__icontains=text) | Q(description__icontains=text));
+		return self.filter_qs(request, queryset) # apply further filter options
+
+
+	def filter_qs(self, request, queryset=None):
 		"""
 			@return QuerySet containing all fields with specified values.
 			@param HttpRequest object
 		"""
+		if queryset is None: # prior queryset not provided
+			queryset = super().get_queryset();
+
 		self.request = request
 		dict = request.GET.dict() # request paramaters
 		tags = None # models.Q object
 		faculty =  None
-		print(dict)
 
-		print(self.ems_select())
-		print(self.fields[0])
 		if dict.__contains__(self.fields[0]):
 			if faculty == None:
 				faculty = self.hms_select()
 			else:
 				faculty = faculty & self.hms_select()
-			print(faculty)
 		if dict.__contains__(self.fields[1]):
 			if faculty == None:
 				faculty = self.ems_select()
@@ -79,13 +85,13 @@ class FilterManager(models.Manager):
 
 		# -- RETURN STATEMENTS --
 		if tags is None and faculty is None:
-			return self.set_order(super().get_queryset())
+			return self.set_order(queryset)
 		elif tags is None:
-			return self.set_order(super().get_queryset().filter(faculty))
+			return self.set_order(queryset.filter(faculty))
 		elif faculty is None:
-			return self.set_order(super().get_queryset().filter(tags))
+			return self.set_order(queryset.filter(tags))
 		else:
-			return self.set_order(super().get_queryset().filter(tags & faculty))
+			return self.set_order(queryset.filter(tags & faculty))
 
 	def set_order(self, queryset):
 		'''
@@ -102,11 +108,9 @@ class FilterManager(models.Manager):
 		else:
 			queryset = queryset.order_by('closing_date')
 
-		print(str)
 		return queryset
 
 	def hms_select(self):
-		print("entered")
 		return Q(hms='True')
 
 	def ems_select(self):
