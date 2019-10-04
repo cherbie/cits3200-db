@@ -95,12 +95,13 @@ class FilterManager(models.Manager):
 		str = self.request.GET.get('sort')
 		if str == 'desc':
 			queryset = queryset.order_by('-name')
-		elif str == 'close-asc':
-			queryset = queryset.order_by('closing_date')
+		elif str == 'asc':
+			queryset = queryset.order_by('name')
 		elif str == 'close-desc':
 			queryset = queryset.order_by('-closing_date')
 		else:
-			queryset = queryset.order_by('name')
+			queryset = queryset.order_by('closing_date')
+
 		print(str)
 		return queryset
 

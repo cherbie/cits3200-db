@@ -51,7 +51,9 @@ def home(request):
 		'posts': display,
 		'form': form
 	}
-	
+
+	print(form['month'].value())
+
 	return render(request, 'fodb/home.html', context)
 
 @login_required(login_url='login')
