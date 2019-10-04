@@ -38,7 +38,8 @@ def register(request):
                         mail_subject, message, to=[to_email]
             )
             email.send()
-            return HttpResponse('Please confirm your email address to complete the registration')
+            #return HttpResponse('Please confirm your email address to complete the registration')
+            return render(request, 'users/auth_confirm.html')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
@@ -59,8 +60,10 @@ def activate(request, uidb64, token):
         user.save()
         login(request, user)
         # return redirect('home')
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        # return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        return render(request, 'users/auth_complete.html')
     else:
-        return HttpResponse('Activation link is invalid!')
+        # return HttpResponse('Activation link is invalid!')
+        return render(request, 'users/auth_invalid.html')
 
 

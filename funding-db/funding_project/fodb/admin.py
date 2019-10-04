@@ -71,6 +71,15 @@ class FundingOpportunityAdmin(admin.ModelAdmin):
         response.context_data['title'] = "Edit Funding Opportunity" if response.context_data['object_id'] else "Add Funding Opportunity"
         return response
 
+
+class MyUserAdmin(admin.ModelAdmin):
+    list_display = ['email', 'first_name', 'last_name', 'is_superuser', 'is_staff', 'is_active', 'last_login']
+    list_filter = ('is_staff', 'is_superuser', 'is_active', 'last_login')
+
+admin.site.unregister(User)
+admin.site.register(User, MyUserAdmin)
+
+
 admin.site.index_title = 'Funding Opportunities Administration'
 admin.site.site_title = 'FODB Admin'
 
