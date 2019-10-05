@@ -67,3 +67,8 @@ def activate(request, uidb64, token):
         return render(request, 'users/auth_invalid.html')
 
 
+def auth_error(request):
+	'''
+		Redirects to auth error page.
+	'''
+	return render(request, 'users/auth_error.html')
