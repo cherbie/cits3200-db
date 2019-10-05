@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User, Group
 from .models import funding_opportunity
 from django.utils.html import format_html
+import datetime
 # Register your models here.
 
 
@@ -18,7 +19,7 @@ admin.site.site_header = 'Funding Opportunities Database'
 class FundingOpportunityAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Funding Opportunity',{'fields': [('name','is_hidden'),'provider','description','link','limit_per_uni']}),
-        ('Date Information', {'fields': [('closing_date', 'Internal_deadline'),('EOI_deadline','Minimum_data_deadline'),('External_deadline','Forecast_Month')]}),
+        ('Date Information', {'fields': [('closing_date', 'internal_deadline'),('eoi_deadline','minimum_data_deadline'),('external_deadline','forecast_month')]}),
         ('Amount and Duration', {'fields': [('max_amount','amount_estimated'),('max_duration','duration_estimated') ,'duration_type']}),
         ('Tags', {'fields': ['ecr','travel','visiting','wir','phd','international']}),
         ('Faculty',{'fields': ['hms','ems','science','fable']}),
@@ -26,11 +27,11 @@ class FundingOpportunityAdmin(admin.ModelAdmin):
     list_filter = ('closing_date', )
     list_display = ('name', 'closing_date','max_amount','max_duration', 'is_hidden')
     search_fields = ['description','name']
-    actions = ['make_hidden', 'make_unhidden', 'export_funding_opportunity']
+    actions = ['make_hidden', 'make_unhidden', 'export_funding_opportunity','dateformat']
 
-    def dateformat(self):
-        self.closing_date = datetime.strftime(self.closing_date, "%d-%m-%Y %H:%M:%S")
-        return self.closing_date
+    def dateformat(self, queryset):
+        funding_opportunity.closing_date = funding_opportunity.closing_date.strftime("%d-%m-%Y %H:%M:%S")
+        funding_opportunity.save()
 
 
     def make_hidden(self, request, queryset):
