@@ -135,19 +135,35 @@
                         <div class="content_tags">
                             <div class="content_department">
                                 {% if post.hms %}
-                                <span class="tags tags_yellow">hms</span>
+                                <span class="tags tags_yellow">hms
+                                    <span class="tags_flags">
+                                        Health and Medical Science
+                                    </span>
+                                </span>
                                 {% endif %}
 
                                 {% if post.ems %}
-                                <span class="tags tags_green">ems</span>
+                                <span class="tags tags_green">ems
+                                    <span class="tags_flags">
+                                        Engineering and Mathematical Sciences
+                                    </span>
+                                </span>
                                 {% endif %}
 
                                 {% if post.science %}
-                                <span class="tags tags_blue">sci</span>
+                                <span class="tags tags_blue">sci
+                                    <span class="tags_flags">
+                                        Science
+                                    </span>
+                                </span>
                                 {% endif %}
 
                                 {% if post.fable %}
-                                <span class="tags tags_violet">fable</span>
+                                <span class="tags tags_violet">fable
+                                    <span class="tags_flags">
+                                        Faculty of Arts, Business, Law and Education
+                                    </span>
+                                </span>
                                 {% endif %}
 
                                 {% if not post.hms and not post.ems and not post.science and not post.fable %}

@@ -112,7 +112,6 @@
 }
 
 .filter_crit h3{
-    text-transform: capitalize;
     margin: 0px;
 }
 
@@ -264,6 +263,7 @@
 
 /* Tags customization */
 .tags{
+    position: relative;
     margin: 0px;
     margin-right: 0.5em;
     padding: 2px 8px;
@@ -313,6 +313,8 @@
     visibility: hidden;
 
     background-color: white;
+    color: black;
+    text-transform: none;
 
     z-index: 1;
 
@@ -324,6 +326,10 @@
 }
 
 .tags_icon:hover .tags_flags{
+    visibility: visible;
+}
+
+.tags:hover .tags_flags{
     visibility: visible;
 }
 
