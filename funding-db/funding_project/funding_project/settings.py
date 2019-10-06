@@ -163,6 +163,7 @@ EMAIL_PORT = 587
 # google auth
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.azuread.AzureADOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
