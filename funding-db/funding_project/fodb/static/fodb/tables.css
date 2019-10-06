@@ -143,50 +143,34 @@
     padding-right: 20px;
     margin: 0px;
     display: grid;
-    gap: 0.3em;
+    gap: 0.5em;
     /* background-color: #ebebeb; */
     border: 1px solid black;
     border-radius: 5px;
     transition: 0.3s ease-in-out;
 }
 
-.noting_flag{
-    color: red;
-    position: absolute;
-    top: 6px;
-    right: 10px;
+.noting_flag{]
     padding: 0px;
-    border-radius: 5px;
-    /* background-color: rgba(211, 211, 211, 1); */
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .hover_note{
-    position: relative;
+    color: red;
 }
 
 .hover_text{
-    position: absolute;
-    right: 0;
-    white-space: nowrap;
-    font-size: 14px;
-
+    margin: 0px;
+    font-size: 13px;
     color: black;
-
-    visibility: hidden;
-
-    background-color: white;
-
-    z-index: 1;
-
-    padding: 2px;
-    border-radius: 5px;
-    border: 1px solid black;
-
-    top: -20px;
 }
 
-.hover_note:hover .hover_text{
-    visibility: visible;
+.end_note_ruler{
+    margin: 0px;
+    width: 100%;
+    border-top: 1px solid rgb(211,211,211, 1);
 }
 
 .content_card:hover{
@@ -278,6 +262,7 @@
     grid-template-columns: 1fr max-content;
 }
 
+/* Tags customization */
 .tags{
     margin: 0px;
     margin-right: 0.5em;
@@ -303,6 +288,10 @@
 
 .tags_green{
     background-color: green;
+}
+
+.tag_violet{
+    background-color: purple;
 }
 
 .tags_black{

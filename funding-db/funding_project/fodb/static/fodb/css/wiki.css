@@ -9,7 +9,7 @@ footer{
     width: 90vw;
     max-width: 1300px;
 
-    margin-top: 10px;
+    margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr 6fr 1fr;
     gap: 1em;
@@ -63,10 +63,9 @@ footer{
     padding-left: 20px;
     padding-right: 20px;
 
-    /* background-color: #ebebeb; */
+    background-color: #ebebeb;
 
     border-radius: 5px;
-    /* border: 1px solid black; */
 }
 
 .detail_container h2,h3{
@@ -95,14 +94,48 @@ footer{
     gap: 1em;
 }
 
-.description_info h5{
-    margin: 0px;
-}
-
-.description_info h6{
+.sub_info{
     margin: 0px;
 }
 
 .light{
     font-weight: 200;
+}
+
+/* Dynamic web starts here */
+@media screen and (max-width: 1200px) {
+    .wiki_container{
+        grid-template-columns: 1fr 7fr;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .wiki_container{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .description_info{
+        grid-template-columns: 1fr;
+    }
+
+    .sub_info:nth-child(even){
+        /* margin-left: 10px; */
+    }
+
+    .sub_info:nth-child(even)::before{
+        content: "-";
+        margin-right: 10px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .important_info{
+        grid-template-columns: 1fr;
+    }
+
+    .content_tags{
+        grid-template-columns: 1fr;
+    }
 }

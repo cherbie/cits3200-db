@@ -58,6 +58,16 @@
                     {{form.science.label}}
                 </label>
             </div>
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox"
+                id="{{form.fable.id_for_label}}" name={{form.fable.name}} value="True"
+                {% if form.fable.value == True %}
+                    checked
+                {% endif %} />
+                <label class="custom-control-label" for="{{form.fable.id_for_label}}">
+                    {{form.fable.label}}
+                </label>
+            </div>
         </div>
     </div>
 

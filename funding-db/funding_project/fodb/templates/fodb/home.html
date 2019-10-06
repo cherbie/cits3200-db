@@ -38,23 +38,18 @@
 
             <div class="content_section">
                 {% for post in posts %}
-                <a target="_blank" style="text-decoration: none; color: black;" href="{% url 'fodb-detail' post.id %}">
-                    <div class="content_card">
-                        <div class="noting_flag">
-                            <i class="fas fa-flag hover_note">
-                                <span class="hover_text">
-                                    Limited applications. Please contact researchgrants-ore@uwa.edu.au
-                                </span>
-                            </i>
-                        </div>
 
+                <div class="content_card">
+                    <a target="_blank" style="text-decoration: none; color: black;" href="{% url 'fodb-detail' post.id %}">
                         <div class="content_header">
                             <h3>
                                 {{ post.name }}
                             </h3>
+                            {% if post.provider %}
                             <h4>
                                 {{ post.provider }}
                             </h4>
+                            {% endif %}
                         </div>
 
                         <hr>
@@ -81,12 +76,21 @@
                             </div>
                             <div class="important_info">
                                 <h7>
-                                    Duration :
+                                    duration :
                                 </h7>
                                 <h7>
-                                    {{ post.max_duration }} {{ post.duration_type}}
+                                    {{ post.max_duration }}
+                                    {% if post.duration_type == "M" %}
+                                    month
+                                    {% else %}
+                                    year
+                                    {% endif %}
+                                    {% if opp.duration_estimated %}
+                                    <span><small><small> <i>(Estimated)</i></small></small></span>
+                                    {% endif %}
                                 </h7>
                             </div>
+                            {% if post.External_deadline %}
                             <div class="important_info">
                                 <h7>
                                     External deadline :
@@ -95,6 +99,8 @@
                                     {{ post.External_deadline|date:"d F Y" }}
                                 </h7>
                             </div>
+                            {% endif %}
+                            {% if post.Internal_deadline %}
                             <div class="important_info">
                                 <h7>
                                     Internal deadline :
@@ -103,6 +109,8 @@
                                     {{ post.Internal_deadline|date:"d F Y" }}
                                 </h7>
                             </div>
+                            {% endif %}
+                            {% if post.EOI_deadline %}
                             <div class="important_info">
                                 <h7>
                                     EOI deadline :
@@ -111,8 +119,18 @@
                                     {{ post.EOI_deadline|date:"d F Y" }}
                                 </h7>
                             </div>
+                            {% endif %}
+                            {% if post.Minimum_data_deadline %}
+                            <div class="important_info">
+                                <h7>
+                                    Minimum data deadline :
+                                </h7>
+                                <h7>
+                                    {{ post.Minimum_data_deadline|date:"d F Y" }}
+                                </h7>
+                            </div>
+                            {% endif %}
                         </div>
-
 
                         <div class="content_tags">
                             <div class="content_department">
@@ -128,7 +146,11 @@
                                 <span class="tags tags_blue">sci</span>
                                 {% endif %}
 
-                                {% if not post.hms and not post.ems and not post.science %}
+                                {% if post.fable %}
+                                <span class="tags tags_violet">fable</span>
+                                {% endif %}
+
+                                {% if not post.hms and not post.ems and not post.science and not post.fable %}
                                 <span class="tags tags_black">Not Specified</span>
                                 {% endif %}
                             </div>
@@ -182,8 +204,23 @@
                                 {% endif %}
                             </div>
                         </div>
+                    </a>
+
+                    {% if post.limit_per_uni %}
+                    <hr class="end_note_ruler">
+
+                    <div class="noting_flag">
+                        <i class="fas fa-flag hover_note"></i>
+                        <p class="hover_text">
+                            Limited per University. Please contact
+                            <a href="mailto:researchgrants-ore@uwa.edu.au?subject=Enquiry about UWA funding opportunity web page&body=To whom it may concern,">
+                                researchgrants-ore@uwa.edu.au
+                            </a>
+                        </p>
                     </div>
-                </a>
+                    {% endif %}
+                </div>
+
                 {% endfor %}
             </div>
             <br>

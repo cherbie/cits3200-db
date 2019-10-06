@@ -1,0 +1,50 @@
+.foot_contain{
+    margin-top: 0 !important;
+}
+
+.cover_section{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    min-width: 99vw;
+    width: 99vw;
+    max-width: 99vw;
+    height: 80vh;
+
+    display: grid;
+
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-image: url('../../../../static/users/images/coolimg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.welcome_title{
+    display: inline-block;
+    vertical-align: middle;
+    align-self: center;
+    justify-self: center;
+
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8), 0 0 12px black;
+}
+
+.welcome_lead{
+    color: #e2b600;
+}
+
+.welcome_lead:hover{
+    color: white;
+    text-decoration: none;
+}
