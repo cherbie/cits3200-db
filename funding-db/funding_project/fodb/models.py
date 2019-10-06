@@ -50,6 +50,9 @@ class funding_opportunity(models.Model):
 	def __str__(self):
 		return self.name
 
+	def closing_date_formatted(self):
+	    return self.closing_date.strftime('%d/%m/%Y')
+
 
 
 	class Meta:

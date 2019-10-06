@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     # google auth
     'social_django',
+    'import_export',
 ]
 
 MIDDLEWARE = [
