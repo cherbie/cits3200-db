@@ -35,6 +35,13 @@ urlpatterns = [
     # Auth test 2
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         user_views.activate, name='activate'),
+
+    # google auth
+    path('', include('social_django.urls', namespace='social')),
+    
+    # google auth error redirect
+    path('auth_error/', user_views.auth_error, name='fodb-auth-error'),
+    
     path('', include('fodb.urls')),
 ]
 
