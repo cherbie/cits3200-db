@@ -10,7 +10,6 @@ The development of an online searchable database providing access to research fu
   - Yanhang Zhang
 
 ### FOR DEVELOPERS
- - The django-project is located in the folder *'funding-db'*
- - The dependencies can be found in the requirements.txt file in the folder *'funding-db'*
- - The virtual environment for python with the necessary modules is in the folder *'./funding-db/venv' (for mac)*
+ - The django-project is located in the folder *'funding-db'*.
+ - The virtual environment for python with the necessaraily modules is in the folder *'./funding-db/venv'*
 

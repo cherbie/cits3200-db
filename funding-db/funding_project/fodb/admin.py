@@ -28,7 +28,6 @@ class FundingOpportunityAdmin(admin.ModelAdmin):
     search_fields = ['description','name']
     actions = ['make_hidden', 'make_unhidden', 'export_funding_opportunity']
 
-
     def make_hidden(self, request, queryset):
         for funding_opportunity in queryset:
             funding_opportunity.is_hidden = True
@@ -71,6 +70,9 @@ class FundingOpportunityAdmin(admin.ModelAdmin):
         response = super(FundingOpportunityAdmin, self).render_change_form(request, context, add, change, form_url, obj)
         response.context_data['title'] = "Edit Funding Opportunity" if response.context_data['object_id'] else "Add Funding Opportunity"
         return response
+
+
+
 
 admin.site.index_title = 'Funding Opportunities Administration'
 admin.site.site_title = 'FODB Admin'
