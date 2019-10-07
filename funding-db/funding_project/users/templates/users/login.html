@@ -1,7 +1,20 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<br><br>
+<style>
+	.overall-container{
+		width: 100vw;
+		min-height: 500px;
+		height: 80vh;
+		margin: 0px;
+		padding-top: 30px;
+	}
+
+	footer{
+		margin-top: 0px !important;
+	}
+</style>
+	<section class="overall-container">
 		<div class="content-section container">
 
 			<form action="" method="POST">
@@ -22,5 +35,5 @@
 				</small>
 			</div>
 		</div>
-
+	</section>
 {% endblock content%}
