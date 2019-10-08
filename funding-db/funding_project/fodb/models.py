@@ -51,10 +51,9 @@ class funding_opportunity(models.Model):
 	def __str__(self):
 		return self.name
 
-	def is_outofdate(self):
-		if self.closing_date < datetime.date.today():
-			self.open_close = True
-		return self.open_close
+
+
+
 
 	class Meta:
 		ordering = ['name']

@@ -7,25 +7,41 @@ class FilterManager(models.Manager):
 	'''
 	fields = ['hms','ems','science','travel','ecr','international','wir','phd','visiting', 'month']
 
-	def filter_qs(self, request):
+	def search_qs(self, request):
+		'''
+		   Filters the queryset based on the keywords provided in the search bar 'POST' request
+		'''
+		self.request = request
+		text = request.POST.__getitem__('search') # search query
+		keywords = text.split(' ');
+		Qobject = None
+		for word in keywords: # cycle through keywords
+			if Qobject is None:
+				Qobject = self.keyword_name(word) | self.keyword_desc(word)
+			else:
+				Qobject |= self.keyword_name(word) | self.keyword_desc(word)
+		queryset = super().get_queryset().filter(Qobject);
+		return self.filter_qs(request, queryset) # apply further filter options
+
+
+	def filter_qs(self, request, queryset=None):
 		"""
 			@return QuerySet containing all fields with specified values.
 			@param HttpRequest object
 		"""
+		if queryset is None: # prior queryset not provided
+			queryset = super().get_queryset();
+
 		self.request = request
 		dict = request.GET.dict() # request paramaters
 		tags = None # models.Q object
 		faculty =  None
-		print(dict)
 
-		print(self.ems_select())
-		print(self.fields[0])
 		if dict.__contains__(self.fields[0]):
 			if faculty == None:
 				faculty = self.hms_select()
 			else:
 				faculty = faculty & self.hms_select()
-			print(faculty)
 		if dict.__contains__(self.fields[1]):
 			if faculty == None:
 				faculty = self.ems_select()
@@ -79,13 +95,13 @@ class FilterManager(models.Manager):
 
 		# -- RETURN STATEMENTS --
 		if tags is None and faculty is None:
-			return self.set_order(super().get_queryset())
+			return self.set_order(queryset)
 		elif tags is None:
-			return self.set_order(super().get_queryset().filter(faculty))
+			return self.set_order(queryset.filter(faculty))
 		elif faculty is None:
-			return self.set_order(super().get_queryset().filter(tags))
+			return self.set_order(queryset.filter(tags))
 		else:
-			return self.set_order(super().get_queryset().filter(tags & faculty))
+			return self.set_order(queryset.filter(tags & faculty))
 
 	def set_order(self, queryset):
 		'''
@@ -95,17 +111,22 @@ class FilterManager(models.Manager):
 		str = self.request.GET.get('sort')
 		if str == 'desc':
 			queryset = queryset.order_by('-name')
-		elif str == 'close-asc':
-			queryset = queryset.order_by('closing_date')
+		elif str == 'asc':
+			queryset = queryset.order_by('name')
 		elif str == 'close-desc':
 			queryset = queryset.order_by('-closing_date')
 		else:
-			queryset = queryset.order_by('name')
-		print(str)
+			queryset = queryset.order_by('closing_date')
+
 		return queryset
 
+	def keyword_name(self, keyword):
+		return Q(name__icontains=keyword)
+
+	def keyword_desc(self, keyword):
+		return Q(description__icontains=keyword)
+
 	def hms_select(self):
-		print("entered")
 		return Q(hms='True')
 
 	def ems_select(self):

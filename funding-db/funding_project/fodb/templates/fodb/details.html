@@ -13,19 +13,17 @@
     </div>
 
     <div class="detail_container">
-        <div class="content_card_filler">
-            <div class="filler_div filler_div_top"></div>
-            <div class="filler_div filler_div_bottom"></div>
-        </div>
         {% if user.is_superuser %}
         <a class="edit_button" href="/admin/fodb/funding_opportunity/{{ opp.id }}/change/"><i class="fas fa-pen"></i> edit</a>
         {% endif %}
         <h2>
             {{ opp.name }}
         </h2>
+        {% if opp.provider %}
         <h3>
             {{ opp.provider }}
         </h3>
+        {% endif %}
 
         <hr>
 
@@ -54,12 +52,17 @@
                     Duration :
                 </h5>
                 <h5>
-                    {{ opp.max_duration }} {{ opp.duration_type}}
+                    {{ opp.max_duration }} {% if post.duration_type == "M" %}
+                    month
+                    {% else %}
+                    year
+                    {% endif %}
                     {% if opp.duration_estimated %}
                     <span><small><small> <i>(Estimated)</i></small></small></span>
                     {% endif %}
                 </h5>
             </div>
+            {% if opp.External_dealine %}
             <div class="important_info">
                 <h5>
                     External deadline :
@@ -68,6 +71,8 @@
                     {{ opp.External_deadline|date:"d F Y" }}
                 </h5>
             </div>
+            {% endif %}
+            {% if opp.Internal_deadline %}
             <div class="important_info">
                 <h5>
                     Internal deadline :
@@ -76,6 +81,8 @@
                     {{ opp.Internal_deadline|date:"d F Y" }}
                 </h5>
             </div>
+            {% endif %}
+            {% if opp.EOI_deadline %}
             <div class="important_info">
                 <h5>
                     EOI deadline :
@@ -84,6 +91,8 @@
                     {{ opp.EOI_deadline|date:"d F Y" }}
                 </h5>
             </div>
+            {% endif %}
+            {% if opp.Minimum_data_deadline %}
             <div class="important_info">
                 <h5>
                     Minimum data deadline :
@@ -92,6 +101,7 @@
                     {{ opp.Minimum_data_deadline|date:"d F Y" }}
                 </h5>
             </div>
+            {% endif %}
         </div>
 
         <hr>
@@ -110,7 +120,10 @@
                 {% if opp.science %}
                 <span class="tags tags_blue">Sci</span>
                 {% endif %}
-                {% if not opp.hms and not opp.ems and not opp.science %}
+                {% if opp.fable %}
+                <span class="tags tags_violet">fable</span>
+                {% endif %}
+                {% if not opp.hms and not opp.ems and not opp.science and not opp.fable %}
                 <span class="tags tags_black">Not Specified</span>
                 {% endif %}
             </div>
@@ -175,21 +188,31 @@
         <hr>
 
         <div class="description_info">
-            <h5>
+            <h5 class="sub_info">
                 Description :
-
             </h5>
-            <h5 class="light">
+            <h5 class="light sub_info">
                 {{ opp.description }}
             </h5>
 
-            <h6>
+            <h6 class="sub_info">
                 <strong>
                     For more info, visit :
                 </strong>
             </h6>
-            <h6>
+            <h6 class="sub_info">
                 <a target="_blank" href="{{ opp.link }}"> {{ opp.link }}</a>
+            </h6>
+            <h6 class="sub_info">
+                <strong>
+                    Notice :
+                </strong>
+            </h6>
+            <h6 class="sub_info">
+                Limited per University. Please contact
+                <a href="mailto:researchgrants-ore@uwa.edu.au?subject=Enquiry about UWA funding opportunity web page&body=To whom it may concern,">
+                    researchgrants-ore@uwa.edu.au
+                </a>
             </h6>
         </div>
 
@@ -197,20 +220,20 @@
 
         <div class="info_container">
             <div class="important_info">
-                <h5>
+                <h6>
                     Create on :
-                </h5>
-                <h5>
+                </h6>
+                <h6>
                     {{ opp.creation_date|date:"d F Y" }}
-                </h5>
+                </h6>
             </div>
             <div class="important_info">
-                <h5>
+                <h6>
                     Last updated :
-                </h5>
-                <h5>
+                </h6>
+                <h6>
                     {{ opp.last_updated|date:"d F Y" }}
-                </h5>
+                </h6>
             </div>
         </div>
     </div>

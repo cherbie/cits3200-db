@@ -46,8 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'fodb.apps.FodbConfig',
     'users.apps.UsersConfig',
-    'crispy_forms'
-
+    'crispy_forms',
+    # google auth
+    'social_django',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # google auth
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'funding_project.urls'
@@ -134,7 +138,6 @@ DATETIME_FORMAT = 'd-m-Y H:i:s'
 USE_TZ = True
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
@@ -151,3 +154,57 @@ LOGIN_URL = 'login'
 
 # For AWS deployment
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+# Auth test
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'fodbdjangoauth@gmail.com'
+EMAIL_HOST_PASSWORD = 'DjangoAuth2019'
+EMAIL_PORT = 587
+
+# google auth
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1080830784114-i6d3q36pmfb6m4uvc1vn5nle395gnjme.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'skenPUpWLy8S120YKF0-2of_'
+
+LOGIN_URL = '/auth/login/google-oauth2/'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {
+    'hd': 'student.uwa.edu.au'
+}
+SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = ['student.uwa.edu.au', 'uwa.edu.au']
+
+
+# fixing auth forbidden error redirect
+# see fodb/pipeline.py to change the url
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'fodb.pipeline.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
+
+# Doesn't work as intended
+''' 
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/error/'
+SOCIAL_AUTH_BACKEND_ERROR_URL = '/error/'
+RAISE_EXCEPTIONS = False
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
+'''

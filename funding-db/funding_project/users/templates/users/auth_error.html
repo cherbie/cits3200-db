@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .overall-container{
+        width: 100vw;
+        max-width: 800px;
+        min-height: 500px;
+        height: 80vh;
+        margin: 0px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0px 20px;
+        padding-top: 40px;
+
+        text-align: center;
+
+        /* background-image: url('../../../../static/users/images/ezone.png');
+        background-repeat: no-repeat;
+        background-size: cover; */
+        /* color: white !important; */
+        /* text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8), 0 0 12px black; */
+    }
+
+    h1{
+        color: red;
+    }
+
+    footer{
+        margin-top: 0px !important;
+    }
+</style>
+
+<section class="overall-container">
+    <h1>
+        Authentication failed. Please use a UWA email to access the website.
+    </h1>
+    <h3>
+        Login as <a href="{% url 'social:begin' 'google-oauth2' %}">student</a>, staff or admin.
+    </h3>
+</section>
+
+{% endblock content%}

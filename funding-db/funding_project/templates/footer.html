@@ -2,16 +2,17 @@
 <style>
   .foot_contain {
     width: 100vw;
-    height: 120px;
+    min-height: 120px;
     margin: 0px;
     margin-top: 50px;
     padding: 10px;
 
     border-top: 2px solid white;
-
     border-bottom: .35rem solid #e2b600;
-
     color: white;
+
+    display: grid;
+    gap: 10px;
 
     justify-content: center;
     justify-items: center;
@@ -22,8 +23,7 @@
 
   .small_contain{
     display: grid;
-    grid-template-columns: repeat(9, max-content);
-    gap: 5px;
+    gap: 2px;
 
     justify-content: center;
     justify-items: bottom;
@@ -32,35 +32,55 @@
     text-align: center;
   }
 
+  .small_contain p{
+    margin: 0px 5px;
+    font-size: 15px;
+  }
+
   .small_contain a {
-    color: white;
+    color: yellow;
   }
 
   .small_contain a:hover{
-    color: yellow;
+    color: white;
+  }
+
+  .logos_footer{
+    width: 99vw;
+    max-width: 1800px;
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media screen and (max-width: 420px) {
+    .logos_footer{
+      display: grid;
+      gap: 10px;
+
+      justify-content: center;
+    }
   }
 </style>
 
 <footer class="foot_contain background_base">
   <div class="small_contain">
-    <a href="">
-      <p>Privacy</p>
+    <p>
+      This website is a property of the University of Western Australia. All rights reserves.
+    </p>
+    <p>
+      For more information, please refer to
+      <a href="mailto:researchgrants-ore@uwa.edu.au?subject=Enquiry about UWA funding opportunity web page&body=To whom it may concern,">
+        researchgrants-ore@uwa.edu.au
+      </a>.
+    </p>
+  </div>
+  <div class="logos_footer">
+    <a class="go8_logo" href="https://go8.edu.au/">
+      <img src="{% static "fodb/images/Go8Member-blank.png" %}" width="150px" alt="Group of 8 Member">
     </a>
-    <p>|</p>
-    <a href="">
-        <p>Cookies</p>
-    </a>
-    <p>|</p>
-    <a href="">
-        <p>Terms and Conditions</p>
-    </a>
-    <p>|</p>
-    <a href="">
-      <p>Contact us</p>
-    </a>
-    <p>|</p>
-    <a href="">
-      <p>FAQ</p>
+    <a class="uwa_logo" href="https://www.uwa.edu.au/">
+      <img src="{% static "users/images/uwa_brand.png" %}" width="180px" alt="University of Western Australia">
     </a>
   </div>
 </footer>

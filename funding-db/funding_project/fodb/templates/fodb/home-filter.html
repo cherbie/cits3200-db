@@ -11,11 +11,11 @@
         <hr>
 
         <div class="form-group">
-            <select name="sort" class="form-control">
-                <option value="asc">A to Z</option>
-                <option value="desc">Z to A</option>
-                <option value="close-asc" selected>Nearest Deadline</option>
-                <option value="close-desc">Furthest Deadline</option>
+            <select name="{{form.sort.name}}" class="form-control">
+                <option value="close-asc" {% if form.sort.value == 'close-asc' %} selected {% endif %}>Nearest Deadline</option>
+                <option value="close-desc" {% if form.sort.value == 'close-desc' %} selected {% endif %}>Furthest Deadline</option>
+                <option value="asc" {% if form.sort.value == 'asc' %} selected {% endif %}>A to Z</option>
+                <option value="desc"{% if form.sort.value == 'desc' %} selected {% endif %}>Z to A</option>
             </select>
         </div>
     </div>
@@ -35,7 +35,7 @@
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.hms.id_for_label}}">
-                    {{form.hms.label}}
+                    Heath and Medical Science
                 </label>
             </div>
             <div class="custom-control custom-checkbox">
@@ -45,17 +45,27 @@
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.ems.id_for_label}}">
-                    {{form.ems.label}}
+                    Engineering and Mathematical Sciences
                 </label>
             </div>
             <div class="custom-control custom-checkbox">
                 <input class="custom-control-input" type="checkbox"
                 id="{{form.science.id_for_label}}" name={{form.science.name}} value="True"
-                {% if form.science.value == "True" %}
+                {% if form.science.value == True %}
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.science.id_for_label}}">
-                    {{form.science.label}}
+                    Science
+                </label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox"
+                id="{{form.fable.id_for_label}}" name={{form.fable.name}} value="True"
+                {% if form.fable.value == True %}
+                    checked
+                {% endif %} />
+                <label class="custom-control-label" for="{{form.fable.id_for_label}}">
+                    Faculty of Arts, Business, Law and Education
                 </label>
             </div>
         </div>
@@ -73,17 +83,17 @@
                 <input class="custom-control-input" type="checkbox"
                 id="{{form.ecr.id_for_label}}" name={{form.ecr.name}} value="True"
                 {{form.ecr.value}}
-                {% if form.ecr.value == "True" %}
+                {% if form.ecr.value == True %}
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.ecr.id_for_label}}">
-                    <span class="tags_icon"><i class="fas fa-business-time fa-fw"></i>&nbsp{{form.ecr.label}}</span>
+                    <span class="tags_icon"><i class="fas fa-business-time fa-fw"></i>&nbspEarly Career Research</span>
                 </label>
             </div>
             <div class="custom-control custom-checkbox">
                 <input class="custom-control-input" type="checkbox"
                 id="{{form.travel.id_for_label}}" name={{form.travel.name}} value="True"
-                {% if form.travel.value == "True" %}
+                {% if form.travel.value == True %}
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.travel.id_for_label}}">
@@ -103,7 +113,7 @@
             <div class="custom-control custom-checkbox">
                 <input class="custom-control-input" type="checkbox"
                 id="{{form.wir.id_for_label}}" name="{{form.wir.name}}" value="True"
-                {% if form.wir.value == "True" %}
+                {% if form.wir.value == True %}
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.wir.id_for_label}}">
@@ -113,7 +123,7 @@
             <div class="custom-control custom-checkbox">
                 <input class="custom-control-input" type="checkbox"
                 id="{{form.international.id_for_label}}" name="{{form.international.name}}" value="True"
-                {% if form.international.value == "True" %}
+                {% if form.international.value == True %}
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.international.id_for_label}}">
@@ -123,7 +133,7 @@
             <div class="custom-control custom-checkbox">
                 <input class="custom-control-input" type="checkbox"
                 id="{{form.phd.id_for_label}}" name="{{form.phd.name}}" value="True"
-                {% if form.phd.value == "True" %}
+                {% if form.phd.value == True %}
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.phd.id_for_label}}">
@@ -140,20 +150,20 @@
         <hr>
 
         <div class="form-group">
-            <select name="month" class="form-control">
-                <option value="-1">N/A</option>
-                <option value="1">Jan</option>
-                <option value="2">Feb</option>
-                <option value="3">Mar</option>
-                <option value="4">Apr</option>
-                <option value="5">May</option>
-                <option value="6">Jun</option>
-                <option value="7">Jul</option>
-                <option value="8">Aug</option>
-                <option value="9">Sep</option>
-                <option value="10">Oct</option>
-                <option value="11">Nov</option>
-                <option value="12">Dec</option>
+            <select class="form-control" name="{{form.month.name}}">
+                <option value="-1" {% if form.month.value == '-1' %} selected {% endif %}></option>
+                <option value="1" {% if form.month.value == '1' %} selected {% endif %}>January</option>
+                <option value="2" {% if form.month.value == '2' %} selected {% endif %}>February</option>
+                <option value="3" {% if form.month.value == '3' %} selected {% endif %}>March</option>
+                <option value="4" {% if form.month.value == '4' %} selected {% endif %}>April</option>
+                <option value="5" {% if form.month.value == '5' %} selected {% endif %}>May</option>
+                <option value="6" {% if form.month.value == '6' %} selected {% endif %}>June</option>
+                <option value="7" {% if form.month.value == '7' %} selected {% endif %}>July</option>
+                <option value="8" {% if form.month.value == '8' %} selected {% endif %}>August</option>
+                <option value="9" {% if form.month.value == '9' %} selected {% endif %}>September</option>
+                <option value="10" {% if form.month.value == '10' %} selected {% endif %}>October</option>
+                <option value="11" {% if form.month.value == '11' %} selected {% endif %}>November</option>
+                <option value="12" {% if form.month.value == '12' %} selected {% endif %}>December</option>
             <select>
         </div>
     </div>

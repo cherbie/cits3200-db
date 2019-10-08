@@ -11,9 +11,25 @@ class FilterForm(forms.Form):
     sorting = [
         ('asc', 'A-Z'),
         ('desc', 'Z-A'),
-        ('close-asc', 'Closest deadline'),
-        ('close-desc', 'Furthest deadline')]
-    sort = forms.ChoiceField(required=False, initial='asc', choices=sorting, label='Sort by')
+        ('close-asc', 'Nearest deadline'),
+        ('close-desc', 'Furthest deadline')
+    ]
+    months = [
+        ('-1', 'N/A'),
+        ('1', 'JAN'),
+        ('2', 'FEB'),
+        ('3', 'MAR'),
+        ('4', 'APR'),
+        ('5', 'MAY'),
+        ('6', 'JUN'),
+        ('7', 'JUL'),
+        ('8', 'AUG'),
+        ('9', 'SEP'),
+        ('10', 'OCT'),
+        ('11', 'NOV'),
+        ('12', 'DEC')
+    ]
+    sort = forms.ChoiceField(required=False, initial='close-asc', choices=sorting, label='Sort by')
     ecr = forms.BooleanField(required=False, initial='False', label='ECR')
     travel = forms.BooleanField(required=False, initial='False', label='Travel')
     visiting = forms.BooleanField(required=False, initial='False', label='Visiting')
@@ -24,6 +40,8 @@ class FilterForm(forms.Form):
     ems = forms.BooleanField(required=False, initial='False', label='EMS')
     science = forms.BooleanField(required=False, initial='False', label='Science')
     fable = forms.BooleanField(required=False, initial='False', label='FABLE')
+    month = forms.ChoiceField(required=False, initial='-1', choices=months, label='Month')
+
 
 class funding_opportunityForm(ModelForm):
     class Meta:
@@ -32,6 +50,9 @@ class funding_opportunityForm(ModelForm):
         'duration_estimated', 'ecr', 'travel','visiting','wir', 'phd','international','hms','ems',
         'science','limit_per_uni', 'link', 'closing_date','is_hidden']
 
+        widgets = {
+            'description' : Textarea(attrs = {'rows' : 40, 'clos' : 60}),
+        }
 
         help_text = {
             'description' : ('the max length is 2500.'),
@@ -46,5 +67,3 @@ class funding_opportunityForm(ModelForm):
             'link' : ('the link of the real funding website'),
             'closing_date' : ('Year-Month-Day H:M:S'),
         }
-
-
