@@ -114,9 +114,9 @@ class FilterManager(models.Manager):
 		elif str == 'asc':
 			queryset = queryset.order_by('name')
 		elif str == 'close-desc':
-			queryset = queryset.order_by('-closing_date')
+			queryset = queryset.order_by('-external_submission_date')
 		else:
-			queryset = queryset.order_by('closing_date')
+			queryset = queryset.order_by('external_submission_date')
 
 		return queryset
 

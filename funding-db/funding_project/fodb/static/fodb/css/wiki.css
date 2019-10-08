@@ -126,7 +126,7 @@ h4{
 
 .info_box_split_section{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2,1fr);
     gap: 10px;
 }
 

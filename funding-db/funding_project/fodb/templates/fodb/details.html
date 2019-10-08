@@ -62,9 +62,9 @@
                     <hr>
                     <h5>
                         {{ opp.max_duration }} {% if post.duration_type == "M" %}
-                        month
+                        month{% if opp.max_duration > 1 %}s{% endif %}
                         {% else %}
-                        year
+                        year{% if opp.max_duration > 1 %}s{% endif %}
                         {% endif %}
                         {% if opp.duration_estimated %}
                         <span><small><small> <i>(Estimated)</i></small></small></span>
@@ -84,72 +84,36 @@
                         Submission deadline :
                     </h5>
                     <h5>
-                        {{ opp.closing_date|date:"d F Y" }}
+                        {{ opp.external_submission_date|date:"d F Y" }}
                     </h5>
                 </div>
-                <div class="important_info amount_info">
-                    <h5>
-                        max amount :
-                    </h5>
-                    <h5>
-                        $ {{ opp.max_amount }}
-                        {% if opp.amount_estimated %}
-                        <span><small><small> <i>(Estimated)</i></small></small></span>
-                        {% endif %}
-                    </h5>
-                </div>
-                <div class="important_info">
-                    <h5>
-                        Duration :
-                    </h5>
-                    <h5>
-                        {{ opp.max_duration }} {% if post.duration_type == "M" %}
-                        month
-                        {% else %}
-                        year
-                        {% endif %}
-                        {% if opp.duration_estimated %}
-                        <span><small><small> <i>(Estimated)</i></small></small></span>
-                        {% endif %}
-                    </h5>
-                </div>
-                {% if opp.External_dealine %}
-                <div class="important_info">
-                    <h5>
-                        External deadline :
-                    </h5>
-                    <h5>
-                        {{ opp.External_deadline|date:"d F Y" }}
-                    </h5>
-                </div>
-                {% endif %}
-                {% if opp.Internal_deadline %}
+                {% if opp.internal_submission_date %}
                 <div class="important_info">
                     <h5>
                         Internal deadline :
                     </h5>
                     <h5>
-                        {{ opp.Internal_deadline|date:"d F Y" }}
+                        {{ opp.internal_submission_date|date:"d F Y" }}
                     </h5>
                 </div>
                 {% endif %}
-                {% if opp.EOI_deadline %}
+                {% if opp.eoi_deadline %}
                 <div class="important_info">
                     <h5>
                         EOI deadline :
                     </h5>
                     <h5>
-                        {{ opp.EOI_deadline|date:"d F Y" }}
+                        {{ opp.eoi_deadline|date:"d F Y" }}
                     </h5>
                 </div>
                 {% endif %}
-                {% if opp.Minimum_data_deadline %}
+                {% if opp.minimum_data_deadline %}
                 <div class="important_info">
                     <h5>
                         Minimum data deadline :
                     </h5>
                     <h5>
-                        {{ opp.Minimum_data_deadline|date:"d F Y" }}
+                        {{ opp.minimum_data_deadline|date:"d F Y" }}
                     </h5>
                 </div>
                 {% endif %}

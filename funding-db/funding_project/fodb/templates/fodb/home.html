@@ -71,7 +71,6 @@
                                     Submission deadline :
                                 </h7>
                                 <h7>
-                                    {{ post.closing_date|date:"d F Y" }}
                                 </h7>
                             </div>
                             <div class="important_info amount_info">
@@ -92,52 +91,42 @@
                                 <h7>
                                     {{ post.max_duration }}
                                     {% if post.duration_type == "M" %}
-                                    month
+                                    month{% if post.max_duration > 1 %}s{% endif %}
                                     {% else %}
-                                    year
+                                    year{% if post.max_duration > 1 %}s{% endif %}
                                     {% endif %}
                                     {% if opp.duration_estimated %}
                                     <span><small><small> <i>(Estimated)</i></small></small></span>
                                     {% endif %}
                                 </h7>
                             </div>
-                            {% if post.External_deadline %}
-                            <div class="important_info">
-                                <h7>
-                                    External deadline :
-                                </h7>
-                                <h7>
-                                    {{ post.External_deadline|date:"d F Y" }}
-                                </h7>
-                            </div>
-                            {% endif %}
-                            {% if post.Internal_deadline %}
+                            {% if post.internal_submission_date %}
                             <div class="important_info">
                                 <h7>
                                     Internal deadline :
                                 </h7>
                                 <h7>
-                                    {{ post.Internal_deadline|date:"d F Y" }}
+                                    {{ post.internal_submission_date|date:"d F Y" }}
                                 </h7>
                             </div>
                             {% endif %}
-                            {% if post.EOI_deadline %}
+                            {% if post.eoi_deadline %}
                             <div class="important_info">
                                 <h7>
                                     EOI deadline :
                                 </h7>
                                 <h7>
-                                    {{ post.EOI_deadline|date:"d F Y" }}
+                                    {{ post.eoi_deadline|date:"d F Y" }}
                                 </h7>
                             </div>
                             {% endif %}
-                            {% if post.Minimum_data_deadline %}
+                            {% if post.minimum_data_deadline %}
                             <div class="important_info">
                                 <h7>
                                     Minimum data deadline :
                                 </h7>
                                 <h7>
-                                    {{ post.Minimum_data_deadline|date:"d F Y" }}
+                                    {{ post.minimum_data_deadline|date:"d F Y" }}
                                 </h7>
                             </div>
                             {% endif %}
