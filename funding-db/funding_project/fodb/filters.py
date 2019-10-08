@@ -8,9 +8,19 @@ class FilterManager(models.Manager):
 	fields = ['hms','ems','science','travel','ecr','international','wir','phd','visiting', 'month']
 
 	def search_qs(self, request):
+		'''
+		   Filters the queryset based on the keywords provided in the search bar 'POST' request
+		'''
 		self.request = request
-		text = request.POST.__getitem__('search').upper() # search query
-		queryset = super().get_queryset().filter(Q(name__icontains=text) | Q(description__icontains=text));
+		text = request.POST.__getitem__('search') # search query
+		keywords = text.split(' ');
+		Qobject = None
+		for word in keywords: # cycle through keywords
+			if Qobject is None:
+				Qobject = self.keyword_name(word) | self.keyword_desc(word)
+			else:
+				Qobject |= self.keyword_name(word) | self.keyword_desc(word)
+		queryset = super().get_queryset().filter(Qobject);
 		return self.filter_qs(request, queryset) # apply further filter options
 
 
@@ -109,6 +119,12 @@ class FilterManager(models.Manager):
 			queryset = queryset.order_by('closing_date')
 
 		return queryset
+
+	def keyword_name(self, keyword):
+		return Q(name__icontains=keyword)
+
+	def keyword_desc(self, keyword):
+		return Q(description__icontains=keyword)
 
 	def hms_select(self):
 		return Q(hms='True')
