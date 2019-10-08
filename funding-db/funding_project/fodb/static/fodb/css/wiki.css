@@ -3,10 +3,24 @@ footer{
     bottom: 0; */
 }
 
+h1,h2,h3,h4,h5,h6{
+    margin: 0px;
+    color: black;
+    font-weight: 300;
+}
+
+h2{
+    font-weight: 600;
+}
+
+h4{
+    font-weight: 500;
+}
+
 .wiki_container{
     margin-right: auto;
     margin-left: auto;
-    width: 90vw;
+    width: 98vw;
     max-width: 1300px;
 
     margin-top: 20px;
@@ -15,6 +29,7 @@ footer{
     gap: 1em;
 }
 
+/* Return button */
 .return_button{
     display: inline-block;
     text-align: center;
@@ -41,6 +56,7 @@ footer{
     transform: translateX(-10px);
 }
 
+/* Edit button */
 .edit_button{
     position: absolute;
     top: 2px;
@@ -53,19 +69,38 @@ footer{
     border-radius: 25px;
 }
 
+/* Outside content div cover */
+.outside_custom{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    background-color: #ebebeb;
+}
+
+.top_border{
+    margin: 0px;
+    width: 100%;
+    border: 0px;
+}
+
+.top_border:nth-child(odd){
+    border-top: 5px solid #e2b600;
+}
+
+.top_border:nth-child(even){
+    border-top: 5px solid #27348b;
+}
+
+/* Content detail work */
 .detail_container{
     position: relative;
     display: grid;
-    gap: 1em;
+    gap: 15px;
 
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
-
-    background-color: #ebebeb;
-
-    border-radius: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .detail_container h2,h3{
@@ -79,6 +114,22 @@ footer{
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+.info_box{
+    display: grid;
+    gap: 5px;
+
+    border-radius: 5px;
+    box-shadow: 0 0 15px 0 rgb(211,211,211,1);
+    padding: 5px 8px;
+    background-color: white;
+}
+
+.info_box_split_section{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
 .info_container{
     grid-template-columns: 1fr;
     gap: 1em;
@@ -86,6 +137,10 @@ footer{
 
 .important_info{
     grid-template-columns: 1fr max-content;
+}
+
+.important_info h5:nth-child(odd){
+    font-weight: 400;
 }
 
 .description_info{
@@ -96,6 +151,12 @@ footer{
 
 .sub_info{
     margin: 0px;
+}
+
+.small_note{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
 .light{
@@ -109,8 +170,14 @@ footer{
     }
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1000px) {
     .wiki_container{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .info_box_split_section{
         grid-template-columns: 1fr;
     }
 }
@@ -120,17 +187,13 @@ footer{
         grid-template-columns: 1fr;
     }
 
-    .sub_info:nth-child(even){
-        /* margin-left: 10px; */
-    }
-
     .sub_info:nth-child(even)::before{
         content: "-";
         margin-right: 10px;
     }
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 450px) {
     .important_info{
         grid-template-columns: 1fr;
     }

@@ -1,84 +1,4 @@
-.navbar{
-    background-color: #27348b;
-}
-
-.head_container{
-    margin: 0px;
-    padding: 0px;
-    width: 100vw;
-    height: 30vh;
-
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-    align-content: center;
-    align-items: center;
-    text-align: center;
-
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("images/searchbackground.png");
-}
-
-.search_container{
-    width: 80vw;
-    padding: 20px;
-    border-radius: 5px;
-
-    display: grid;
-    grid-auto-rows: max-content;
-    gap: 5px;
-
-    justify-items: center;
-}
-
-.search_container h1{
-    color: white;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8), 0 0 12px black;
-}
-
-.search_form{
-    display: flex;
-    align-items: stretch;
-}
-
-.search_button{
-    border-radius: 0px 5px 5px 0px;
-    background-color: #e2b600;
-    color: white;
-}
-
-.search_button:hover {
-    color: white;
-}
-
-.search_button:focus{
-    color: white;
-}
-
-.search_form input {
-    z-index: 2;
-    width: 80vw;
-    max-width: 600px;
-    padding: 6px 10px;
-    border: none;
-    border-radius: 5px 0px 0px 5px;
-    /* margin-top: 8px;
-    margin-right: 16px; */
-    font-size: 17px;
-
-    /* color: rgba(255, 255, 255, 1);
-    background-color: rgba(255, 255, 255, 0.3); */
-    border: 0px solid rgba(255, 255, 255, 1);
-
-    transition: 0.3s linear;
-}
-
-.search_form input:focus{
-    box-shadow: 0 0 0 .2rem rgba(222,170,12,.5);
-    transition: 0.3s linear;
-}
-
+/* Research opportunities column */
 .research_content{
     margin: 0px 5vw;
     margin-top: 20px;
@@ -93,29 +13,6 @@
     gap: 3em;
 }
 
-.filter_column{
-    display: grid;
-    gap: 1em;
-    grid-template-columns: minmax(min-content, max-content);
-
-    grid-auto-rows: min-content;
-}
-
-.filter_column hr{
-    margin: 0px;
-    border-top: 1px solid rgba(0, 0, 0, 0.6);
-}
-
-.filter_crit{
-    display: grid;
-    gap: 0.7em;
-}
-
-.filter_crit h3{
-    margin: 0px;
-}
-
-/* Content css */
 .funding_column{
     display: grid;
     grid-template-rows: min-content;
@@ -152,7 +49,7 @@
 .noting_flag{
     padding: 0px;
     display: flex;
-    justify-content: space-between;
+    gap: 5px;
     flex-wrap: wrap;
 }
 
@@ -331,82 +228,4 @@
 
 .tags:hover .tags_flags{
     visibility: visible;
-}
-
-/* Dynamic website work starts here */
-@media screen and (max-width: 1000px) {
-    .info_container{
-        grid-template-columns: 1fr;
-    }
-
-    .important_info{
-        grid-template-columns: 1fr max-content;
-    }
-}
-
-@media screen and (max-width: 980px) {
-    .form-control{
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-}
-
-@media screen and (max-width: 940px) {
-    .research_content{
-        grid-template-columns: 1fr 3fr;
-    }
-}
-
-@media screen and (max-width: 870px) {
-    .search_container{
-        width: 60vw;
-    }
-
-    .search_form input{
-        width: 50vw;
-    }
-}
-
-@media screen and (max-width: 765px) {
-    .research_content{
-        width: 98vw;
-        margin-left: 1vw;
-        margin-right: 1vw;
-    }
-}
-
-@media screen and (max-width: 700px) {
-    .research_content{
-        grid-template-columns: 1fr 2fr;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .search_container{
-        width: 90vw;
-    }
-
-    .research_content{
-        grid-template-columns: 1fr;
-        gap: 1em;
-    }
-
-    .filter_column{
-        padding: 1em;
-        grid-template-columns: 1fr;
-        border: 1px solid rgb(211,211,211,.8);
-        border-radius: 5px;
-    }
-
-    .hover_text{
-        white-space: normal;
-        right: 20px;
-    }
-}
-
-@media screen and (max-width: 360px) {
-    .important_info{
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
-    }
 }

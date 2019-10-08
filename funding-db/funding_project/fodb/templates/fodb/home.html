@@ -3,14 +3,19 @@
 {% load static %}
 
 {% block content %}
-
 <!-- Load css under here -->
-<link rel="stylesheet" type="text/css" href="{% static 'fodb/tables.css' %}">
+<!-- Filter column css -->
+<link rel="stylesheet" type="text/css" href="{% static 'fodb/css/filter.css' %}">
+<!-- Research content column css -->
+<link rel="stylesheet" type="text/css" href="{% static 'fodb/css/research-content.css' %}">
+<!-- This customise the layout of the entire page -->
+<link rel="stylesheet" type="text/css" href="{% static 'fodb/css/tables.css' %}">
 
 {% if user.is_authenticated %}
 
-<!-- Work under here -->
+<!-- Work starts here -->
 
+    <!-- The top section containing search bar -->
     <section class="head_container">
         <div class="search_container">
             <h1>
@@ -26,8 +31,12 @@
         </div>
     </section>
 
+    <!-- Section displaying the opportunities given and the filters -->
     <section class="research_content container">
+        <!-- The filter column -->
         {% include './home-filter.html' %}
+
+        <!-- The opportunities column -->
         <div class="funding_column">
             <div class="funding_header">
                 <p class="current">
@@ -41,6 +50,7 @@
 
                 <div class="content_card">
                     <a target="_blank" style="text-decoration: none; color: black;" href="{% url 'fodb-detail' post.id %}">
+                        <!-- This div contain name of the research, and the name of the provider -->
                         <div class="content_header">
                             <h3>
                                 {{ post.name }}
@@ -54,10 +64,11 @@
 
                         <hr>
 
+                        <!-- After this contains important information, it is hidden if null -->
                         <div class="info_container">
                             <div class="important_info deadline_info">
                                 <h7>
-                                    Deadline :
+                                    Submission deadline :
                                 </h7>
                                 <h7>
                                     {{ post.closing_date|date:"d F Y" }}
@@ -132,7 +143,9 @@
                             {% endif %}
                         </div>
 
+                        <!-- The tags here involve faculty it belongs to and the subsequent tags that it has -->
                         <div class="content_tags">
+                            <!-- The faculty involve -->
                             <div class="content_department">
                                 {% if post.hms %}
                                 <span class="tags tags_yellow">hms
@@ -170,6 +183,8 @@
                                 <span class="tags tags_black">Not Specified</span>
                                 {% endif %}
                             </div>
+
+                            <!-- The tags that it has -->
                             <div class="content_type">
                                 {% if post.ecr %}
                                 <span class="tags_icon"><i class="fas fa-business-time fa-fw"></i>
@@ -222,6 +237,7 @@
                         </div>
                     </a>
 
+                    <!-- This is to indicate if the opportunities is limited per university -->
                     {% if post.limit_per_uni %}
                     <hr class="end_note_ruler">
 
@@ -236,7 +252,6 @@
                     </div>
                     {% endif %}
                 </div>
-
                 {% endfor %}
             </div>
             <br>
