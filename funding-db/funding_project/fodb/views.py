@@ -39,6 +39,8 @@ def home(request):
 	'''
 		Rendering of fodb/home.html ... applying filter QuerySet from ./filter.py
 	'''
+	print("Here")
+	print(request)
 	if request.method == 'POST':
 		queryset = funding_opportunity.filters.search_qs(request).exclude(is_visiable=False) # returns filtered queryset including 'GET' parameters
 	elif request.method == 'GET':

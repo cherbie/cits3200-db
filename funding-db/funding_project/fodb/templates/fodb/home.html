@@ -38,6 +38,11 @@
 
         <!-- The opportunities column -->
         <div class="funding_column">
+            {% if not posts %}
+            <h3>
+                No result for your search.
+            </h3>
+            {% else %}
             <div class="funding_header">
                 <p class="current">
                     Page {{ posts.number }}
@@ -261,6 +266,7 @@
                     {% endif %}
                 </span>
             </div>
+            {% endif %}
         </div>
     </section>
 
