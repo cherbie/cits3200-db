@@ -12,14 +12,14 @@ class funding_opportunity(models.Model):
 	provider = models.CharField(max_length = 100, verbose_name = 'Funding provider',default = '')
 	name = models.CharField(max_length = 100, verbose_name = 'Title')
 	description = models.TextField()
-	closing_date = models.DateTimeField(null = False)
+	external_submission_date = models.DateTimeField(null = False, verbose_name = 'External Submission Date')
 	creation_date = models.DateField(auto_now_add = True)
 	last_updated = models.DateField(auto_now= True)
-	link = models.URLField(max_length = 260)
+	link = models.URLField(max_length = 260, verbose_name = 'Link')
 	limit_per_uni = models.BooleanField(default = False, verbose_name = 'Limited Per University')
 
-	max_amount = models.IntegerField(blank = True)
-	max_duration = models.IntegerField(blank = True)
+	max_amount = models.IntegerField(blank = True, verbose_name = 'Max Amount')
+	max_duration = models.IntegerField(blank = True, verbose_name = 'Max Duration')
 	duration_type = models.CharField(max_length = 6, choices = Year_or_Month)
 	amount_estimated = models.BooleanField(default = False )
 	duration_estimated = models.BooleanField(default = False)
@@ -36,14 +36,13 @@ class funding_opportunity(models.Model):
 	science = models.BooleanField(default = False, verbose_name = 'SCI')
 	fable = models.BooleanField(default = False, verbose_name = 'FABLE')
 
-	is_hidden = models.BooleanField(default = False, verbose_name = 'Hidden from regular view')
-	open_close = models.BooleanField(default = False)
+	is_visiable = models.BooleanField(default = True, verbose_name = 'Visiable from regualr view')
 
-	external_deadline = models.DateTimeField(blank = True, null = True, verbose_name = 'External_deadline')
-	forecast_month = models.CharField(blank = True, max_length = 15,  choices = Forecast_Mon, verbose_name ='Forecast_Month')
-	internal_deadline = models.DateTimeField(blank = True, null = True, verbose_name = 'Internal_deadline')
+	application_open_date = models.DateTimeField(blank = True, null = True, verbose_name = 'Application Open Date')
+	forecast_month = models.CharField(blank = True, max_length = 15,  choices = Forecast_Mon, verbose_name ='Forecast Month')
+	internal_submission_date = models.DateTimeField(blank = True, null = True, verbose_name = 'Internal deadline')
 	eoi_deadline  = models.DateTimeField(blank = True, null = True, verbose_name = 'Expression of interest deadline')
-	minimum_data_deadline = models.DateTimeField(blank = True, null = True, verbose_name ='Minimum_data_deadline' )
+	minimum_data_deadline = models.DateTimeField(blank = True, null = True, verbose_name ='Minimum data deadline' )
 
 
 	objects = models.Manager() # default list of entries

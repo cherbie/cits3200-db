@@ -9,7 +9,6 @@ from django.db import connections, connection
 
 from .models import funding_opportunity
 from .forms import FilterForm
-from .modelForm import funding_opportunityForm
 import time
 
 
