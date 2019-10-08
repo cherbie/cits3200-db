@@ -26,7 +26,7 @@ class funding_opportunity(models.Model):
 
 	ecr = models.BooleanField(default = False)
 	travel = models.BooleanField(default = False)
-	visiting = models.BooleanField(default = False)
+	visiting_fellow = models.BooleanField(default = False, verbose_name = 'Visiting Fellow')
 	wir = models.BooleanField(default = False)
 	phd = models.BooleanField(default = False)
 	international = models.BooleanField(default = False)
@@ -49,6 +49,12 @@ class funding_opportunity(models.Model):
 	filters = FilterManager() # filtered list of entries
 	def __str__(self):
 		return self.name
+	
+	def experied_opportunities(self):
+		from datetime import datetime
+		if self.external_submission_date < datetime.now():
+			super().self.is_visiable = False
+		return self.is_visiable
 
 
 

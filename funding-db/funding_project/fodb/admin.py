@@ -25,12 +25,12 @@ class FODBResource(resources.ModelResource):
         export_order = ('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_Month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable')
+            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable')
         skip_unchanged = True
         fields = ('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_Month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable')
+            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable')
 
 class FundingOpportunityAdmin(ImportExportModelAdmin):
     resource_class = FODBResource
@@ -38,7 +38,7 @@ class FundingOpportunityAdmin(ImportExportModelAdmin):
         ('Funding Opportunity',{'fields': [('name','is_visiable'),'provider','description','link','limit_per_uni']}),
         ('Date Information', {'fields': [('external_submission_date', 'internal_submission_date'),('eoi_deadline','minimum_data_deadline'),('application_open_date','forecast_month')]}),
         ('Amount and Duration', {'fields': [('max_amount','amount_estimated'),('max_duration','duration_estimated') ,'duration_type']}),
-        ('Tags', {'fields': ['ecr','travel','visiting','wir','phd','international']}),
+        ('Tags', {'fields': ['ecr','travel','visiting_fellow','wir','phd','international']}),
         ('Faculty',{'fields': ['hms','ems','science','fable']}),
     ]
     list_filter = ('external_submission_date', )
@@ -75,14 +75,14 @@ class FundingOpportunityAdmin(ImportExportModelAdmin):
         writer.writerow([ 'id','name', 'provider', 'description', 'link', 'limit_per_uni', 
             'closing_date', 'EOI_deadline','Internal_deadline','External_deadline','Minimum_data_deadline','Forecast_Month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable'])
+            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable'])
 
         #data = list(Model.objects.extra(select={'date':"to_char(<DATABASENAME>_<TableName>.created_at, 'DD-YYYY-MM hh:mi ')"}).values_list('date', flat='true'))
 
         FO = queryset.values_list('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
             'closing_date' , 'EOI_deadline','Internal_deadline','External_deadline','Minimum_data_deadline','Forecast_Month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable')
+            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable')
 
         for funding_opportunity in FO:
             writer.writerow(funding_opportunity)
