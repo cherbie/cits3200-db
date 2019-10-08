@@ -48,8 +48,3 @@ class funding_opportunityForm(ModelForm):
         }
 
 
-class RegisterForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        Model: User
-        fields = ('email','is_active','is_superuser')
-
