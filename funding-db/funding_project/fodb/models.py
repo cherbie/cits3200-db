@@ -36,7 +36,7 @@ class funding_opportunity(models.Model):
 	science = models.BooleanField(default = False, verbose_name = 'SCI')
 	fable = models.BooleanField(default = False, verbose_name = 'FABLE')
 
-	is_visiable = models.BooleanField(default = True, verbose_name = 'Visiable from regualr view')
+	is_visiable = models.BooleanField(default = True, verbose_name = 'Visiable in regualr view')
 
 	application_open_date = models.DateTimeField(blank = True, null = True, verbose_name = 'Application Open Date')
 	forecast_month = models.CharField(blank = True, max_length = 15,  choices = Forecast_Mon, verbose_name ='Forecast Month')

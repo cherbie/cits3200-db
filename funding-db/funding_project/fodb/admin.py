@@ -21,16 +21,16 @@ class FODBResource(resources.ModelResource):
     class Meta:
         model = funding_opportunity
         exclude = ('creation_date','is_hidden')
-        ecr = Field(widget=widgets.BooleanWidget())
+
+
         export_order = ('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
-            'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_Month',
+            'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable')
-        skip_unchanged = True
+            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable','is_visiable',)
         fields = ('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
-            'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_Month',
+            'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable')
+            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable','is_visiable')
 
 class FundingOpportunityAdmin(ImportExportModelAdmin):
     resource_class = FODBResource
@@ -68,21 +68,18 @@ class FundingOpportunityAdmin(ImportExportModelAdmin):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="selected_funding_opportunities.csv"'
         writer = csv.writer(response)
-        #writer.writerow(['ID','Title', 'Funding Provider', 'Description', 'Link', 'Limited per University', 'Closing Date', 'EOI deadline' , 'Internal Deadline',
-          #  'External Deadline', 'Minimum Data Deadline' , 'Forecast Month' , 'Max Amount' , 'Amount Estimated', 'Max Duration','Duration Type', 'Duration Estimated', 'ECR',
-           # 'Travel','Visiting','Women In Research','PhD','International','HMS','EMS','Science','FABLE'  ])
+        
 
         writer.writerow([ 'id','name', 'provider', 'description', 'link', 'limit_per_uni', 
-            'closing_date', 'EOI_deadline','Internal_deadline','External_deadline','Minimum_data_deadline','Forecast_Month',
+            'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable'])
+            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable','is_visiable'])
 
-        #data = list(Model.objects.extra(select={'date':"to_char(<DATABASENAME>_<TableName>.created_at, 'DD-YYYY-MM hh:mi ')"}).values_list('date', flat='true'))
-
+        
         FO = queryset.values_list('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
-            'closing_date' , 'EOI_deadline','Internal_deadline','External_deadline','Minimum_data_deadline','Forecast_Month',
+            'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable')
+            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable','is_visiable')
 
         for funding_opportunity in FO:
             writer.writerow(funding_opportunity)
