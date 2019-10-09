@@ -21,13 +21,13 @@
             <h1>
                 Funding Opportunities
             </h1>
-            <form action="" id="search_bar" method="POST">
-                {% csrf_token %}
-                <div class="search_form">
-                    <input for="search_bar" type="text" name="search" placeholder="Search..">
-                    <button for="search_bar" type="submit" class="btn btn-warning search_button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
+            <div class="search_form">
+                <input for="search_bar" form="qs_filter" type="text" name="search" placeholder="Search.."
+                    {% if form.search.value != "" and form.search.value is not None %}
+                        value="{{form.search.value}}"
+                    {% endif %} >
+                <button for="search_bar" type="submit" form="qs_filter" class="btn btn-warning search_button"><i class="fas fa-search"></i></button>
+            </div>
         </div>
     </section>
 
