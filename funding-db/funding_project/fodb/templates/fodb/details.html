@@ -81,29 +81,39 @@
                 <hr>
                 <div class="important_info deadline_info">
                     <h5>
-                        Submission deadline :
+                        External Submission Date :
                     </h5>
                     <h5>
-                        {{ opp.external_submission_date|date:"d F Y" }}
+                        {{ opp.external_submission_date }}
                     </h5>
                 </div>
+                {% if opp.application_open_date %}
+                <div class="important_info">
+                    <h5>
+                        application open date :
+                    </h5>
+                    <h5>
+                        {{ opp.application_open_date }}
+                    </h5>
+                </div>
+                {% endif %}
                 {% if opp.internal_submission_date %}
                 <div class="important_info">
                     <h5>
                         Internal deadline :
                     </h5>
                     <h5>
-                        {{ opp.internal_submission_date|date:"d F Y" }}
+                        {{ opp.internal_submission_date }}
                     </h5>
                 </div>
                 {% endif %}
                 {% if opp.eoi_deadline %}
                 <div class="important_info">
                     <h5>
-                        EOI deadline :
+                        Expression of interest deadline :
                     </h5>
                     <h5>
-                        {{ opp.eoi_deadline|date:"d F Y" }}
+                        {{ opp.eoi_deadline }}
                     </h5>
                 </div>
                 {% endif %}
@@ -113,7 +123,7 @@
                         Minimum data deadline :
                     </h5>
                     <h5>
-                        {{ opp.minimum_data_deadline|date:"d F Y" }}
+                        {{ opp.minimum_data_deadline }}
                     </h5>
                 </div>
                 {% endif %}
@@ -162,7 +172,7 @@
                 </div>
                 <div class="info_box">
                     <h4>
-                        Type include
+                        Tag
                     </h4>
                     <hr>
                     <div class="content_type">
@@ -245,10 +255,11 @@
                     <h6 class="sub_info">
                         <a target="_blank" href="{{ opp.link }}"> {{ opp.link }}</a>
                     </h6>
+                    {% if post.limit_per_uni %}
                     <h6 class="sub_info">
                         <strong>
                             <strong>
-                                Notice :
+                                <i class="fas fa-flag hover_note"></i>
                             </strong>
                         </strong>
                     </h6>
@@ -258,6 +269,7 @@
                             researchgrants-ore@uwa.edu.au
                         </a>
                     </h6>
+                    {% endif %}
                 </div>
             </div>
 
@@ -268,7 +280,7 @@
                     </h6>
                     <hr>
                     <h6>
-                        {{ opp.creation_date|date:"d F Y" }}
+                        {{ opp.creation_date }}
                     </h6>
                 </div>
                 <div class="info_box">
@@ -277,7 +289,7 @@
                     </h6>
                     <hr>
                     <h6>
-                        {{ opp.last_updated|date:"d F Y" }}
+                        {{ opp.last_updated }}
                     </h6>
                 </div>
             </div>

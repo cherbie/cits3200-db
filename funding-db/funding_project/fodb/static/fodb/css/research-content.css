@@ -55,6 +55,7 @@
 
 .hover_note{
     color: red;
+    margin-right: 5px;
 }
 
 .hover_text{
@@ -98,43 +99,6 @@
     margin: 0px;
     width: 100%;
     border-top: 1px solid rgb(211,211,211, 1);
-}
-
-.content_card_filler{
-    position: absolute;
-    margin: 0px;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0;
-
-    width: 100%;
-    height: 100%;
-}
-
-.filler_div{
-    width: 100%;
-    height: 100%;
-
-    background-color: rgba(0, 0, 0, 0);
-}
-
-.filler_div_top{
-    grid-column: 1;
-    grid-row: 1;
-
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    border-width: 1px 0px 0px 1px;
-    border-radius: 5px 0px 0px 0px;
-}
-.filler_div_bottom{
-    grid-column: 2;
-    grid-row: 2;
-
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    border-width: 0px 1px 1px 0px;
-    border-radius: 0px 0px 5px 0px;
 }
 
 .important_info{
@@ -187,7 +151,7 @@
     background-color: green;
 }
 
-.tag_violet{
+.tags_violet{
     background-color: purple;
 }
 

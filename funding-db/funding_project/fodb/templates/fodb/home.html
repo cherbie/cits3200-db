@@ -73,14 +73,15 @@
                         <div class="info_container">
                             <div class="important_info deadline_info">
                                 <h7>
-                                    Submission deadline :
+                                    external submission date :
                                 </h7>
                                 <h7>
+                                    {{ post.external_submission_date }}
                                 </h7>
                             </div>
                             <div class="important_info amount_info">
                                 <h7>
-                                    amount :
+                                    max amount :
                                 </h7>
                                 <h7>
                                     $ {{ post.max_amount }}
@@ -91,7 +92,7 @@
                             </div>
                             <div class="important_info">
                                 <h7>
-                                    duration :
+                                    max duration :
                                 </h7>
                                 <h7>
                                     {{ post.max_duration }}
@@ -105,10 +106,20 @@
                                     {% endif %}
                                 </h7>
                             </div>
+                            {% if post.application_open_date %}
+                            <div class="important_info">
+                                <h7>
+                                    application open date :
+                                </h7>
+                                <h7>
+                                    {{ post.application_open_date|date:"d F Y" }}
+                                </h7>
+                            </div>
+                            {% endif %}
                             {% if post.internal_submission_date %}
                             <div class="important_info">
                                 <h7>
-                                    Internal deadline :
+                                    internal submission date :
                                 </h7>
                                 <h7>
                                     {{ post.internal_submission_date|date:"d F Y" }}
@@ -118,7 +129,7 @@
                             {% if post.eoi_deadline %}
                             <div class="important_info">
                                 <h7>
-                                    EOI deadline :
+                                    Expression of interest deadline :
                                 </h7>
                                 <h7>
                                     {{ post.eoi_deadline|date:"d F Y" }}
@@ -191,7 +202,7 @@
                                 {% if post.travel %}
                                 <span class="tags_icon"><i class="fas fa-plane-departure fa-fw"></i>
                                     <span class="tags_flags">
-                                        Involve traveling
+                                        Travel
                                     </span>
                                 </span>
                                 {% endif %}
@@ -199,7 +210,7 @@
                                 {% if post.visiting %}
                                 <span class="tags_icon"><i class="fas fa-map-marked-alt fa-fw"></i>
                                     <span class="tags_flags">
-                                        Visiting
+                                        Visiting fellow
                                     </span>
                                 </span>
                                 {% endif %}
