@@ -21,8 +21,6 @@ class FODBResource(resources.ModelResource):
     class Meta:
         model = funding_opportunity
         exclude = ('creation_date','is_hidden')
-
-
         export_order = ('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
