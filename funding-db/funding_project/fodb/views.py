@@ -42,9 +42,9 @@ def home(request):
 	print("Here")
 	print(request)
 	if request.method == 'POST':
-		queryset = funding_opportunity.filters.search_qs(request).exclude(is_visiable=False) # returns filtered queryset including 'GET' parameters
+		queryset = funding_opportunity.filters.search_qs(request).exclude(is_visible=False) # returns filtered queryset including 'GET' parameters
 	elif request.method == 'GET':
-		queryset = funding_opportunity.filters.filter_qs(request).exclude(is_visiable=False) # returns filtered queryset
+		queryset = funding_opportunity.filters.filter_qs(request).exclude(is_visible=False) # returns filtered queryset
 	else:
 		return error(request, error={'title': 'Forbidden request', 'status': 403, 'message': 'The request has been rejected, please return to the webpage.'})
 
