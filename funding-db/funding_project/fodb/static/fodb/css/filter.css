@@ -1,0 +1,22 @@
+/* Filter columnn css */
+.filter_column{
+    display: grid;
+    gap: 1em;
+    grid-template-columns: minmax(min-content, max-content);
+
+    grid-auto-rows: min-content;
+}
+
+.filter_column hr{
+    margin: 0px;
+    border-top: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.filter_crit{
+    display: grid;
+    gap: 0.7em;
+}
+
+.filter_crit h3{
+    margin: 0px;
+}
