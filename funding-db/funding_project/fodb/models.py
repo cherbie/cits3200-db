@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from .filters import FilterManager
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class funding_opportunity(models.Model):
@@ -20,13 +20,13 @@ class funding_opportunity(models.Model):
 
 	max_amount = models.IntegerField(blank = True, verbose_name = 'Max Amount')
 	max_duration = models.IntegerField(blank = True, verbose_name = 'Max Duration')
-	duration_type = models.CharField(max_length = 6, choices = Year_or_Month)
+	duration_type = models.CharField(max_length = 6, choices = Year_or_Month, blank = True)
 	amount_estimated = models.BooleanField(default = False )
 	duration_estimated = models.BooleanField(default = False)
 
 	ecr = models.BooleanField(default = False)
 	travel = models.BooleanField(default = False)
-	visiting = models.BooleanField(default = False)
+	visiting_fellow = models.BooleanField(default = False, verbose_name = 'Visiting Fellow')
 	wir = models.BooleanField(default = False)
 	phd = models.BooleanField(default = False)
 	international = models.BooleanField(default = False)
@@ -36,7 +36,7 @@ class funding_opportunity(models.Model):
 	science = models.BooleanField(default = False, verbose_name = 'SCI')
 	fable = models.BooleanField(default = False, verbose_name = 'FABLE')
 
-	is_visiable = models.BooleanField(default = True, verbose_name = 'Visiable in regualr view')
+	is_visible = models.BooleanField(default = True, verbose_name = 'Visible from regualr view')
 
 	application_open_date = models.DateTimeField(blank = True, null = True, verbose_name = 'Application Open Date')
 	forecast_month = models.CharField(blank = True, max_length = 15,  choices = Forecast_Mon, verbose_name ='Forecast Month')
@@ -50,22 +50,30 @@ class funding_opportunity(models.Model):
 	def __str__(self):
 		return self.name
 
-
-
 	class Meta:
 		ordering = ['name']
 		verbose_name = 'Funding Opportunity'
 		verbose_name_plural = 'Funding Opportunities'
+"""
+fodb = funding_opportunity.objects.filter(is_visible = True)
+for opportunity in fodb:
+	if opportunity.is_expeired() == True:
+		opportunity.is_visible = False
+		"""
+
+"""
+fodb = funding_opportunity()
+now = datetime.now()
+date = fodb.external_submission_date.date()
+if date < now:
+	is_visiable = False
 
 
 class objects(models.Manager):
-	def date_format(self):
-		self.closing_date = self.closing_date.strftime('%d-%m-%Y %H:%m:%s')
-		self.creation_date = self.creation_date.strftime('%d-%m-%Y')
-		self.Internal_deadline = self.Internal_deadline.strftime('%d-%m-%Y %H:%m:%s')
-		self.EOI_deadline = self.EOI_deadline.strftime('%d-%m-%Y %H:%m:%s')
-		self.External_deadline = self.External_deadline.strftime('%d-%m-%Y %H:%m:%s')
-		self.last_updated = self.last_updated.strftime('%d-%m-%Y')
-		self.Minimum_data_deadline = self.Minimum_data_deadline.strftime('%d-%m-%Y %H:%m:%s')
-		return self.closing_date,self.creation_date,self.Internal_deadline,self.EOI_deadline,self.External_deadline,self.last_updated,self.Minimum_data_deadline
+	def is_expeired(self):
+		if self.external_submission_date < timezone.now():
+			return True
+		return False
+		"""
+	
 

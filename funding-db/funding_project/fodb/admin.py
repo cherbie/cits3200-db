@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User, Group
 from .models import funding_opportunity
 from django.utils.html import format_html
+from django.utils import timezone
 # Register your models here.
 
 
@@ -20,44 +21,50 @@ class FODBResource(resources.ModelResource):
 
     class Meta:
         model = funding_opportunity
-        exclude = ('creation_date','is_hidden')
+        exclude = ('creation_date','is_visible')
+        ecr = Field(widget=widgets.BooleanWidget())
         export_order = ('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable','is_visiable',)
+            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable')
+        skip_unchanged = True
         fields = ('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable','is_visiable')
+            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable')
 
 class FundingOpportunityAdmin(ImportExportModelAdmin):
     resource_class = FODBResource
     fieldsets = [
-        ('Funding Opportunity',{'fields': [('name','is_visiable'),'provider','description','link','limit_per_uni']}),
-        ('Date Information', {'fields': [('external_submission_date', 'internal_submission_date'),('eoi_deadline','minimum_data_deadline'),('application_open_date','forecast_month')]}),
+        ('Funding Opportunity',{'fields': [('name','is_visible'),'provider','description','link','limit_per_uni']}),
+        ('Date Information', {'fields': [('external_submission_date', 'forecast_month'),('eoi_deadline','minimum_data_deadline'),('application_open_date','internal_submission_date')]}),
         ('Amount and Duration', {'fields': [('max_amount','amount_estimated'),('max_duration','duration_estimated') ,'duration_type']}),
-        ('Tags', {'fields': ['ecr','travel','visiting','wir','phd','international']}),
+        ('Tags', {'fields': ['ecr','travel','visiting_fellow','wir','phd','international']}),
         ('Faculty',{'fields': ['hms','ems','science','fable']}),
     ]
     list_filter = ('external_submission_date', )
-    list_display = ('name', 'external_submission_date','max_amount','max_duration', 'is_visiable')
+    list_display = ('name', 'external_submission_date','max_amount','max_duration', 'is_visible')
     search_fields = ['description','name']
-    actions = ['make_hidden', 'make_unhidden', 'export_funding_opportunity','dateformat']
+    actions = ['make_hidden', 'make_unhidden', 'export_funding_opportunity','dateformat','update_experied']
 
-    def dateformat(self, queryset):
-        funding_opportunity.closing_date = funding_opportunity.closing_date.strftime("%d-%m-%Y %H:%M:%S")
-        funding_opportunity.save()
+    def update_experied(self, request, queryset):
+        for funding_opportunity in queryset:
+            if funding_opportunity.external_submission_date < timezone.now():
+                funding_opportunity.is_visible = False
+                funding_opportunity.save()
+    
+    update_experied.short_description = 'Hidden experied opportunities'
 
     def make_hidden(self, request, queryset):
         for funding_opportunity in queryset:
-            funding_opportunity.is_visiable = False
+            funding_opportunity.is_visible = False
             funding_opportunity.save()
 
     make_hidden.short_description = 'Hide Opportunity'
 
     def make_unhidden(self, request, queryset):
         for funding_opportunity in queryset:
-            funding_opportunity.is_visiable = True
+            funding_opportunity.is_visible = True
             funding_opportunity.save()
 
     make_unhidden.short_description = 'Unhide Opportunity'
