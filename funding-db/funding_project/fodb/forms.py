@@ -41,5 +41,4 @@ class FilterForm(forms.Form):
     science = forms.BooleanField(required=False, initial='False', label='Science')
     fable = forms.BooleanField(required=False, initial='False', label='FABLE')
     month = forms.ChoiceField(required=False, initial='-1', choices=months, label='Month')
-
-
+    search = forms.CharField(required=False, initial="", max_length=200, strip=False)
