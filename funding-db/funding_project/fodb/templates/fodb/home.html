@@ -40,9 +40,14 @@
         <div class="funding_column">
             {% if not posts %}
             <h3>
-                No result for your search.
+                No result for your search of {{ form.search.value }}
             </h3>
             {% else %}
+            {% if form.search.value != "" and form.search.value is not None %}
+            <h3>
+                Search results for: <span style="color: blue">{{ form.search.value }}</span>
+            </h3>
+            {% endif %}
             <div class="funding_header">
                 <p class="current">
                     Page {{ posts.number }}

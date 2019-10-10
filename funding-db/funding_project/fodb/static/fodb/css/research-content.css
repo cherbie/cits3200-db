@@ -15,13 +15,17 @@
 
 .funding_column{
     display: grid;
-    grid-template-rows: min-content;
+    grid-auto-rows: max-content;
     gap: 0.5em;
 }
 
 .funding_header{
     display: flex;
     justify-content: space-between;
+}
+
+.funding_header p{
+    margin: 0px;
 }
 
 .content_section{

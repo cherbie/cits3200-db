@@ -24,17 +24,17 @@ class funding_opportunity(models.Model):
 	amount_estimated = models.BooleanField(default = False )
 	duration_estimated = models.BooleanField(default = False)
 
-	ecr = models.BooleanField(default = False)
+	ecr = models.BooleanField(default = False, verbose_name = 'Early Career Research')
 	travel = models.BooleanField(default = False)
 	visiting_fellow = models.BooleanField(default = False, verbose_name = 'Visiting Fellow')
-	wir = models.BooleanField(default = False)
-	phd = models.BooleanField(default = False)
+	wir = models.BooleanField(default = False, verbose_name = 'Women in Research')
+	phd = models.BooleanField(default = False, verbose_name= 'PhD')
 	international = models.BooleanField(default = False)
 
-	hms = models.BooleanField(default = False, verbose_name = 'HMS')
-	ems = models.BooleanField(default = False, verbose_name = 'EMS')
-	science = models.BooleanField(default = False, verbose_name = 'SCI')
-	fable = models.BooleanField(default = False, verbose_name = 'FABLE')
+	hms = models.BooleanField(default = False, verbose_name = 'Health and Medical Science')
+	ems = models.BooleanField(default = False, verbose_name = 'Engineering and Mathematical Sciences')
+	science = models.BooleanField(default = False, verbose_name = 'Science')
+	fable = models.BooleanField(default = False, verbose_name = 'Faculty of Arts, Business, Law and Education')
 
 	is_visible = models.BooleanField(default = True, verbose_name = 'Visible from regualr view')
 
@@ -75,5 +75,5 @@ class objects(models.Manager):
 			return True
 		return False
 		"""
-	
+
 
