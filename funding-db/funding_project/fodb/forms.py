@@ -32,7 +32,7 @@ class FilterForm(forms.Form):
     sort = forms.ChoiceField(required=False, initial='close-asc', choices=sorting, label='Sort by')
     ecr = forms.BooleanField(required=False, initial='False', label='ECR')
     travel = forms.BooleanField(required=False, initial='False', label='Travel')
-    visiting = forms.BooleanField(required=False, initial='False', label='Visiting')
+    visiting = forms.BooleanField(required=False, initial='False', label='Visiting Fellow')
     wir = forms.BooleanField(required=False, initial='False', label='Women in Research')
     phd = forms.BooleanField(required=False, initial='False', label='PhD')
     international = forms.BooleanField(required=False, initial='False', label='International')
@@ -41,5 +41,4 @@ class FilterForm(forms.Form):
     science = forms.BooleanField(required=False, initial='False', label='Science')
     fable = forms.BooleanField(required=False, initial='False', label='FABLE')
     month = forms.ChoiceField(required=False, initial='-1', choices=months, label='Month')
-
-
+    search = forms.CharField(required=False, initial="", max_length=200, strip=False)

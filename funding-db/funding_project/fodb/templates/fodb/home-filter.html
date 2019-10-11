@@ -2,7 +2,7 @@
 
 <!-- Filter Content -->
 
-<form action="" method="GET" class="filter_column">
+<form action="" id="qs_filter" method="GET" class="filter_column">
     <div class="filter_crit" id="sort_box">
         <h3>
             Sort by
@@ -107,7 +107,7 @@
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.visiting.id_for_label}}">
-                    <span class="tags_icon"><i class="fas fa-map-marked-alt fa-fw"></i>&nbsp{{form.visiting.label}} fellow</span>
+                    <span class="tags_icon"><i class="fas fa-map-marked-alt fa-fw"></i>&nbsp{{form.visiting.label}}</span>
                 </label>
             </div>
             <div class="custom-control custom-checkbox">
@@ -167,5 +167,5 @@
             <select>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary" style="justify-self: start;">Filter</button>
+    <button type="submit" form="qs_filter" class="btn btn-primary" style="justify-self: start;">Filter</button>
 </form>
