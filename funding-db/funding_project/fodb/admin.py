@@ -8,7 +8,18 @@ from django.contrib.auth.models import User, Group
 from .models import funding_opportunity
 from django.utils.html import format_html
 from django.utils import timezone
+from import_export.formats import base_formats
+
+from django.utils.timezone import localtime
+from import_export.widgets import DateTimeWidget
+from django.conf import settings
+
+
+
+
 # Register your models here.
+
+
 
 
 #admin.site.register(Post)
@@ -17,23 +28,47 @@ from django.utils import timezone
 
 admin.site.site_header = 'Funding Opportunities Database'
 
+
+class TzDateTimeWidget(DateTimeWidget):
+
+    def render(self, value):
+        if settings.USE_TZ:
+            value = localtime(value)
+        return super(TzDateTimeWidget, self).render(value)
+
+
+
 class FODBResource(resources.ModelResource):
 
     class Meta:
         model = funding_opportunity
         exclude = ('creation_date','is_visible')
-        ecr = Field(widget=widgets.BooleanWidget())
-        export_order = ('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
+        #ecr = Field(widget=widgets.BooleanWidget())
+
+        export_order = ('id','name', 'provider', 'description', 'link', 'limit_per_uni',
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable')
+            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable','is_visible')
         skip_unchanged = True
         fields = ('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable')
+            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable','is_visible')
 
-class FundingOpportunityAdmin(ImportExportModelAdmin):
+        widgets = {
+                'external_submission_date': {'format': '%d-%m-%Y %H:%M:%S'},
+                'eoi_deadline': {'format': '%d-%m-%Y %H:%M:%S'},
+                'internal_submission_date': {'format': '%d-%m-%Y %H:%M:%S'},
+                'application_open_date': {'format': '%d-%m-%Y %H:%M:%S'},
+                'minimum_data_deadline': {'format': '%d-%m-%Y %H:%M:%S'},
+
+                }
+
+
+
+
+
+class FundingOpportunityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = FODBResource
     fieldsets = [
         ('Funding Opportunity',{'fields': [('name','is_visible'),'provider','description','link','limit_per_uni']}),
@@ -43,7 +78,7 @@ class FundingOpportunityAdmin(ImportExportModelAdmin):
         ('Faculty',{'fields': ['hms','ems','science','fable']}),
     ]
     list_filter = ('external_submission_date', )
-    list_display = ('name', 'external_submission_date','max_amount','max_duration', 'is_visible')
+    list_display = ('name', 'external_submission_date','max_amount','max_duration','is_visible')
     search_fields = ['description','name']
     actions = ['make_hidden', 'make_unhidden', 'export_funding_opportunity','dateformat','update_experied']
 
@@ -78,13 +113,13 @@ class FundingOpportunityAdmin(ImportExportModelAdmin):
         writer.writerow([ 'id','name', 'provider', 'description', 'link', 'limit_per_uni', 
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable','is_visiable'])
+            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable','is_visible'])
 
         
         FO = queryset.values_list('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting','wir','phd','international','hms','ems','science','fable','is_visiable')
+            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable','is_visible')
 
         for funding_opportunity in FO:
             writer.writerow(funding_opportunity)
@@ -105,6 +140,19 @@ class FundingOpportunityAdmin(ImportExportModelAdmin):
         response = super(FundingOpportunityAdmin, self).render_change_form(request, context, add, change, form_url, obj)
         response.context_data['title'] = "Edit Funding Opportunity" if response.context_data['object_id'] else "Add Funding Opportunity"
         return response
+
+
+    def get_export_formats(self):
+            """
+            Returns available export formats.
+            """
+            formats = (
+                  base_formats.CSV,
+                  base_formats.XLS,
+                  base_formats.XLSX,
+                  base_formats.HTML,
+            )
+            return [f for f in formats if f().can_export()]
 
 
 
