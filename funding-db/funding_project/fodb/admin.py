@@ -10,11 +10,8 @@ from django.utils.html import format_html
 from django.utils import timezone
 from import_export.formats import base_formats
 
-from django.utils.timezone import localtime
-from import_export.widgets import DateTimeWidget
 from django.conf import settings
-
-
+from django.contrib.admin import widgets  
 
 
 # Register your models here.
@@ -29,14 +26,6 @@ from django.conf import settings
 admin.site.site_header = 'Funding Opportunities Database'
 
 
-class TzDateTimeWidget(DateTimeWidget):
-
-    def render(self, value):
-        if settings.USE_TZ:
-            value = localtime(value)
-        return super(TzDateTimeWidget, self).render(value)
-
-
 
 class FODBResource(resources.ModelResource):
 
@@ -45,22 +34,23 @@ class FODBResource(resources.ModelResource):
         exclude = ('creation_date','is_visible')
         #ecr = Field(widget=widgets.BooleanWidget())
 
-        export_order = ('id','name', 'provider', 'description', 'link', 'limit_per_uni',
+        export_order = ('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable','is_visible')
-        skip_unchanged = True
+            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable', 'is_visible')
+    
+
         fields = ('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
-            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable','is_visible')
+            'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable', 'is_visible')
 
         widgets = {
-                'external_submission_date': {'format': '%d-%m-%Y %H:%M:%S'},
-                'eoi_deadline': {'format': '%d-%m-%Y %H:%M:%S'},
-                'internal_submission_date': {'format': '%d-%m-%Y %H:%M:%S'},
-                'application_open_date': {'format': '%d-%m-%Y %H:%M:%S'},
-                'minimum_data_deadline': {'format': '%d-%m-%Y %H:%M:%S'},
+                'external_submission_date': {'format': '%d-%m-%Y %H:%M'},
+                'eoi_deadline': {'format': '%d-%m-%Y %H:%M'},
+                'internal_submission_date': {'format': '%d-%m-%Y %H:%M'},
+                'application_open_date': {'format': '%d-%m-%Y %H:%M'},
+                'minimum_data_deadline': {'format': '%d-%m-%Y %H:%M'},
 
                 }
 

@@ -55,26 +55,26 @@ class funding_opportunity(models.Model):
 		ordering = ['name']
 		verbose_name = 'Funding Opportunity'
 		verbose_name_plural = 'Funding Opportunities'
-"""
-fodb = funding_opportunity.objects.filter(is_visible = True)
-for opportunity in fodb:
-	if opportunity.is_expeired() == True:
-		opportunity.is_visible = False
-		"""
-
-"""
-fodb = funding_opportunity()
-now = datetime.now()
-date = fodb.external_submission_date.date()
-if date < now:
-	is_visiable = False
 
 
-class objects(models.Manager):
-	def is_expeired(self):
-		if self.external_submission_date < timezone.now():
-			return True
-		return False
-		"""
+'''
+	fodb = funding_opportunity.objects.filter(is_visible = True)
+	for opportunity in fodb:
+		if opportunity.is_expeired() == True:
+			opportunity.is_visible = False
+		
+	fodb = funding_opportunity()
+	now = datetime.now()
+	date = fodb.external_submission_date.date()
+	if date < now:
+		is_visible = False
 
+
+	class objects(models.Manager):
+		def is_expeired(self):
+			if self.external_submission_date < timezone.now():
+				return True
+			return False
+
+'''
 
