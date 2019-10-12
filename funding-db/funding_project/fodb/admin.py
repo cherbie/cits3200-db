@@ -11,7 +11,7 @@ from django.utils import timezone
 from import_export.formats import base_formats
 
 from django.conf import settings
-from django.contrib.admin import widgets  
+from django.contrib.admin import widgets
 
 
 # Register your models here.
@@ -34,13 +34,13 @@ class FODBResource(resources.ModelResource):
         exclude = ('creation_date')
         #ecr = Field(widget=widgets.BooleanWidget())
 
-        export_order = ('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
+        export_order = ('id','name', 'provider', 'description', 'link', 'limit_per_uni',
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
             'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable', 'is_visible')
-    
 
-        fields = ('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
+
+        fields = ('id','name', 'provider', 'description', 'link', 'limit_per_uni',
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
             'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable', 'is_visible')
@@ -77,7 +77,7 @@ class FundingOpportunityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
             if funding_opportunity.external_submission_date < timezone.now():
                 funding_opportunity.is_visible = False
                 funding_opportunity.save()
-    
+
     update_experied.short_description = 'Hidden experied opportunities'
 
     def make_hidden(self, request, queryset):
@@ -98,15 +98,15 @@ class FundingOpportunityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="selected_funding_opportunities.csv"'
         writer = csv.writer(response)
-        
 
-        writer.writerow([ 'id','name', 'provider', 'description', 'link', 'limit_per_uni', 
+
+        writer.writerow([ 'id','name', 'provider', 'description', 'link', 'limit_per_uni',
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
             'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable','is_visible'])
 
-        
-        FO = queryset.values_list('id','name', 'provider', 'description', 'link', 'limit_per_uni', 
+
+        FO = queryset.values_list('id','name', 'provider', 'description', 'link', 'limit_per_uni',
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
             'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable','is_visible')
@@ -118,13 +118,13 @@ class FundingOpportunityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     export_funding_opportunity.short_description = 'Export selected funding opportunities to csv'
 
 
-    # this changes the title at /admin/fodb/funding_opportunity/ 
+    # this changes the title at /admin/fodb/funding_opportunity/
     def changelist_view(self, request, extra_context=None):
         extra_context = {'title': 'Select Funding Opportunity to edit'}
         return super(FundingOpportunityAdmin, self).changelist_view(request, extra_context=extra_context)
 
-    
-    
+
+
     # this changes the title at /admin/fodb/funding_opportunity/6/change/
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
         response = super(FundingOpportunityAdmin, self).render_change_form(request, context, add, change, form_url, obj)
@@ -160,5 +160,3 @@ admin.site.register(funding_opportunity,FundingOpportunityAdmin)
 
 
 admin.site.unregister(Group)
-
-
