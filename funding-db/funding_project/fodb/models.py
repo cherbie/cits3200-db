@@ -51,7 +51,9 @@ class funding_opportunity(models.Model):
 	filters = FilterManager() # filtered list of entries
 
 
-
+	def clean(self):
+		if self.max_duration is not None and self.duration_type is None:
+			raise ValidationError('You have entered a max duration so you must enter duration type')	
 
 	def __str__(self):
 		return self.name
