@@ -9,28 +9,27 @@ from .models import funding_opportunity
 from django.utils.html import format_html
 from django.utils import timezone
 from import_export.formats import base_formats
-
+import datetime 
+import codecs
 from django.conf import settings
 from django.contrib.admin import widgets
 
 
-# Register your models here.
+'''
+
+    THE FOLLOWING CODE IS RESPONSIBLE FOR THE ADMINISTRATION VIEW IN THE APP
+    IT BUILDS ONTOP ON DJANGO FEATURES 
 
 
+'''
 
-
-#admin.site.register(Post)
-#admin.site.register(funding_opportunity)
-#admin.site.register(important_date)
 
 admin.site.site_header = 'Funding Opportunities Database'
 
 
-'''
-the following class is resposisible for the import/export feature in the Admin view 
-'''
-class FODBResource(resources.ModelResource):
 
+#THE FOLLOWING CLASS IS RESPONSIBLE FOR THE IMPORT/EXPORT FEATURE IN THE ADMIN VIEW
+class FODBResource(resources.ModelResource):
     class Meta:
         model = funding_opportunity
         exclude = ('creation_date')
@@ -40,12 +39,12 @@ class FODBResource(resources.ModelResource):
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
             'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable', 'is_visible')
 
-
         fields = ('id','name', 'provider', 'description', 'link', 'limit_per_uni',
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
             'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable', 'is_visible')
         
+        #THIS FORMATS THE DATES FRO READABILITY
         widgets = {
                 'external_submission_date': {'format': '%d-%m-%Y %H:%M'},
                 'eoi_deadline': {'format': '%d-%m-%Y %H:%M'},
@@ -59,6 +58,8 @@ class FODBResource(resources.ModelResource):
 
 class FundingOpportunityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = FODBResource
+
+    #THIS FORMATS THE FORM USED TO TO ADD A FUNDING OPPORTUNITY
     fieldsets = [
         ('Funding Opportunity',{'fields': [('name','is_visible'),'provider','description','link','limit_per_uni']}),
         ('Date Information', {'fields': [('external_submission_date', 'forecast_month'),('eoi_deadline','minimum_data_deadline'),('application_open_date','internal_submission_date')]}),
@@ -66,11 +67,20 @@ class FundingOpportunityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
         ('Tags', {'fields': ['ecr','travel','visiting_fellow','wir','phd','international']}),
         ('Faculty',{'fields': ['hms','ems','science','fable']}),
     ]
+
+    #IN THE VIEW THAT CONTAINS THE FUNDING OPPORTUNITIES THESE ARE THE FILTERS FOUND ON THE RIGHT-HAND SIDE 
     list_filter = ('external_submission_date', )
+
+    #THE FUNNDING OPPORTUNITIES ARE SHOW WITH THE FOLLOWING CRITERIA 
     list_display = ('name', 'external_submission_date','max_amount','max_duration','is_visible')
-    search_fields = ['description','name']
+
+    #THE TABLE CAN BE SEARCHED BY THE FOLLOWING CRITERIA
+    search_fields = ['description','name', 'provider']
+
+    #THESE ARE THE ACTIONS THAT CAN BE PLACES ON THE TABLE - THE FUNCTIONS ASSOCIATED WITH THE ACTIONS ARE DESCRIBED BELOW
     actions = ['make_hidden', 'make_unhidden', 'export_funding_opportunity','dateformat','update_expired']
 
+    #THIS FUNCTION HIDES ANY EXPIRED OPPORTUNITIES VALUES 
     def update_expired(self, request, queryset):
         for funding_opportunity in queryset:
             if funding_opportunity.external_submission_date < timezone.now():
@@ -78,6 +88,7 @@ class FundingOpportunityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
                 funding_opportunity.save()
     update_expired.short_description = 'Hide expired opportunities'
 
+    #THIS FUNCTION HIDES THE SELECTED OPPORTUNITIES VALUES 
     def make_hidden(self, request, queryset):
         for funding_opportunity in queryset:
             funding_opportunity.is_visible = False
@@ -85,30 +96,38 @@ class FundingOpportunityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
     make_hidden.short_description = 'Hide Opportunity'
 
+    #THIS FUNCTION UNHIDES THE SELECTED OPPORTUNITIES VALUES 
     def make_unhidden(self, request, queryset):
         for funding_opportunity in queryset:
             funding_opportunity.is_visible = True
             funding_opportunity.save()
-
     make_unhidden.short_description = 'Unhide Opportunity'
 
+
+    #THIS FUNCTION ADDS THE ABBILITY TO EXPORT SELECTED FUNDING OPPORTUNITIES TO CSV
     def export_funding_opportunity(modeladmin, request, queryset):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="selected_funding_opportunities.csv"'
         writer = csv.writer(response)
-
 
         writer.writerow([ 'id','name', 'provider', 'description', 'link', 'limit_per_uni',
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
             'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable','is_visible'])
 
-
         FO = queryset.values_list('id','name', 'provider', 'description', 'link', 'limit_per_uni',
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
             'max_amount','amount_estimated','max_duration','duration_type','duration_estimated',
             'ecr','travel','visiting_fellow','wir','phd','international','hms','ems','science','fable','is_visible')
 
+        #THIS FUNCTION ADDS TIME TO THE VALUES TO CONVERT FROM UTC TO PERTH/AUSTRAILIA TIME 
+        def add_hours(time_string):
+            the_time = datetime.datetime.strptime(time_string, '%d-%m-%Y %H:%M')
+            new_time = the_time + datetime.timedelta(hours=8)
+            return new_time.strftime('%d-%m-%Y %H:%M')        
+
+        FO = [[add_hours(x.strftime("%d-%m-%Y %H:%M")) if isinstance(x, datetime.datetime) else x for x in row] for row in FO]
+        
         for funding_opportunity in FO:
             writer.writerow(funding_opportunity)
         return response
