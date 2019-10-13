@@ -26,13 +26,14 @@ from django.contrib.admin import widgets
 admin.site.site_header = 'Funding Opportunities Database'
 
 
-
+'''
+the following class is resposisible for the import/export feature in the Admin view 
+'''
 class FODBResource(resources.ModelResource):
 
     class Meta:
         model = funding_opportunity
         exclude = ('creation_date')
-        #ecr = Field(widget=widgets.BooleanWidget())
 
         export_order = ('id','name', 'provider', 'description', 'link', 'limit_per_uni',
             'external_submission_date', 'eoi_deadline','internal_submission_date','application_open_date','minimum_data_deadline','forecast_month',
@@ -68,15 +69,14 @@ class FundingOpportunityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_filter = ('external_submission_date', )
     list_display = ('name', 'external_submission_date','max_amount','max_duration','is_visible')
     search_fields = ['description','name']
-    actions = ['make_hidden', 'make_unhidden', 'export_funding_opportunity','dateformat','update_experied']
+    actions = ['make_hidden', 'make_unhidden', 'export_funding_opportunity','dateformat','update_expired']
 
-    def update_experied(self, request, queryset):
+    def update_expired(self, request, queryset):
         for funding_opportunity in queryset:
             if funding_opportunity.external_submission_date < timezone.now():
                 funding_opportunity.is_visible = False
                 funding_opportunity.save()
-
-    update_experied.short_description = 'Hidden experied opportunities'
+    update_expired.short_description = 'Hide expired opportunities'
 
     def make_hidden(self, request, queryset):
         for funding_opportunity in queryset:

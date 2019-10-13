@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from .filters import FilterManager
 from datetime import datetime, timedelta
+from django.core.exceptions import ValidationError
 
 
 class funding_opportunity(models.Model):
@@ -19,9 +20,9 @@ class funding_opportunity(models.Model):
 	limit_per_uni = models.BooleanField(default = False, verbose_name = 'Limited Per University')
 
 
-	max_amount = models.IntegerField(blank = True, verbose_name = 'Max Amount')
-	max_duration = models.IntegerField(blank = True, verbose_name = 'Max Duration')
-	duration_type = models.CharField(blank = True, max_length = 6, choices = Year_or_Month)
+	max_amount = models.IntegerField(blank = True, null = True, verbose_name = 'Max Amount')
+	max_duration = models.IntegerField(blank = True, null = True, verbose_name = 'Max Duration')
+	duration_type = models.CharField(blank = True, null = True, max_length = 6, choices = Year_or_Month)
 	amount_estimated = models.BooleanField(default = False )
 	duration_estimated = models.BooleanField(default = False)
 
@@ -40,7 +41,7 @@ class funding_opportunity(models.Model):
 	is_visible = models.BooleanField(default = True, verbose_name = 'Visible in regualr view')
 
 	application_open_date = models.DateTimeField(blank = True, null = True, verbose_name = 'Application Open Date')
-	forecast_month = models.CharField(blank = True, max_length = 15,  choices = Forecast_Mon, verbose_name ='Forecast Month')
+	forecast_month = models.CharField(blank = True, max_length = 15, null = True, choices = Forecast_Mon, verbose_name ='Forecast Month')
 	internal_submission_date = models.DateTimeField(blank = True, null = True, verbose_name = 'Internal deadline')
 	eoi_deadline  = models.DateTimeField(blank = True, null = True, verbose_name = 'Expression of interest deadline')
 	minimum_data_deadline = models.DateTimeField(blank = True, null = True, verbose_name ='Minimum data deadline' )
@@ -48,13 +49,21 @@ class funding_opportunity(models.Model):
 
 	objects = models.Manager() # default list of entries
 	filters = FilterManager() # filtered list of entries
+
+
+
+
 	def __str__(self):
 		return self.name
+
+
 
 	class Meta:
 		ordering = ['name']
 		verbose_name = 'Funding Opportunity'
 		verbose_name_plural = 'Funding Opportunities'
+
+
 
 
 '''
