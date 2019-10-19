@@ -2,7 +2,7 @@
 
 <!-- Filter Content -->
 
-<form action="" method="GET" class="filter_column">
+<form action="" id="qs_filter" method="GET" class="filter_column">
     <div class="filter_crit" id="sort_box">
         <h3>
             Sort by
@@ -35,7 +35,7 @@
                     checked
                 {% endif %} />
                 <label class="custom-control-label" for="{{form.hms.id_for_label}}">
-                    Heath and Medical Science
+                    Health and Medical Science
                 </label>
             </div>
             <div class="custom-control custom-checkbox">
@@ -167,5 +167,5 @@
             <select>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary" style="justify-self: start;">Filter</button>
+    <button type="submit" form="qs_filter" class="btn btn-primary" style="justify-self: start;">Filter</button>
 </form>

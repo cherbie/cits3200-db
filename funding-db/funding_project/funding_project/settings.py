@@ -127,13 +127,17 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Australia/Perth'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
+DTAE_FORMAT = 'd-m-Y'
+DATETIME_FORMAT = 'd-m-Y H:i'
 
 USE_TZ = True
+TIME_ZONE = 'Australia/Perth'
+
+
 
 
 # Static files (CSS, JavaScript, Images)

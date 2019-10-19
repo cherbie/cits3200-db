@@ -3,32 +3,65 @@
 {% load static %}
 
 {% block content %}
-
 <!-- Load css under here -->
-<link rel="stylesheet" type="text/css" href="{% static 'fodb/tables.css' %}">
+<!-- Filter column css -->
+<link rel="stylesheet" type="text/css" href="{% static 'fodb/css/filter.css' %}">
+<!-- Research content column css -->
+<link rel="stylesheet" type="text/css" href="{% static 'fodb/css/research-content.css' %}">
+<!-- This customise the layout of the entire page -->
+<link rel="stylesheet" type="text/css" href="{% static 'fodb/css/tables.css' %}">
 
 {% if user.is_authenticated %}
 
-<!-- Work under here -->
+<!-- Work starts here -->
 
+    <!-- The top section containing search bar -->
     <section class="head_container">
         <div class="search_container">
             <h1>
                 Funding Opportunities
             </h1>
-            <form action="" id="search_bar" method="POST">
-                {% csrf_token %}
-                <div class="search_form">
-                    <input for="search_bar" type="text" name="search" placeholder="Search..">
-                    <button for="search_bar" type="submit" class="btn btn-warning search_button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
+            <div class="search_form">
+                <input for="search_bar" form="qs_filter" type="text" name="search" placeholder="Search.."
+                    {% if form.search.value != "" and form.search.value is not None %}
+                        value="{{form.search.value}}"
+                    {% endif %} >
+                <button for="search_bar" type="submit" form="qs_filter" class="btn btn-warning search_button"><i class="fas fa-search"></i></button>
+            </div>
         </div>
     </section>
 
+    <!-- Section displaying the opportunities given and the filters -->
     <section class="research_content container">
+        <!-- The filter column -->
         {% include './home-filter.html' %}
+
+        <!-- The opportunities column -->
         <div class="funding_column">
+            {% if not posts %}
+            <h4>
+                No result for your search of {{ form.search.value }}
+            </h4>
+            {% else %}
+            {% if form.search.value != "" and form.search.value is not None %}
+            <h4 style="text-transform: none;">
+                Search results for: <span style="color: blue">{{ form.search.value }}</span>
+                {% if form.ems.value or form.hms.value or form.science.value or form.fable.value or form.ecr.value or form.travel.value or form.visiting.value or form.wir.value or form.international.value %}
+                and filter by:
+                {% endif %}
+                {% if form.ems.value or form.hms.value or form.science.value or form.fable.value %}
+                <span style="color: blue">faculty</span>
+                {% endif %}
+                {% if form.ems.value or form.hms.value or form.science.value or form.fable.value %}
+                {% if form.ecr.value or form.travel.value or form.visiting.value or form.wir.value or form.international.value %}
+                and
+                {% endif %}
+                {% endif %}
+                {% if form.ecr.value or form.travel.value or form.visiting.value or form.wir.value or form.international.value %}
+                <span style="color: blue">tag</span>
+                {% endif %}
+            </h4>
+            {% endif %}
             <div class="funding_header">
                 <p class="current">
                     Page {{ posts.number }}
@@ -41,6 +74,7 @@
 
                 <div class="content_card">
                     <a target="_blank" style="text-decoration: none; color: black;" href="{% url 'fodb-detail' post.id %}">
+                        <!-- This div contain name of the research, and the name of the provider -->
                         <div class="content_header">
                             <h3>
                                 {{ post.name }}
@@ -54,18 +88,19 @@
 
                         <hr>
 
+                        <!-- After this contains important information, it is hidden if null -->
                         <div class="info_container">
                             <div class="important_info deadline_info">
                                 <h7>
-                                    Deadline :
+                                    external submission date :
                                 </h7>
                                 <h7>
-                                    {{ post.closing_date|date:"d F Y" }}
+                                    {{ post.external_submission_date }}
                                 </h7>
                             </div>
                             <div class="important_info amount_info">
                                 <h7>
-                                    amount :
+                                    max amount :
                                 </h7>
                                 <h7>
                                     $ {{ post.max_amount }}
@@ -76,63 +111,65 @@
                             </div>
                             <div class="important_info">
                                 <h7>
-                                    duration :
+                                    max duration :
                                 </h7>
                                 <h7>
                                     {{ post.max_duration }}
                                     {% if post.duration_type == "M" %}
-                                    month
+                                    month{% if post.max_duration > 1 %}s{% endif %}
                                     {% else %}
-                                    year
+                                    year{% if post.max_duration > 1 %}s{% endif %}
                                     {% endif %}
                                     {% if opp.duration_estimated %}
                                     <span><small><small> <i>(Estimated)</i></small></small></span>
                                     {% endif %}
                                 </h7>
                             </div>
-                            {% if post.External_deadline %}
+                            {% if post.application_open_date %}
                             <div class="important_info">
                                 <h7>
-                                    External deadline :
+                                    application open date :
                                 </h7>
                                 <h7>
-                                    {{ post.External_deadline|date:"d F Y" }}
+                                    {{ post.application_open_date|date:"d F Y" }}
                                 </h7>
                             </div>
                             {% endif %}
-                            {% if post.Internal_deadline %}
+                            {% if post.internal_submission_date %}
                             <div class="important_info">
                                 <h7>
-                                    Internal deadline :
+                                    internal submission date :
                                 </h7>
                                 <h7>
-                                    {{ post.Internal_deadline|date:"d F Y" }}
+                                    {{ post.internal_submission_date|date:"d F Y" }}
                                 </h7>
                             </div>
                             {% endif %}
-                            {% if post.EOI_deadline %}
+                            {% if post.eoi_deadline %}
                             <div class="important_info">
                                 <h7>
-                                    EOI deadline :
+                                    Expression of interest deadline :
                                 </h7>
                                 <h7>
-                                    {{ post.EOI_deadline|date:"d F Y" }}
+                                    {{ post.eoi_deadline|date:"d F Y" }}
                                 </h7>
                             </div>
                             {% endif %}
-                            {% if post.Minimum_data_deadline %}
+                            {% if post.minimum_data_deadline %}
                             <div class="important_info">
                                 <h7>
                                     Minimum data deadline :
                                 </h7>
                                 <h7>
-                                    {{ post.Minimum_data_deadline|date:"d F Y" }}
+                                    {{ post.minimum_data_deadline|date:"d F Y" }}
                                 </h7>
                             </div>
                             {% endif %}
                         </div>
 
+                        <!-- The tags here involve faculty it belongs to and the subsequent tags that it has -->
                         <div class="content_tags">
+                            <!-- The faculty involve -->
                             <div class="content_department">
                                 {% if post.hms %}
                                 <span class="tags tags_yellow">hms
@@ -170,6 +207,8 @@
                                 <span class="tags tags_black">Not Specified</span>
                                 {% endif %}
                             </div>
+
+                            <!-- The tags that it has -->
                             <div class="content_type">
                                 {% if post.ecr %}
                                 <span class="tags_icon"><i class="fas fa-business-time fa-fw"></i>
@@ -182,7 +221,7 @@
                                 {% if post.travel %}
                                 <span class="tags_icon"><i class="fas fa-plane-departure fa-fw"></i>
                                     <span class="tags_flags">
-                                        Involve traveling
+                                        Travel
                                     </span>
                                 </span>
                                 {% endif %}
@@ -190,7 +229,7 @@
                                 {% if post.visiting %}
                                 <span class="tags_icon"><i class="fas fa-map-marked-alt fa-fw"></i>
                                     <span class="tags_flags">
-                                        Visiting
+                                        Visiting fellow
                                     </span>
                                 </span>
                                 {% endif %}
@@ -222,6 +261,7 @@
                         </div>
                     </a>
 
+                    <!-- This is to indicate if the opportunities is limited per university -->
                     {% if post.limit_per_uni %}
                     <hr class="end_note_ruler">
 
@@ -236,7 +276,6 @@
                     </div>
                     {% endif %}
                 </div>
-
                 {% endfor %}
             </div>
             <br>
@@ -257,6 +296,7 @@
                     {% endif %}
                 </span>
             </div>
+            {% endif %}
         </div>
     </section>
 

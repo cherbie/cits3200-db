@@ -5,27 +5,42 @@ class FilterManager(models.Manager):
 	'''
         Customly manage filters.
 	'''
-	fields = ['hms','ems','science','travel','ecr','international','wir','phd','visiting', 'month']
+	fields = ['hms','ems','science','travel','ecr','international','wir','phd','visiting', 'fable', 'month', 'search']
 
-	def search_qs(self, request):
-		self.request = request
-		text = request.POST.__getitem__('search').upper() # search query
-		queryset = super().get_queryset().filter(Q(name__icontains=text) | Q(description__icontains=text));
-		return self.filter_qs(request, queryset) # apply further filter options
+	def search_qs(self, dict):
+		'''
+		   Filters the queryset based on the keywords provided in the search bar 'GET' request
+		   @param dict dictionary of 'GET' method paramaters
+		'''
+		if not dict.__contains__('search'):
+			return super().get_queryset() # no search filters applied
+
+		text = dict.__getitem__('search') # search query
+		keywords = text.split(' ');
+		Qobject = None
+		for word in keywords: # cycle through keywords
+			if Qobject is None:
+				Qobject = self.keyword_name(word) | self.keyword_desc(word) | self.keyword_provider(word)
+			else:
+				Qobject |= self.keyword_name(word) | self.keyword_desc(word) | self.keyword_provider(word)
+
+		queryset = super().get_queryset().filter(Qobject); # filtered queryset
+
+		return queryset # revised queryset
 
 
-	def filter_qs(self, request, queryset=None):
+	def filter_qs(self, request):
 		"""
 			@return QuerySet containing all fields with specified values.
 			@param HttpRequest object
 		"""
-		if queryset is None: # prior queryset not provided
-			queryset = super().get_queryset();
-
 		self.request = request
 		dict = request.GET.dict() # request paramaters
+
+		queryset = self.search_qs(dict); # call function to filter search keywords
+
 		tags = None # models.Q object
-		faculty =  None
+		faculty =  None # models.Q object
 
 		if dict.__contains__(self.fields[0]):
 			if faculty == None:
@@ -42,8 +57,8 @@ class FilterManager(models.Manager):
 				faculty = self.science_select()
 			else:
 				faculty = faculty & self.science_select()
-		if dict.__contains__(self.fields[9]):
-			if dict.__getitem__(self.fields[9]) == '-1':
+		if dict.__contains__(self.fields[10]):
+			if dict.__getitem__(self.fields[10]) == '-1':
 				faculty = faculty
 			elif faculty == None:
 				faculty = self.month_select(dict.__getitem__(self.fields[9]))
@@ -81,6 +96,11 @@ class FilterManager(models.Manager):
 				tags = self.visiting_select()
 			else:
 				tags = tags | self.visiting_select()
+		if dict.__contains__(self.fields[9]):
+			if tags == None:
+				tags = self.fable_select()
+			else:
+				tags = tags | self.fable_select()
 
 
 		# -- RETURN STATEMENTS --
@@ -104,11 +124,20 @@ class FilterManager(models.Manager):
 		elif str == 'asc':
 			queryset = queryset.order_by('name')
 		elif str == 'close-desc':
-			queryset = queryset.order_by('-closing_date')
+			queryset = queryset.order_by('-external_submission_date')
 		else:
-			queryset = queryset.order_by('closing_date')
+			queryset = queryset.order_by('external_submission_date')
 
 		return queryset
+
+	def keyword_name(self, keyword):
+		return Q(name__icontains=keyword)
+
+	def keyword_desc(self, keyword):
+		return Q(description__icontains=keyword)
+
+	def keyword_provider(self, keyword):
+		return Q(provider__icontains=keyword)
 
 	def hms_select(self):
 		return Q(hms='True')
@@ -118,6 +147,9 @@ class FilterManager(models.Manager):
 
 	def science_select(self):
 		return Q(science='True')
+
+	def fable_select(self):
+		return Q(fable='True')
 
 	def travel_select(self):
 		return Q(travel='True')

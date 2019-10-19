@@ -4,236 +4,295 @@
 
 {% block content %}
 <!-- Load css -->
-<link rel="stylesheet" type="text/css" href="{% static 'fodb/tables.css' %}">
+<!-- Research content column css -->
+<link rel="stylesheet" type="text/css" href="{% static 'fodb/css/research-content.css' %}">
+<!-- This customise the layout of the entire page -->
+<link rel="stylesheet" type="text/css" href="{% static 'fodb/css/tables.css' %}">
+<!-- Detail page personalized css -->
 <link rel="stylesheet" type="text/css" href="{% static 'fodb/css/wiki.css' %}">
 
 <div class="wiki_container container">
+    <!-- Return button goes here -->
     <div class="return_div">
         <a class="return_button" href="{% url 'fodb-home' %}"><i class="fas fa-chevron-left"></i> return</a>
     </div>
 
-    <div class="detail_container">
-        {% if user.is_superuser %}
-        <a class="edit_button" href="/admin/fodb/funding_opportunity/{{ opp.id }}/change/"><i class="fas fa-pen"></i> edit</a>
-        {% endif %}
-        <h2>
-            {{ opp.name }}
-        </h2>
-        {% if opp.provider %}
-        <h3>
-            {{ opp.provider }}
-        </h3>
-        {% endif %}
+    <!-- Cover div for customizing -->
+    <div class="outside_custom">
+        <hr class="top_border">
+        <hr class="top_border">
 
-        <hr>
+        <!-- The deatail display of the div -->
+        <div class="detail_container">
+            <!-- Quick button to edit the -->
+            {% if user.is_superuser %}
+            <a class="edit_button" href="/admin/fodb/funding_opportunity/{{ opp.id }}/change/"><i class="fas fa-pen"></i> edit</a>
+            {% endif %}
 
-        <div class="info_container">
-            <div class="important_info deadline_info">
+            <!-- Top info about opp name and provider -->
+            <div class="top_info">
+                <h2>
+                    {{ opp.name }}
+                </h2>
+                {% if opp.provider %}
+                <h3>
+                    {{ opp.provider }}
+                </h3>
+                {% endif %}
+            </div>
+
+            <!-- Description / overview box -->
+            <div class="info_box overview_box">
+                <h4>
+                    Overview
+                </h4>
+                <hr>
                 <h5>
-                    Deadline :
-                </h5>
-                <h5>
-                    {{ opp.closing_date|date:"d F Y" }}
+                    {{ opp.description }}
                 </h5>
             </div>
-            <div class="important_info amount_info">
-                <h5>
-                    amount :
-                </h5>
-                <h5>
-                    $ {{ opp.max_amount }}
-                    {% if opp.amount_estimated %}
-                    <span><small><small> <i>(Estimated)</i></small></small></span>
+
+            <!-- Max amount and duration box -->
+            <div class="info_box_split_section">
+                <div class="info_box" id="fund_amount">
+                    <h4>
+                        Max amount
+                    </h4>
+                    <hr>
+                    <h5>
+                        $ {{ opp.max_amount }}
+                        {% if opp.amount_estimated %}
+                        <span><small><small> <i>(Estimated)</i></small></small></span>
+                        {% endif %}
+                    </h5>
+                </div>
+                <div class="info_box" id="duration_amount">
+                    <h4>
+                        Max duration
+                    </h4>
+                    <hr>
+                    <h5>
+                        {{ opp.max_duration }} {% if post.duration_type == "M" %}
+                        month{% if opp.max_duration > 1 %}s{% endif %}
+                        {% else %}
+                        year{% if opp.max_duration > 1 %}s{% endif %}
+                        {% endif %}
+                        {% if opp.duration_estimated %}
+                        <span><small><small> <i>(Estimated)</i></small></small></span>
+                        {% endif %}
+                    </h5>
+                </div>
+            </div>
+
+            <!-- Important dates box -->
+            <div class="info_box">
+                <h4>
+                    Important dates
+                </h4>
+                <hr>
+                <div class="important_info deadline_info">
+                    <h5>
+                        External Submission Date :
+                    </h5>
+                    <h5>
+                        {{ opp.external_submission_date }}
+                    </h5>
+                </div>
+                {% if opp.application_open_date %}
+                <div class="important_info">
+                    <h5>
+                        application open date :
+                    </h5>
+                    <h5>
+                        {{ opp.application_open_date }}
+                    </h5>
+                </div>
+                {% endif %}
+                {% if opp.internal_submission_date %}
+                <div class="important_info">
+                    <h5>
+                        Internal deadline :
+                    </h5>
+                    <h5>
+                        {{ opp.internal_submission_date }}
+                    </h5>
+                </div>
+                {% endif %}
+                {% if opp.eoi_deadline %}
+                <div class="important_info">
+                    <h5>
+                        Expression of interest deadline :
+                    </h5>
+                    <h5>
+                        {{ opp.eoi_deadline }}
+                    </h5>
+                </div>
+                {% endif %}
+                {% if opp.minimum_data_deadline %}
+                <div class="important_info">
+                    <h5>
+                        Minimum data deadline :
+                    </h5>
+                    <h5>
+                        {{ opp.minimum_data_deadline }}
+                    </h5>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Faculty and tags div -->
+            <div class="info_box_split_section">
+                <div class="info_box">
+                    <h4>
+                        Faculty
+                    </h4>
+                    <hr>
+                    <div class="content_department">
+                        {% if opp.hms %}
+                        <span class="tags tags_yellow">HMS
+                            <span class="tags_flags">
+                                Health and Medical Science
+                            </span>
+                        </span>
+                        {% endif %}
+                        {% if opp.ems %}
+                        <span class="tags tags_green">EMS
+                            <span class="tags_flags">
+                                Engineering and Mathematical Sciences
+                            </span>
+                        </span>
+                        {% endif %}
+                        {% if opp.science %}
+                        <span class="tags tags_blue">Sci
+                            <span class="tags_flags">
+                                Science
+                            </span>
+                        </span>
+                        {% endif %}
+                        {% if opp.fable %}
+                        <span class="tags tags_violet">fable
+                            <span class="tags_flags">
+                                Faculty of Arts, Business, Law and Education
+                            </span>
+                        </span>
+                        {% endif %}
+                        {% if not opp.hms and not opp.ems and not opp.science and not opp.fable %}
+                        <span class="tags tags_black">Not Specified</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="info_box">
+                    <h4>
+                        Tag
+                    </h4>
+                    <hr>
+                    <div class="content_type">
+                        {% if opp.ecr %}
+                        <span class="tags_icon"><i class="fas fa-business-time"></i>
+                            <span class="tags_flags">
+                                Early career research
+                            </span>
+                        </span>
+                        {% endif %}
+
+                        {% if opp.travel %}
+                        <span class="tags_icon"><i class="fas fa-plane-departure"></i>
+                            <span class="tags_flags">
+                                Involve traveling
+                            </span>
+                        </span>
+                        {% endif %}
+
+                        {% if opp.visiting %}
+                        <span class="tags_icon"><i class="fas fa-map-marked-alt"></i>
+                            <span class="tags_flags">
+                                Visiting
+                            </span>
+                        </span>
+                        {% endif %}
+
+                        {% if opp.wir %}
+                        <span class="tags_icon"><i class="fas fa-female"></i><i class="fas fa-microscope"></i>
+                            <span class="tags_flags">
+                                Women in research
+                            </span>
+                        </span>
+                        {% endif %}
+
+                        {% if opp.phd %}
+                        <span class="tags_icon"><i class="fas fa-graduation-cap"></i>
+                            <span class="tags_flags">
+                                PhD
+                            </span>
+                        </span>
+                        {% endif %}
+
+                        {% if opp.international %}
+                        <span class="tags_icon"><i class="fas fa-globe"></i>
+                            <span class="tags_flags">
+                                International
+                            </span>
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional info box -->
+            <div class="info_box more_info">
+                <h4>
+                    Additional information
+                </h4>
+                <hr>
+
+                <div class="description_info">
+                    <h6 class="sub_info">
+                        <strong>
+                            <strong>
+                                For more info, visit :
+                            </strong>
+                        </strong>
+                    </h6>
+                    <h6 class="sub_info">
+                        <a target="_blank" href="{{ opp.link }}"> {{ opp.link }}</a>
+                    </h6>
+                    {% if post.limit_per_uni %}
+                    <h6 class="sub_info">
+                        <strong>
+                            <strong>
+                                <i class="fas fa-flag hover_note"></i>
+                            </strong>
+                        </strong>
+                    </h6>
+                    <h6 class="sub_info">
+                        Limited per University. Please contact
+                        <a href="mailto:researchgrants-ore@uwa.edu.au?subject=Enquiry about UWA funding opportunity web page&body=To whom it may concern,">
+                            researchgrants-ore@uwa.edu.au
+                        </a>
+                    </h6>
                     {% endif %}
-                </h5>
-            </div>
-            <div class="important_info">
-                <h5>
-                    Duration :
-                </h5>
-                <h5>
-                    {{ opp.max_duration }} {% if post.duration_type == "M" %}
-                    month
-                    {% else %}
-                    year
-                    {% endif %}
-                    {% if opp.duration_estimated %}
-                    <span><small><small> <i>(Estimated)</i></small></small></span>
-                    {% endif %}
-                </h5>
-            </div>
-            {% if opp.External_dealine %}
-            <div class="important_info">
-                <h5>
-                    External deadline :
-                </h5>
-                <h5>
-                    {{ opp.External_deadline|date:"d F Y" }}
-                </h5>
-            </div>
-            {% endif %}
-            {% if opp.Internal_deadline %}
-            <div class="important_info">
-                <h5>
-                    Internal deadline :
-                </h5>
-                <h5>
-                    {{ opp.Internal_deadline|date:"d F Y" }}
-                </h5>
-            </div>
-            {% endif %}
-            {% if opp.EOI_deadline %}
-            <div class="important_info">
-                <h5>
-                    EOI deadline :
-                </h5>
-                <h5>
-                    {{ opp.EOI_deadline|date:"d F Y" }}
-                </h5>
-            </div>
-            {% endif %}
-            {% if opp.Minimum_data_deadline %}
-            <div class="important_info">
-                <h5>
-                    Minimum data deadline :
-                </h5>
-                <h5>
-                    {{ opp.Minimum_data_deadline|date:"d F Y" }}
-                </h5>
-            </div>
-            {% endif %}
-        </div>
-
-        <hr>
-
-        <div class="content_tags">
-            <h5>
-                Faculty :
-            </h5>
-            <div class="content_department">
-                {% if opp.hms %}
-                <span class="tags tags_yellow">HMS</span>
-                {% endif %}
-                {% if opp.ems %}
-                <span class="tags tags_green">EMS</span>
-                {% endif %}
-                {% if opp.science %}
-                <span class="tags tags_blue">Sci</span>
-                {% endif %}
-                {% if opp.fable %}
-                <span class="tags tags_violet">fable</span>
-                {% endif %}
-                {% if not opp.hms and not opp.ems and not opp.science and not opp.fable %}
-                <span class="tags tags_black">Not Specified</span>
-                {% endif %}
+                </div>
             </div>
 
-        </div>
-
-        <div class="content_tags">
-            <h5>
-                Type include :
-            </h5>
-            <div class="content_type">
-                {% if opp.ecr %}
-                <span class="tags_icon"><i class="fas fa-business-time"></i>
-                    <span class="tags_flags">
-                        Early career research
-                    </span>
-                </span>
-                {% endif %}
-
-                {% if opp.travel %}
-                <span class="tags_icon"><i class="fas fa-plane-departure"></i>
-                    <span class="tags_flags">
-                        Involve traveling
-                    </span>
-                </span>
-                {% endif %}
-
-                {% if opp.visiting %}
-                <span class="tags_icon"><i class="fas fa-map-marked-alt"></i>
-                    <span class="tags_flags">
-                        Visiting
-                    </span>
-                </span>
-                {% endif %}
-
-                {% if opp.wir %}
-                <span class="tags_icon"><i class="fas fa-female"></i><i class="fas fa-microscope"></i>
-                    <span class="tags_flags">
-                        Women in research
-                    </span>
-                </span>
-                {% endif %}
-
-                {% if opp.phd %}
-                <span class="tags_icon"><i class="fas fa-graduation-cap"></i>
-                    <span class="tags_flags">
-                        PhD
-                    </span>
-                </span>
-                {% endif %}
-
-                {% if opp.international %}
-                <span class="tags_icon"><i class="fas fa-globe"></i>
-                    <span class="tags_flags">
-                        International
-                    </span>
-                </span>
-                {% endif %}
-            </div>
-        </div>
-
-        <hr>
-
-        <div class="description_info">
-            <h5 class="sub_info">
-                Description :
-            </h5>
-            <h5 class="light sub_info">
-                {{ opp.description }}
-            </h5>
-
-            <h6 class="sub_info">
-                <strong>
-                    For more info, visit :
-                </strong>
-            </h6>
-            <h6 class="sub_info">
-                <a target="_blank" href="{{ opp.link }}"> {{ opp.link }}</a>
-            </h6>
-            <h6 class="sub_info">
-                <strong>
-                    Notice :
-                </strong>
-            </h6>
-            <h6 class="sub_info">
-                Limited per University. Please contact
-                <a href="mailto:researchgrants-ore@uwa.edu.au?subject=Enquiry about UWA funding opportunity web page&body=To whom it may concern,">
-                    researchgrants-ore@uwa.edu.au
-                </a>
-            </h6>
-        </div>
-
-        <hr>
-
-        <div class="info_container">
-            <div class="important_info">
-                <h6>
-                    Create on :
-                </h6>
-                <h6>
-                    {{ opp.creation_date|date:"d F Y" }}
-                </h6>
-            </div>
-            <div class="important_info">
-                <h6>
-                    Last updated :
-                </h6>
-                <h6>
-                    {{ opp.last_updated|date:"d F Y" }}
-                </h6>
+            <div class="info_box_split_section">
+                <div class="info_box">
+                    <h6>
+                        Created on :
+                    </h6>
+                    <hr>
+                    <h6>
+                        {{ opp.creation_date }}
+                    </h6>
+                </div>
+                <div class="info_box">
+                    <h6>
+                        Last updated :
+                    </h6>
+                    <hr>
+                    <h6>
+                        {{ opp.last_updated }}
+                    </h6>
+                </div>
             </div>
         </div>
     </div>

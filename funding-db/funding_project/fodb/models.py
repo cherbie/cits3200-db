@@ -2,56 +2,61 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from .filters import FilterManager
-import datetime
+from datetime import datetime, timedelta
+from django.core.exceptions import ValidationError
 
 
 class funding_opportunity(models.Model):
 	Year_or_Month =( ('Y','year'), ('M','month'),)
 	Forecast_Mon = (('1','Jan'), ('2','Feb'), ('3','Mar'), ('4','Apr'), ('5','May'), ('6','Jun'), ('7','Jul'), ('8','Aug'), ('9','Sep'), ('10','Oct'), ('11','Nov'), ('12','Dec'),)
 
-	provider = models.CharField(max_length = 100, verbose_name = 'Funding provider',default = 'none')
+	provider = models.CharField(max_length = 100, verbose_name = 'Funding provider',default = '')
 	name = models.CharField(max_length = 100, verbose_name = 'Title')
 	description = models.TextField()
-	closing_date = models.DateTimeField(null = False)
+	external_submission_date = models.DateTimeField(null = False, verbose_name = 'External Submission Date')
 	creation_date = models.DateField(auto_now_add = True)
 	last_updated = models.DateField(auto_now= True)
-	link = models.URLField(max_length = 260)
+	link = models.URLField(max_length = 260, verbose_name = 'Link')
 	limit_per_uni = models.BooleanField(default = False, verbose_name = 'Limited Per University')
 
-	max_amount = models.IntegerField(blank = True)
-	max_duration = models.IntegerField(blank = True)
-	duration_type = models.CharField(max_length = 6, choices = Year_or_Month)
+
+	max_amount = models.IntegerField(blank = True, null = True, verbose_name = 'Max Amount')
+	max_duration = models.IntegerField(blank = True, null = True, verbose_name = 'Max Duration')
+	duration_type = models.CharField(blank = True, null = True, max_length = 6, choices = Year_or_Month)
 	amount_estimated = models.BooleanField(default = False )
 	duration_estimated = models.BooleanField(default = False)
 
-	ecr = models.BooleanField(default = False)
+	ecr = models.BooleanField(default = False, verbose_name = 'Early Career Research')
 	travel = models.BooleanField(default = False)
-	visiting = models.BooleanField(default = False)
-	wir = models.BooleanField(default = False)
-	phd = models.BooleanField(default = False)
+	visiting_fellow = models.BooleanField(default = False, verbose_name = 'Visiting Fellow')
+	wir = models.BooleanField(default = False, verbose_name = 'Women in Research')
+	phd = models.BooleanField(default = False, verbose_name= 'PhD')
 	international = models.BooleanField(default = False)
 
-	hms = models.BooleanField(default = False, verbose_name = 'HMS')
-	ems = models.BooleanField(default = False, verbose_name = 'EMS')
-	science = models.BooleanField(default = False, verbose_name = 'SCI')
-	fable = models.BooleanField(default = False, verbose_name = 'FABLE')
+	hms = models.BooleanField(default = False, verbose_name = 'Health and Medical Science')
+	ems = models.BooleanField(default = False, verbose_name = 'Engineering and Mathematical Sciences')
+	science = models.BooleanField(default = False, verbose_name = 'Science')
+	fable = models.BooleanField(default = False, verbose_name = 'Faculty of Arts, Business, Law and Education')
 
-	is_hidden = models.BooleanField(default = False, verbose_name = 'Hidden from regular view')
+	is_visible = models.BooleanField(default = True, verbose_name = 'Visible in regualr view')
 
-	External_deadline = models.DateTimeField(blank = True, null = True)
-	Forecast_Month = models.CharField(blank = True, max_length = 15,  choices = Forecast_Mon)
-	Internal_deadline = models.DateTimeField(blank = True, null = True)
-	EOI_deadline  = models.DateTimeField(blank = True, null = True, verbose_name = 'Expression of interest deadline')
-	Minimum_data_deadline = models.DateTimeField(blank = True, null = True)
+	application_open_date = models.DateTimeField(blank = True, null = True, verbose_name = 'Application Open Date')
+	forecast_month = models.CharField(blank = True, max_length = 15, null = True, choices = Forecast_Mon, verbose_name ='Forecast Month')
+	internal_submission_date = models.DateTimeField(blank = True, null = True, verbose_name = 'Internal deadline')
+	eoi_deadline  = models.DateTimeField(blank = True, null = True, verbose_name = 'Expression of interest deadline')
+	minimum_data_deadline = models.DateTimeField(blank = True, null = True, verbose_name ='Minimum data deadline' )
 
 
 	objects = models.Manager() # default list of entries
 	filters = FilterManager() # filtered list of entries
+
+
+	def clean(self):
+		if self.max_duration is not None and self.duration_type is None:
+			raise ValidationError('You have entered a max duration so you must enter duration type')	
+
 	def __str__(self):
 		return self.name
-
-	def closing_date_formatted(self):
-	    return self.closing_date.strftime('%d/%m/%Y')
 
 
 
@@ -59,4 +64,28 @@ class funding_opportunity(models.Model):
 		ordering = ['name']
 		verbose_name = 'Funding Opportunity'
 		verbose_name_plural = 'Funding Opportunities'
+
+
+
+
+'''
+	fodb = funding_opportunity.objects.filter(is_visible = True)
+	for opportunity in fodb:
+		if opportunity.is_expeired() == True:
+			opportunity.is_visible = False
+		
+	fodb = funding_opportunity()
+	now = datetime.now()
+	date = fodb.external_submission_date.date()
+	if date < now:
+		is_visible = False
+
+
+	class objects(models.Manager):
+		def is_expeired(self):
+			if self.external_submission_date < timezone.now():
+				return True
+			return False
+
+'''
 

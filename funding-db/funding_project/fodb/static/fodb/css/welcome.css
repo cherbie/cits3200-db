@@ -9,6 +9,7 @@
     min-width: 99vw;
     width: 99vw;
     max-width: 99vw;
+    min-height: 500px;
     height: 80vh;
 
     display: grid;
