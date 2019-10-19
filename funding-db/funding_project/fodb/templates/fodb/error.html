@@ -1,29 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<style>
-    .cover_section{
-        position: relative;
-        margin: 0px;
-        padding: 20px;
-        min-width: 99vw;
-        width: 99vw;
-        max-width: 99vw;
-        min-height: 500px;
-        height: 80vh;
 
-        text-align: center;
-    }
+		<div style="display:center; margin:auto; text-align:center;">
+            <h1 style="color:red;">{{error.title}}</h1>
+            <h3>{{error.status_code}}</h3>
+        </div>
+        <div style="display:center; text-align:center; margin:auto;">
+            <p style="color:blue;">{{error.message}}</p>
+			<p><a href='/'>Go back to home</a></p>
+        </div>
 
-    footer{
-        margin-top: 0px !important;
-    }
-</style>
-
-<section class="cover_section">
-    <h1>{{error.status_code}}</h1>
-    <h2 style="color:red;">{{error.title}}</h2>
-
-    <h4 style="color:blue;">{{error.message}}</h4>
-    <h5><a href='/'>Go back to home</a></h5>
-</section>
 {% endblock content%}
