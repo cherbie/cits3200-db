@@ -13,7 +13,7 @@
     </button>
     <div class="collapse navbar-collapse navbar-items" id="navbar-nav">
         <ul class="navbar-nav navbar-items">
-            {% if user.is_superuser %}
+            {% if user.is_superuser or user.is_staff %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
             </li>
