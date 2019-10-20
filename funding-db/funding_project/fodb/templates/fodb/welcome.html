@@ -29,11 +29,16 @@
       </h4>
       <br>
       <h5 class="welcome_title">
-        Alternatively, 
+        Alternatively, login with
         <a class="welcome_lead" href="{% url 'social:begin' 'google-oauth2' %}">
-          login with Google
+          Google (student)
+        </a>
+        or
+        <a class="welcome_lead" href="{% url 'social:begin' 'azuread-oauth2' %}">
+          Microsoft (staff)
         </a>
       </h5>
+
 
     {% endif %}
 

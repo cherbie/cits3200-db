@@ -10,6 +10,7 @@ django-compressor==2.3
 django-crispy-forms==1.7.2
 -e git://github.com/django-extensions/django-extensions.git@afa8f0c242126197ca0e1eaf9d1c226e615a013b#egg=django_extensions
 django-filter==2.2.0
+paramiko==2.6.0
 -e git+https://github.com/django-import-export/django-import-export.git@4589d4c40bd5b8ecb1b34e69e5f5e6632217de2c#egg=django_import_export
 django-libsass==0.7
 django-sb-admin==0.3.7
