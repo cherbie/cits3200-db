@@ -2,3 +2,6 @@
 funding-db/funding_project/fodb/migrations/0002_remove_funding_opportunity_fable.py
 funding-db/funding_project/fodb/migrations/0003_funding_opportunity_fable.py
 funding-db/funding_project/users/migrations/0002_remove_profile_user.py
+
+# REMOVE MAC SYSTEM FILES
+.DS_Store
