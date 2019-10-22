@@ -22,7 +22,6 @@ def opp(request):
 
 
 def research(request):
-	# researches = {}
 
 	researches = []
 
@@ -60,7 +59,7 @@ def details(request, pk):
 	opp = funding_opportunity.objects.get(id=pk)
 	return render(request, 'fodb/details.html', {'opp':opp})
 
-# you can change this to the welcome page?
+
 def welcome(request):
  	return render(request,'fodb/welcome.html', {'title':'Welcome'})
 
