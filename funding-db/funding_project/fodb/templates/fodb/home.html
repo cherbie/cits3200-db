@@ -40,7 +40,26 @@
         <div class="funding_column">
             {% if not posts %}
             <h4>
-                No result for your search of {{ form.search.value }}
+                No result
+                {% if form.search.value != "" and form.search.value is not None %}
+                for your search of {{ form.search.value }}
+                {% if form.ems.value or form.hms.value or form.science.value or form.fable.value or form.ecr.value or form.travel.value or form.visiting.value or form.wir.value or form.international.value %}
+                {% endif %}
+                {% endif %}
+                {% if form.ems.value or form.hms.value or form.science.value or form.fable.value or form.ecr.value or form.travel.value or form.visiting.value or form.wir.value or form.international.value %}
+                and filtered by:
+                {% endif %}
+                {% if form.ems.value or form.hms.value or form.science.value or form.fable.value %}
+                <span style="color: blue">faculty</span>
+                {% endif %}
+                {% if form.ems.value or form.hms.value or form.science.value or form.fable.value %}
+                {% if form.ecr.value or form.travel.value or form.visiting.value or form.wir.value or form.international.value %}
+                and
+                {% endif %}
+                {% endif %}
+                {% if form.ecr.value or form.travel.value or form.visiting.value or form.wir.value or form.international.value %}
+                <span style="color: blue">tag</span>
+                {% endif %}
             </h4>
             {% else %}
             {% if form.search.value != "" and form.search.value is not None %}
@@ -204,7 +223,7 @@
                                 {% endif %}
 
                                 {% if not post.hms and not post.ems and not post.science and not post.fable %}
-                                <span class="tags tags_black">Not Specified</span>
+                                <span class="tags tags_black">No Faculty Specified</span>
                                 {% endif %}
                             </div>
 
