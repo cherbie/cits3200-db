@@ -170,4 +170,4 @@ class FilterManager(models.Manager):
 		return Q(visiting_fellow='True')
 
 	def month_select(self, month):
-		return Q(External_deadline__month = month)
+		return Q(Forecast_Mon = month)
