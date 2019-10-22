@@ -5,7 +5,7 @@ class FilterManager(models.Manager):
 	'''
         Customly manage filters.
 	'''
-	fields = ['hms','ems','science','travel','ecr','international','wir','phd','visiting_fellow', 'fable', 'forecast_month', 'search']
+	fields = ['hms','ems','science','travel','ecr','international','wir','phd','visiting_fellow', 'fable', 'month', 'search']
 
 	def search_qs(self, dict):
 		'''
@@ -170,4 +170,4 @@ class FilterManager(models.Manager):
 		return Q(visiting_fellow='True')
 
 	def month_select(self, month):
-		return Q(Forecast_Mon = month)
+		return Q(forecast_month = month)
