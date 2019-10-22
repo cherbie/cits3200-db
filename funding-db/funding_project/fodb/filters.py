@@ -5,7 +5,7 @@ class FilterManager(models.Manager):
 	'''
         Customly manage filters.
 	'''
-	fields = ['hms','ems','science','travel','ecr','international','wir','phd','visiting_fellow', 'fable', 'month', 'search']
+	fields = ['hms','ems','science','travel','ecr','international','wir','phd','visiting_fellow', 'fable', 'forecast_month', 'search']
 
 	def search_qs(self, dict):
 		'''
@@ -61,9 +61,9 @@ class FilterManager(models.Manager):
 			if dict.__getitem__(self.fields[10]) == '-1':
 				faculty = faculty
 			elif faculty == None:
-				faculty = self.month_select(dict.__getitem__(self.fields[9]))
+				faculty = self.month_select(dict.__getitem__(self.fields[10]))
 			else:
-				faculty = faculty & self.month_select(dict.__getitem__(self.fields[9]))
+				faculty = faculty & self.month_select(dict.__getitem__(self.fields[10]))
 
 		# -- OR results --
 		if dict.__contains__(self.fields[3]):
