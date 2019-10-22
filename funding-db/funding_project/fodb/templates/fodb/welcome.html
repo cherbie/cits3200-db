@@ -18,26 +18,18 @@
 
       <h1 class="font-weight-light welcome_title">Welcome to Funding Research Database</h1>
       <h4 class="welcome_title">
-        <a class="welcome_lead" href="{% url 'login' %}">
-            Login
-        </a>
-        or
-        <a class="welcome_lead" href="{% url 'register' %}">
-            register
-        </a>
-        to view oportunities available to you.
-      </h4>
-      <br>
-      <h5 class="welcome_title">
-        Alternatively, login with
+        Login as
         <a class="welcome_lead" href="{% url 'social:begin' 'google-oauth2' %}">
-          Google (student)
+          UWA student
+        </a>
+        ,
+        <a class="welcome_lead" href="{% url 'social:begin' 'azuread-oauth2' %}">
+          UWA staff
         </a>
         or
-        <a class="welcome_lead" href="{% url 'social:begin' 'azuread-oauth2' %}">
-          Microsoft (staff)
+        <a class="welcome_lead" href="{% url 'login' %}">
+          admin
         </a>
-      </h5>
 
 
     {% endif %}
