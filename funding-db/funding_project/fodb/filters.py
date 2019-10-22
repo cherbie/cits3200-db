@@ -46,24 +46,24 @@ class FilterManager(models.Manager):
 			if faculty == None:
 				faculty = self.hms_select()
 			else:
-				faculty = faculty & self.hms_select()
+				faculty = faculty | self.hms_select()
 		if dict.__contains__(self.fields[1]):
 			if faculty == None:
 				faculty = self.ems_select()
 			else:
-				faculty = faculty & self.ems_select()
+				faculty = faculty | self.ems_select()
 		if dict.__contains__(self.fields[2]):
 			if faculty == None:
 				faculty = self.science_select()
 			else:
-				faculty = faculty & self.science_select()
+				faculty = faculty | self.science_select()
 		if dict.__contains__(self.fields[10]):
 			if dict.__getitem__(self.fields[10]) == '-1':
 				faculty = faculty
 			elif faculty == None:
 				faculty = self.month_select(dict.__getitem__(self.fields[10]))
 			else:
-				faculty = faculty & self.month_select(dict.__getitem__(self.fields[10]))
+				faculty = faculty | self.month_select(dict.__getitem__(self.fields[10]))
 
 		# -- OR results --
 		if dict.__contains__(self.fields[3]):
