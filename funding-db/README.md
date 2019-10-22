@@ -17,7 +17,7 @@ How to run the project server:
 
  Django considers the major folders within the __funding_project__ project as applications within the project. The below reference will describe the uses of each project app
 
-#### Funding Project App
+### Funding Project App
 
 All project settings and url routing is handled within this application. The creation of a _Django_ project by default creates this folder and is critical to the functionality of the web application.
 
