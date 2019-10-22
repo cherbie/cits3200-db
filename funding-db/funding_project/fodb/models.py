@@ -5,6 +5,12 @@ from .filters import FilterManager
 from datetime import datetime, timedelta
 from django.core.exceptions import ValidationError
 
+'''
+
+    THE FOLLOWING IS THE DATABASE ASSOCIATED WITH THIS WEBSITE 
+
+
+'''
 
 class funding_opportunity(models.Model):
 	Year_or_Month =( ('Y','year'), ('M','month'),)
@@ -38,7 +44,7 @@ class funding_opportunity(models.Model):
 	science = models.BooleanField(default = False, verbose_name = 'Science')
 	fable = models.BooleanField(default = False, verbose_name = 'Faculty of Arts, Business, Law and Education')
 
-	is_visible = models.BooleanField(default = True, verbose_name = 'Visible in regualr view')
+	is_visible = models.BooleanField(default = True, verbose_name = 'Visible in regualar view')
 
 	application_open_date = models.DateTimeField(blank = True, null = True, verbose_name = 'Application Open Date')
 	forecast_month = models.CharField(blank = True, max_length = 15, null = True, choices = Forecast_Mon, verbose_name ='Forecast Month')
@@ -50,7 +56,7 @@ class funding_opportunity(models.Model):
 	objects = models.Manager() # default list of entries
 	filters = FilterManager() # filtered list of entries
 
-
+	#CHECKS WETHER THE USER HAS ALSO TYPED IN THE DURATION TYPE WHEN ENTERING A DURATION 
 	def clean(self):
 		if self.max_duration is not None and self.duration_type is None:
 			raise ValidationError('You have entered a max duration so you must enter duration type')	
@@ -66,26 +72,4 @@ class funding_opportunity(models.Model):
 		verbose_name_plural = 'Funding Opportunities'
 
 
-
-
-'''
-	fodb = funding_opportunity.objects.filter(is_visible = True)
-	for opportunity in fodb:
-		if opportunity.is_expeired() == True:
-			opportunity.is_visible = False
-		
-	fodb = funding_opportunity()
-	now = datetime.now()
-	date = fodb.external_submission_date.date()
-	if date < now:
-		is_visible = False
-
-
-	class objects(models.Manager):
-		def is_expeired(self):
-			if self.external_submission_date < timezone.now():
-				return True
-			return False
-
-'''
 

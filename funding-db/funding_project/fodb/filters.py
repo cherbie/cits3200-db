@@ -5,7 +5,7 @@ class FilterManager(models.Manager):
 	'''
         Customly manage filters.
 	'''
-	fields = ['hms','ems','science','travel','ecr','international','wir','phd','visiting', 'fable', 'month', 'search']
+	fields = ['hms','ems','science','travel','ecr','international','wir','phd','visiting_fellow', 'fable', 'month', 'search']
 
 	def search_qs(self, dict):
 		'''
@@ -167,7 +167,7 @@ class FilterManager(models.Manager):
 		return Q(phd='True')
 
 	def visiting_select(self):
-		return Q(visiting='True')
+		return Q(visiting_fellow='True')
 
 	def month_select(self, month):
 		return Q(External_deadline__month = month)
