@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     # google auth
     'social_django',
     'import_export',
+    'daterange_filter'
 ]
 
 MIDDLEWARE = [

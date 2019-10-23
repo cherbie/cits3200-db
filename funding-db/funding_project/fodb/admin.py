@@ -13,6 +13,9 @@ import datetime
 import codecs
 from django.conf import settings
 from django.contrib.admin import widgets
+from social.apps.django_app.default.models import Association, Nonce, UserSocialAuth
+from social.apps.django_app.default import models
+from daterange_filter.filter import DateRangeFilter
 
 
 '''
@@ -54,8 +57,6 @@ class FODBResource(resources.ModelResource):
 
                 }
 
-
-
 class FundingOpportunityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = FODBResource
 
@@ -69,7 +70,10 @@ class FundingOpportunityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     ]
 
     #IN THE VIEW THAT CONTAINS THE FUNDING OPPORTUNITIES THESE ARE THE FILTERS FOUND ON THE RIGHT-HAND SIDE 
-    list_filter = ('external_submission_date', )
+    #date_hierarchy = 'external_submission_date'
+    list_filter = ('external_submission_date',
+        ('external_submission_date', DateRangeFilter),
+    )
 
     #THE FUNNDING OPPORTUNITIES ARE SHOW WITH THE FOLLOWING CRITERIA 
     list_display = ('name', 'external_submission_date','max_amount','max_duration','is_visible')
@@ -160,19 +164,12 @@ class FundingOpportunityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
             )
             return [f for f in formats if f().can_export()]
 
-
-
+    
 
     admin.site.index_title = 'Funding Opportunities Administration'
     admin.site.site_title = 'FODB Admin'
 
 admin.site.register(funding_opportunity,FundingOpportunityAdmin)
-
-
-
-
-
-
 
 
 admin.site.unregister(Group)
