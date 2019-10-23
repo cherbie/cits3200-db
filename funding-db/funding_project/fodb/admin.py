@@ -13,8 +13,6 @@ import datetime
 import codecs
 from django.conf import settings
 from django.contrib.admin import widgets
-from social.apps.django_app.default.models import Association, Nonce, UserSocialAuth
-from social.apps.django_app.default import models
 from daterange_filter.filter import DateRangeFilter
 
 
