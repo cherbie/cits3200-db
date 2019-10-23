@@ -205,39 +205,11 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
-# Doesn't work as intended
-''' 
-SOCIAL_AUTH_LOGIN_ERROR_URL = '/error/'
-SOCIAL_AUTH_BACKEND_ERROR_URL = '/error/'
-RAISE_EXCEPTIONS = False
-SOCIAL_AUTH_RAISE_EXCEPTIONS = False
-'''
-
-
 # ms auth
 SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = '913c0f24-ac27-4b05-833c-cb54b3d26cec'
 SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = 'cGA18B]5wmJu2[=VsfGogMxFst:s4qfC'
 
-# ms auth 2
-#SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = '14410f03-ffec-42c1-878f-44bf90dbe48f'
-#SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = 'OuD6JzBH[PD6nkjAUUBekvWpcAt4]4[_'
 
-# ms auth 3
-#SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = '4e8517a7-f23d-41de-b191-62ac4d5c5adf'
-#SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = '.opqs90TtGT2X.oV0-A[G89pfUKNsVHF'
-
-
-# uwa webmail login url:
-'''
- https://login.microsoftonline.com/common/oauth2/authorize?client_id=00000002-0000-0ff1-ce00-000000000000
-    &redirect_uri=https%3a%2f%2foutlook.office365.com%2fowa%2f&resource=00000002-0000-0ff1-ce00-000000000000
-    &response_mode=form_post&response_type=code+id_token&scope=openid&msafed=0
-    &client-request-id=72f89000-f8ab-4d1a-97ef-3c7e57715733
-    &protectedtoken=true
-    &domain_hint=uniwa.mail.onmicrosoft.com
-    &nonce=637059448430510557.eac257b4-cc61-47d6-9adb-87a0707cfe77&state=DctLDoMwDEXRpF1IV5Bgip0HyzEGpEgNlvoR228G585uDCHcu1sXqSegTCBZmGeeSEYSQd7VnoKVk1kZE2MradFtTTOUQLBjB2J_H4NfOvzOemluWl_Zz1bt7R8_vtm8_QE
-'''
-# from this we can see the 'domain_hint' should be 'uniwa.mail.onmicrosoft.com':
 SOCIAL_AUTH_AZUREAD_OAUTH2_AUTH_EXTRA_ARGUMENTS = {
     'domain_hint': 'uniwa.mail.onmicrosoft.com'
 }
