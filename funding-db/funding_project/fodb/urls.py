@@ -6,6 +6,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
+
 from . import views
 
 urlpatterns = [
@@ -18,3 +19,6 @@ urlpatterns = [
     re_path(r'.*', views.unknown, name='fodb-unknown'), # redirects to project error page if no match
 
 ]
+
+
+
