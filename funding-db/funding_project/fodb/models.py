@@ -26,8 +26,8 @@ class funding_opportunity(models.Model):
 	limit_per_uni = models.BooleanField(default = False, verbose_name = 'Limited Per University')
 
 
-	max_amount = models.IntegerField(blank = True, null = True, verbose_name = 'Max Amount')
-	max_duration = models.IntegerField(blank = True, null = True, verbose_name = 'Max Duration')
+	max_amount = models.PositiveIntegerField(blank = True, null = True, verbose_name = 'Max Amount')
+	max_duration = models.PositiveIntegerField(blank = True, null = True, verbose_name = 'Max Duration')
 	duration_type = models.CharField(blank = True, null = True, max_length = 6, choices = Year_or_Month)
 	amount_estimated = models.BooleanField(default = False )
 	duration_estimated = models.BooleanField(default = False)
