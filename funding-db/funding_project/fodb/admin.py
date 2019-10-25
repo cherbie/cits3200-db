@@ -14,6 +14,7 @@ import codecs
 from django.conf import settings
 from django.contrib.admin import widgets
 from daterange_filter.filter import DateRangeFilter
+from .forms import NewAdminForm
 
 
 '''
@@ -57,6 +58,7 @@ class FODBResource(resources.ModelResource):
 
 class FundingOpportunityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = FODBResource
+    form = NewAdminForm
 
     #THIS FORMATS THE FORM USED TO TO ADD A FUNDING OPPORTUNITY
     fieldsets = [
@@ -70,11 +72,11 @@ class FundingOpportunityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     #IN THE VIEW THAT CONTAINS THE FUNDING OPPORTUNITIES THESE ARE THE FILTERS FOUND ON THE RIGHT-HAND SIDE 
     #date_hierarchy = 'external_submission_date'
     list_filter = ('external_submission_date',
-        ('external_submission_date', DateRangeFilter),
+        'forecast_month',
     )
 
     #THE FUNNDING OPPORTUNITIES ARE SHOW WITH THE FOLLOWING CRITERIA 
-    list_display = ('name', 'external_submission_date','max_amount','max_duration','is_visible')
+    list_display = ('name', 'external_submission_date','max_amount','max_duration','is_visible', 'forecast_month')
 
     #THE TABLE CAN BE SEARCHED BY THE FOLLOWING CRITERIA
     search_fields = ['description','name', 'provider']

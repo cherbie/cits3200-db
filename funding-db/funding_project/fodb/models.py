@@ -44,7 +44,7 @@ class funding_opportunity(models.Model):
 	science = models.BooleanField(default = False, verbose_name = 'Science')
 	fable = models.BooleanField(default = False, verbose_name = 'Faculty of Arts, Business, Law and Education')
 
-	is_visible = models.BooleanField(default = True, verbose_name = 'Visible in regualar view')
+	is_visible = models.BooleanField(default = True, verbose_name = 'Visible in regular view')
 
 	application_open_date = models.DateTimeField(blank = True, null = True, verbose_name = 'Application Open Date')
 	forecast_month = models.CharField(blank = True, max_length = 15, null = True, choices = Forecast_Mon, verbose_name ='Forecast Month')
@@ -64,6 +64,11 @@ class funding_opportunity(models.Model):
 	def __str__(self):
 		return self.name
 
+	# Automatically make forecast_month the month of external submission date
+	def save(self, *args, **kwargs):
+		if self.external_submission_date: 
+			self.forecast_month = int(self.external_submission_date.strftime("%m"))
+		super().save(*args, **kwargs)
 
 
 	class Meta:

@@ -42,3 +42,29 @@ class FilterForm(forms.Form):
     fable = forms.BooleanField(required=False, initial='False', label='FABLE')
     month = forms.ChoiceField(required=False, initial='-1', choices=months, label='Month')
     search = forms.CharField(required=False, initial="", max_length=200, strip=False)
+
+
+class NewAdminForm(forms.ModelForm):
+    class Media:
+        js = ("/static/fodb/js/base2.js",
+            "/static/fodb/js/jquery-3.4.1.min.js"
+        )
+    def clean(self):
+        max_duration = self.cleaned_data.get('max_duration')
+        duration_type = self.cleaned_data.get('duration_type')
+        
+        if max_duration is not None and duration_type is None:
+            msg = forms.ValidationError("This field is required.")
+            self.add_error('duration_type', msg)
+        elif duration_type is not None and max_duration is None:
+            msg = forms.ValidationError("This field is required.")
+            self.add_error('max_duration', msg)
+        '''
+        else:
+            # Keep the database consistent. The user may have
+            # submitted a duration_type even if max_duration
+            # was not selected
+            self.cleaned_data['duration_type'] = ''
+            '''
+
+        return self.cleaned_data
